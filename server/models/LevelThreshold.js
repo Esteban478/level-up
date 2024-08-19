@@ -4,25 +4,31 @@ const levelThresholdSchema = new mongoose.Schema({
     level: {
         type: Number,
         required: true,
-        unique: true,
-        min: 1
+        unique: true
     },
     xpRequired: {
         type: Number,
-        required: true,
-        min: 0
+        required: true
     },
     totalXpRequired: {
         type: Number,
-        required: true,
-        min: 0
+        required: true
     },
-    reward: {
-        xpBoost: Number,
-        badge: String,
-        featureUnlock: String
+    rewards: {
+        xpBoost: {
+            type: Number,
+            default: 0
+        },
+        badge: {
+            type: String,
+            default: ''
+        }
+    },
+    featureUnlock: {
+        type: String,
+        default: ''
     }
-});
+}, { timestamps: true });
 
 const LevelThreshold = mongoose.model('LevelThreshold', levelThresholdSchema);
 

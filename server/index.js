@@ -1,10 +1,14 @@
 import express from "express";
 import cors from "cors";
-import userRouter from "./routes/user.js";
-import authRouter from "./routes/auth.js";
-import habitRouter from './routes/habit.js';
-import habitLogRouter from './routes/habitlog.js';
-import xpTransactionRouter from "./routes/xptransaction.js";
+import {
+    auditLogRouter,
+    authRouter,
+    habitRouter,
+    habitLogRouter,
+    levelThresholdRouter,
+    userRouter,
+    xpTransactionRouter
+} from './routes/index.js';
 import "dotenv/config";
 import mongoose from "mongoose";
 
@@ -24,8 +28,8 @@ const establishRoutes = (app) => {
     app.use('/api/habits', habitRouter);
     app.use('/api/habitlogs', habitLogRouter);
     app.use('/api/xp', xpTransactionRouter);
-    // Add other routes here, using authMiddleware where needed
-    // app.use('/api/habits', authMiddleware, habitRouter);
+    app.use('/api/levels', levelThresholdRouter);
+    app.use('/api/audit', auditLogRouter);
     app.use('*', (req, res) => {
         res.status(404).json({ error: 'Endpoint not found. Typo somewhere maybe?' });
     });

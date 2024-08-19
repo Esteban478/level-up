@@ -6,7 +6,7 @@ import {
     getUserHabits,
     getUserAchievements,
     getUserXPAndLevel
-} from '../controllers/user.js';
+} from '../controllers/index.js';
 
 const userRouter = express.Router();
 

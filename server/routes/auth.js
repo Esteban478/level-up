@@ -1,5 +1,5 @@
 import express from 'express';
-import { register, login, registerLimiter, loginLimiter, conditionalRateLimiter } from '../controllers/auth.js';
+import { register, login, registerLimiter, loginLimiter, conditionalRateLimiter } from '../controllers/index.js';
 
 const authRouter = express.Router();
 

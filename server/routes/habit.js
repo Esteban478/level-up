@@ -6,7 +6,7 @@ import {
     getHabitById,
     updateHabit,
     deleteHabit
-} from '../controllers/habit.js';
+} from '../controllers/index.js';
 
 const habitRouter = express.Router();
 

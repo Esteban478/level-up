@@ -5,7 +5,7 @@ import {
     getXPTransactions,
     getXPTransactionById,
     getUserTotalXP
-} from '../controllers/xptransaction.js';
+} from '../controllers/index.js';
 
 const xpTransactionRouter = express.Router();
 
