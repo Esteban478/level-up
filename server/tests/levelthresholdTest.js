@@ -10,6 +10,9 @@ let token;
 let userId;
 
 const setupTestData = async () => {
+    // Clear existing level thresholds
+    await LevelThreshold.deleteMany({});
+
     const testUser = new User({
         username: 'leveluser',
         email: 'leveluser@example.com',
