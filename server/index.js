@@ -2,9 +2,11 @@ import express from "express";
 import cors from "cors";
 import userRouter from "./routes/user.js";
 import authRouter from "./routes/auth.js";
+import habitRouter from './routes/habit.js';
+import habitLogRouter from './routes/habitlog.js';
+import xpTransactionRouter from "./routes/xptransaction.js";
 import "dotenv/config";
 import mongoose from "mongoose";
-import { authMiddleware } from "./middleware/auth.js";
 
 const middlewares = (app) => {
     app.use(express.json());
@@ -19,6 +21,9 @@ const middlewares = (app) => {
 const establishRoutes = (app) => {
     app.use('/api/auth', authRouter);
     app.use('/api/users', userRouter);
+    app.use('/api/habits', habitRouter);
+    app.use('/api/habitlogs', habitLogRouter);
+    app.use('/api/xp', xpTransactionRouter);
     // Add other routes here, using authMiddleware where needed
     // app.use('/api/habits', authMiddleware, habitRouter);
     app.use('*', (req, res) => {

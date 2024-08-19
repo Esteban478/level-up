@@ -26,6 +26,6 @@ const xpTransactionSchema = new mongoose.Schema({
     }
 });
 
-const XpTransaction = mongoose.model('XpTransaction', xpTransactionSchema);
+const XPTransaction = mongoose.model('XPTransaction', xpTransactionSchema);
 
-export default XpTransaction;
+export default XPTransaction;

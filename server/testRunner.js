@@ -11,8 +11,7 @@ const runTests = async () => {
     try {
         await connectDB();
         await cleanupDatabase(); // Clean once at the start
-        await import('./tests/authTest.js');
-        await import('./tests/userTest.js');
+
         const testDir = path.join(__dirname, 'tests');
         const testFiles = fs.readdirSync(testDir).filter(file => file.endsWith('Test.js'));
 
