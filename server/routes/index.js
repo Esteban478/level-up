@@ -7,3 +7,4 @@ export { default as levelThresholdRouter } from './levelthreshold.js';
 export { default as userRouter } from './user.js';
 export { default as xpTransactionRouter } from './xptransaction.js';
 export { default as tipRouter } from './tip.js'
+export { default as badgeTierRouter } from './badgetier.js'

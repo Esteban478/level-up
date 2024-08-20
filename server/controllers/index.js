@@ -6,3 +6,5 @@ export * from './levelThreshold.js';
 export * from './user.js';
 export * from './xptransaction.js';
 export * from './achievement.js';
+export * from './tip.js';
+export * from './badgetier.js';

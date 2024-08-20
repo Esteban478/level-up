@@ -1,5 +1,5 @@
 import { makeRequest } from '../utils/testUtils.js';
-import { User, LevelThreshold } from '../models/index.js';
+import { User, LevelThreshold, Achievement } from '../models/index.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -10,8 +10,9 @@ let token;
 let userId;
 
 const setupTestData = async () => {
-    // Clear existing level thresholds
+    // Clear existing level thresholds and achievements
     await LevelThreshold.deleteMany({});
+    await Achievement.deleteMany({});
 
     const testUser = new User({
         username: 'leveluser',
@@ -28,36 +29,60 @@ const setupTestData = async () => {
     });
     token = loginResponse.body.token;
 
+    // Create sample achievements
+    const achievement1 = await Achievement.create({
+        name: 'Novice',
+        description: 'Reached level 1',
+        type: 'level',
+        category: 'general',
+        condition: { level: 1 },
+        reward: { xp: 10 },
+        tier: 'bronze'
+    });
+
+    const achievement2 = await Achievement.create({
+        name: 'Apprentice',
+        description: 'Reached level 2',
+        type: 'level',
+        category: 'general',
+        condition: { level: 2 },
+        reward: { xp: 20 },
+        tier: 'silver'
+    });
+
     // Create some level thresholds
     await LevelThreshold.create({
         level: 1,
         xpRequired: 0,
         totalXpRequired: 0,
-        rewards: { xpBoost: 0, badge: 'Novice' },
+        rewards: { xpBoost: 0, achievementId: achievement1._id },
         featureUnlock: 'Basic Habits'
     });
     await LevelThreshold.create({
         level: 2,
         xpRequired: 1000,
         totalXpRequired: 1000,
-        rewards: { xpBoost: 5, badge: 'Apprentice' },
+        rewards: { xpBoost: 1.05, achievementId: achievement2._id },
         featureUnlock: 'Habit Streaks'
-    });
-    await LevelThreshold.create({
-        level: 3,
-        xpRequired: 2000,
-        totalXpRequired: 3000,
-        rewards: { xpBoost: 10, badge: 'Adept' },
-        featureUnlock: 'Custom Habits'
     });
 };
 
 const testCreateLevelThreshold = async () => {
+    const achievement = await Achievement.create({
+        name: 'Expert',
+        description: 'Reached level 4',
+        type: 'level',
+        category: 'general',
+        condition: { level: 4 },
+        reward: { xp: 40 },
+        tier: 'gold'
+    });
+
     const levelThresholdData = {
         level: 4,
         xpRequired: 3000,
         totalXpRequired: 6000,
-        rewards: { xpBoost: 15, badge: 'Expert' },
+        rewards: { xpBoost: 1.15, achievementId: achievement._id },
         featureUnlock: 'Social Challenges'
     };
 
@@ -68,10 +93,20 @@ const testCreateLevelThreshold = async () => {
 };
 
 const testUpdateLevelThreshold = async (levelThresholdId) => {
+    const achievement = await Achievement.create({
+        name: 'Master',
+        description: 'Reached level 4 (updated)',
+        type: 'level',
+        category: 'general',
+        condition: { level: 4 },
+        reward: { xp: 50 },
+        tier: 'platinum'
+    });
+
     const updateData = {
         xpRequired: 3500,
         totalXpRequired: 6500,
-        rewards: { xpBoost: 20, badge: 'Master' },
+        rewards: { xpBoost: 1.2, achievementId: achievement._id },
         featureUnlock: 'Advanced Analytics'
     };
     const response = await makeRequest(`${BASE_URL}/levels/${levelThresholdId}`, 'PUT', updateData, token);

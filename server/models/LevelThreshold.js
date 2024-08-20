@@ -19,9 +19,9 @@ const levelThresholdSchema = new mongoose.Schema({
             type: Number,
             default: 0
         },
-        badge: {
-            type: String,
-            default: ''
+        achievementId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Achievement'
         }
     },
     featureUnlock: {

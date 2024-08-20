@@ -1,3 +1,5 @@
+import { createLevelProgression } from "../services/levelProgressionService";
+
 export const habits = [
     {
         name: "Daily Exercise",
@@ -316,11 +318,9 @@ export const habits = [
     }
 ];
 
-export const levelThresholds = [
-    { level: 1, xpRequired: 0, reward: { title: "Beginner" } },
-    { level: 2, xpRequired: 100, reward: { title: "Novice" } },
-    // ... add more level thresholds
-];
+export const levelThresholds = async () => {
+    await createLevelProgression(100);
+};
 
 export const achievements = [
     {

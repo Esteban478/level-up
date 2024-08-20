@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { Habit, LevelThreshold, Achievement, Tip } from '../models/index.js';
-import { habits, levelThresholds, achievements, tips } from './seedData.js';
+import { Habit, LevelThreshold, Achievement, Tip, BadgeTier } from '../models/index.js';
+import { habits, achievements, tips } from './seedData.js';
+import { createLevelProgression } from '../services/levelProgressionService.js';
 
 dotenv.config();
 
@@ -15,30 +16,28 @@ const seedDatabase = async () => {
         await LevelThreshold.deleteMany({});
         await Achievement.deleteMany({});
         await Tip.deleteMany({});
+        await BadgeTier.deleteMany({});
 
         // Seed Habits
-        for (const habit of habits) {
-            await Habit.create(habit);
-        }
+        await Habit.insertMany(habits);
         console.log('Habits seeded successfully');
 
-        // Seed Level Thresholds
-        for (const threshold of levelThresholds) {
-            await LevelThreshold.create(threshold);
-        }
-        console.log('Level Thresholds seeded successfully');
+        // Seed Level Thresholds and related Achievements
+        await createLevelProgression();
+        console.log('Level Thresholds and related Achievements seeded successfully');
 
-        // Seed Achievements
-        for (const achievement of achievements) {
-            await Achievement.create(achievement);
-        }
-        console.log('Achievements seeded successfully');
+        // Seed additional Achievements
+        await Achievement.insertMany(achievements);
+        console.log('Additional Achievements seeded successfully');
 
         // Seed Tips
-        for (const tip of tips) {
-            await Tip.create(tip);
-        }
+        await Tip.insertMany(tips);
         console.log('Tips seeded successfully');
+
+        // Seed BadgeTiers
+        // This would need to be implemented based on your specific badge tier requirements
+        // await seedBadgeTiers();
+        // console.log('Badge Tiers seeded successfully');
 
         console.log('Database seeded successfully');
     } catch (error) {
@@ -50,45 +49,3 @@ const seedDatabase = async () => {
 };
 
 seedDatabase();
-
-// scripts/seedData.js
-
-export const habits = [
-    {
-        name: "Daily Exercise",
-        description: "Engage in physical activity to improve overall health and fitness",
-        type: "Duration",
-        area: "Health",
-        goal: { duration: 30, unit: "minutes" },
-        xpReward: 50,
-        frequency: "Daily"
-    },
-    // ... add all other habits from the spreadsheet
-];
-
-export const levelThresholds = [
-    { level: 1, xpRequired: 0, reward: { title: "Beginner" } },
-    { level: 2, xpRequired: 100, reward: { title: "Novice" } },
-    // ... add more level thresholds
-];
-
-export const achievements = [
-    {
-        name: "Early Bird",
-        description: "Complete your morning routine for 7 consecutive days",
-        type: "streak",
-        condition: { habitId: "morning-routine-id", streakDays: 7 },
-        reward: { xp: 100, badge: "early_bird_badge" }
-    },
-    // ... add more achievements
-];
-
-export const tips = [
-    {
-        content: "Start with small, achievable goals to build momentum",
-        category: "starting",
-        relatedHabitTypes: ["boolean", "numeric"],
-        difficulty: "beginner"
-    },
-    // ... add more tips
-];

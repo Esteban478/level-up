@@ -42,8 +42,12 @@ export const getCurrentLevel = async (req, res) => {
         }
         const currentLevel = await LevelThreshold.findOne({ totalXpRequired: { $lte: user.totalXp } })
             .sort('-totalXpRequired')
-            .limit(1);
-        res.json({ currentLevel: currentLevel ? currentLevel.level : 1 });
+            .limit(1)
+            .populate('rewards.achievementId');
+        res.json({
+            currentLevel: currentLevel ? currentLevel.level : 1,
+            currentLevelDetails: currentLevel
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -51,7 +55,7 @@ export const getCurrentLevel = async (req, res) => {
 
 export const getLevelThresholds = async (req, res) => {
     try {
-        const levelThresholds = await LevelThreshold.find().sort('level');
+        const levelThresholds = await LevelThreshold.find().sort('level').populate('rewards.achievementId');
         res.json(levelThresholds);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -60,7 +64,7 @@ export const getLevelThresholds = async (req, res) => {
 
 export const getLevelThresholdById = async (req, res) => {
     try {
-        const levelThreshold = await LevelThreshold.findById(req.params.id);
+        const levelThreshold = await LevelThreshold.findById(req.params.id).populate('rewards.achievementId');
         if (!levelThreshold) {
             return res.status(404).json({ error: 'Level threshold not found' });
         }

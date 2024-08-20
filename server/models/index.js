@@ -7,3 +7,4 @@ export { default as User } from './User.js';
 export { default as XPTransaction } from './XPTransaction.js';
 export { default as Tip } from './Tip.js'
 export { default as Routine } from './Routine.js'
+export { default as BadgeTier } from './BadgeTier.js'
