@@ -8,7 +8,8 @@ import {
     levelThresholdRouter,
     userRouter,
     xpTransactionRouter,
-    achievementRouter
+    achievementRouter,
+    tipRouter
 } from './routes/index.js';
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -32,6 +33,7 @@ const establishRoutes = (app) => {
     app.use('/api/levels', levelThresholdRouter);
     app.use('/api/audit', auditLogRouter);
     app.use('/api/achievements', achievementRouter);
+    app.use('/api/tips', tipRouter);
     app.use('*', (req, res) => {
         res.status(404).json({ error: 'Endpoint not found. Typo somewhere maybe?' });
     });

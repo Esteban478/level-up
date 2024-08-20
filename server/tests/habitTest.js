@@ -1,6 +1,5 @@
-import { connectDB, cleanupDatabase, makeRequest } from '../utils/testUtils.js';
-import { User, Habit } from '../models/index.js';
-import mongoose from 'mongoose';
+import { makeRequest } from '../utils/testUtils.js';
+import { User } from '../models/index.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
