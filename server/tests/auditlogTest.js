@@ -8,65 +8,84 @@ const BASE_URL = process.env.BASE_URL;
 
 let token;
 let userId;
+let habitId;
 
 const setupTestData = async () => {
     const testUser = new User({
-        username: 'audituser',
-        email: 'audituser@example.com',
+        username: 'habitloguser',
+        email: 'habitloguser@example.com',
         password: 'password123'
     });
     await testUser.save();
     userId = testUser._id;
 
     const loginResponse = await makeRequest(`${BASE_URL}/auth/login`, 'POST', {
-        email: 'audituser@example.com',
+        email: 'habitloguser@example.com',
         password: 'password123'
     });
     token = loginResponse.body.token;
-};
 
-const testCreateAuditLog = async () => {
-    const auditLogData = {
-        action: 'USER_LOGIN',
-        details: { ip: '192.168.1.1', browser: 'Chrome' },
-        affectedResource: 'USER'
+    // Create a test habit
+    const habitData = {
+        name: 'Test Habit',
+        description: 'This is a test habit',
+        area: 'Health',
+        type: 'Boolean',
+        frequency: { type: 'Daily' },
+        goal: { type: 'atLeast', value: 1, direction: 'increase' },
+        xpReward: { base: 10 }
     };
 
-    const response = await makeRequest(`${BASE_URL}/audit`, 'POST', auditLogData, token);
-    console.log('Create Audit Log:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
+    const habitResponse = await makeRequest(`${BASE_URL}/habits`, 'POST', habitData, token);
+    habitId = habitResponse.body._id;
+};
+
+const testCreateHabitLog = async () => {
+    const habitLogData = {
+        habitId: habitId,
+        date: new Date(),
+        value: true
+    };
+
+    const response = await makeRequest(`${BASE_URL}/habitlogs`, 'POST', habitLogData, token);
+    console.log('Create Habit Log:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
     console.log('Response:', response.body);
     return response.body;
 };
 
-const testGetAuditLogs = async () => {
-    const response = await makeRequest(`${BASE_URL}/audit`, 'GET', null, token);
-    console.log('Get Audit Logs:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
+const testGetHabitLogs = async () => {
+    const response = await makeRequest(`${BASE_URL}/habitlogs`, 'GET', null, token);
+    console.log('Get Habit Logs:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
     console.log('Response:', response.body);
 };
 
-const testGetAuditLogById = async (auditLogId) => {
-    const response = await makeRequest(`${BASE_URL}/audit/${auditLogId}`, 'GET', null, token);
-    console.log('Get Audit Log by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
+const testGetHabitLogById = async (habitLogId) => {
+    const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'GET', null, token);
+    console.log('Get Habit Log by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
     console.log('Response:', response.body);
 };
 
-const testGetUserAuditLogs = async () => {
-    const response = await makeRequest(`${BASE_URL}/audit/user`, 'GET', null, token);
-    console.log('Get User Audit Logs:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
+const testUpdateHabitLog = async (habitLogId) => {
+    const updateData = { value: false };
+    const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'PUT', updateData, token);
+    console.log('Update Habit Log:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
+    console.log('Response:', response.body);
+};
+
+const testDeleteHabitLog = async (habitLogId) => {
+    const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'DELETE', null, token);
+    console.log('Delete Habit Log:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
     console.log('Response:', response.body);
 };
 
 const runTests = async () => {
     try {
         await setupTestData();
-        const createdAuditLog = await testCreateAuditLog();
-        await testGetAuditLogs();
-        if (createdAuditLog && createdAuditLog._id) {
-            await testGetAuditLogById(createdAuditLog._id);
-        } else {
-            console.log('Skipping Get Audit Log by ID test due to failed creation');
-        }
-        await testGetUserAuditLogs();
+        const createdHabitLog = await testCreateHabitLog();
+        await testGetHabitLogs();
+        await testGetHabitLogById(createdHabitLog._id);
+        await testUpdateHabitLog(createdHabitLog._id);
+        await testDeleteHabitLog(createdHabitLog._id);
     } catch (error) {
         console.error('An error occurred during testing:', error);
     }

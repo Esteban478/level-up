@@ -6,3 +6,4 @@ export { default as LevelThreshold } from './LevelThreshold.js';
 export { default as User } from './User.js';
 export { default as XPTransaction } from './XPTransaction.js';
 export { default as Tip } from './Tip.js'
+export { default as Routine } from './Routine.js'

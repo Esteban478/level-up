@@ -29,10 +29,11 @@ const testCreateHabit = async () => {
     const habitData = {
         name: 'Test Habit',
         description: 'This is a test habit',
-        category: 'health',
-        type: 'boolean',
-        frequency: { type: 'daily' },
-        goal: { type: 'atleast', value: 1 }
+        area: 'Health',
+        type: 'Boolean',
+        frequency: { type: 'Daily' },
+        goal: { type: 'atLeast', value: 1, direction: 'increase' },
+        xpReward: { base: 10 }
     };
 
     const response = await makeRequest(`${BASE_URL}/habits`, 'POST', habitData, token);

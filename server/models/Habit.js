@@ -11,27 +11,27 @@ const habitSchema = new mongoose.Schema({
         required: true
     },
     description: String,
-    category: {
+    area: {
         type: String,
-        enum: ['health', 'productivity', 'learning', 'social', 'other'],
-        default: 'other'
+        enum: ['Health', 'Fitness', 'Mental Health', 'Productivity', 'Personal Development', 'Skill Development', 'Education', 'Creativity', 'Home Management', 'Financial Health', 'Social Connection', 'Environmental Consciousness', 'Professional Development', 'Digital Wellbeing', 'Lifestyle', 'Stress Management', 'Career Development', 'Other'],
+        default: 'Other'
     },
     type: {
         type: String,
-        enum: ['boolean', 'numeric', 'duration', 'checklist'],
+        enum: ['Boolean', 'Numeric', 'Duration', 'Checklist'],
         required: true
     },
     frequency: {
         type: {
             type: String,
-            enum: ['daily', 'weekly', 'monthly'],
+            enum: ['Daily', 'Weekly', 'Monthly'],
             required: true
         },
         daysOfWeek: {
             type: [Number],
             validate: {
                 validator: function (v) {
-                    return this.frequency.type !== 'weekly' || (v && v.length > 0);
+                    return this.frequency.type !== 'Weekly' || (v && v.length > 0);
                 },
                 message: 'Weekly habits must specify at least one day of the week'
             }
@@ -40,7 +40,7 @@ const habitSchema = new mongoose.Schema({
             type: [Number],
             validate: {
                 validator: function (v) {
-                    return this.frequency.type !== 'monthly' || (v && v.length > 0);
+                    return this.frequency.type !== 'Monthly' || (v && v.length > 0);
                 },
                 message: 'Monthly habits must specify at least one day of the month'
             }
@@ -49,15 +49,27 @@ const habitSchema = new mongoose.Schema({
     goal: {
         type: {
             type: String,
-            enum: ['atleast', 'atmost', 'exactly'],
+            enum: ['atLeast', 'atMost', 'exactly'],
             required: true
         },
         value: {
             type: mongoose.Schema.Types.Mixed,
             required: true
+        },
+        unit: String,
+        direction: {
+            type: String,
+            enum: ['increase', 'decrease', 'maintain'],
+            default: 'increase'
         }
     },
-    unit: String,
+    xpReward: {
+        base: {
+            type: Number,
+            required: true
+        },
+        max: Number
+    },
     isPublic: {
         type: Boolean,
         default: false

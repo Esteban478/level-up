@@ -1,5 +1,5 @@
 import { makeRequest } from '../utils/testUtils.js';
-import { User, Habit } from '../models/index.js';
+import { User } from '../models/index.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -11,29 +11,41 @@ let userId;
 let habitId;
 
 const setupTestData = async () => {
+    // Generate unique email and username for each test run
+    const timestamp = Date.now();
+    const uniqueEmail = `habitloguser_${timestamp}@example.com`;
+    const uniqueUsername = `habitloguser_${timestamp}`;
+
+    // Delete the user if it already exists (by email or username)
+    await User.deleteOne({ $or: [{ email: uniqueEmail }, { username: uniqueUsername }] });
+
     const testUser = new User({
-        username: 'habitloguser',
-        email: 'habitloguser@example.com',
+        username: uniqueUsername,
+        email: uniqueEmail,
         password: 'password123'
     });
     await testUser.save();
     userId = testUser._id;
 
     const loginResponse = await makeRequest(`${BASE_URL}/auth/login`, 'POST', {
-        email: 'habitloguser@example.com',
+        email: uniqueEmail,
         password: 'password123'
     });
     token = loginResponse.body.token;
 
-    const habit = new Habit({
-        userId,
+    // Create a test habit
+    const habitData = {
         name: 'Test Habit',
-        type: 'boolean',
-        frequency: { type: 'daily' },
-        goal: { type: 'atleast', value: 1 }
-    });
-    await habit.save();
-    habitId = habit._id;
+        description: 'This is a test habit',
+        area: 'Health',
+        type: 'Boolean',
+        frequency: { type: 'Daily' },
+        goal: { type: 'atLeast', value: 1, direction: 'increase' },
+        xpReward: { base: 10 }
+    };
+
+    const habitResponse = await makeRequest(`${BASE_URL}/habits`, 'POST', habitData, token);
+    habitId = habitResponse.body._id;
 };
 
 const testCreateHabitLog = async () => {

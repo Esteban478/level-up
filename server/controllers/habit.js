@@ -2,10 +2,17 @@ import { Habit } from '../models/index.js';
 
 export const createHabit = async (req, res) => {
     try {
-        const habit = new Habit({
+        const habitData = {
             ...req.body,
             userId: req.user.userId
-        });
+        };
+
+        // Ensure xpReward is set
+        if (!habitData.xpReward || !habitData.xpReward.base) {
+            habitData.xpReward = { base: 10 }; // Default value if not provided
+        }
+
+        const habit = new Habit(habitData);
         await habit.save();
         res.status(201).json(habit);
     } catch (error) {
