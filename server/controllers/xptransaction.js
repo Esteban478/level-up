@@ -2,11 +2,11 @@ import { XPTransaction, User } from '../models/index.js';
 
 export const createXPTransaction = async (req, res) => {
     try {
-        const { amount, reason } = req.body;
+        const { amount, source } = req.body;
         const xpTransaction = new XPTransaction({
             userId: req.user.userId,
             amount,
-            reason
+            source
         });
         await xpTransaction.save();
 

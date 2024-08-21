@@ -117,7 +117,7 @@ const testGetUserHabits = async () => {
 // Test get user achievements
 const testGetUserAchievements = async () => {
     const response = await makeRequest(`${BASE_URL}/users/achievements`, 'GET', null, token);
-    console.log('Get user achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
+    console.log('Get User Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
     console.log('Response:', response.body);
 };
 

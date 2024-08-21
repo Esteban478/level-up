@@ -1,8 +1,15 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { Habit, LevelThreshold, Achievement, Tip, BadgeTier } from '../models/index.js';
-import { habits, achievements, tips } from './seedData.js';
+import { User, Habit, HabitLog, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, UserAchievement } from '../models/index.js';
+import { habits } from './habitSeedData.js';
+import { achievements } from './achievementSeedData.js';
+import { tips } from './tipSeedData.js';
 import { createLevelProgression } from '../services/levelProgressionService.js';
+import { badgeTiers } from './updatedBadgeTierSeedData.js';
+import { userProfiles } from './userProfileSeedData.js';
+import { generateHabitLogs } from './habitLogSeedData.js';
+import { generateXPTransactions } from './xpTransactionSeedData.js';
+import { generateUserAchievements } from './userAchievementSeedData.js';
 
 dotenv.config();
 
@@ -12,32 +19,47 @@ const seedDatabase = async () => {
         console.log('Connected to MongoDB');
 
         // Clear existing data
+        await User.deleteMany({});
         await Habit.deleteMany({});
-        await LevelThreshold.deleteMany({});
+        await HabitLog.deleteMany({});
         await Achievement.deleteMany({});
         await Tip.deleteMany({});
+        await LevelThreshold.deleteMany({});
         await BadgeTier.deleteMany({});
+        await XPTransaction.deleteMany({});
+        await UserAchievement.deleteMany({});
 
-        // Seed Habits
-        await Habit.insertMany(habits);
+        // Seed users
+        const createdUsers = await User.create(userProfiles);
+        console.log('Users seeded successfully');
+
+        // Seed habits
+        const createdHabits = await Habit.create(habits);
         console.log('Habits seeded successfully');
 
-        // Seed Level Thresholds and related Achievements
+        // Generate and seed habit logs
+        const habitLogs = generateHabitLogs(createdUsers, createdHabits);
+        const createdHabitLogs = await HabitLog.create(habitLogs);
+        console.log('Habit logs seeded successfully');
+
+        // Generate and seed XP transactions
+        const xpTransactions = generateXPTransactions(createdHabitLogs, createdHabits);
+        await XPTransaction.create(xpTransactions);
+        console.log('XP transactions seeded successfully');
+
+        // Seed achievements
+        const createdAchievements = await Achievement.create(achievements);
+        console.log('Achievements seeded successfully');
+
+        // Generate and seed user achievements
+        const userAchievements = generateUserAchievements(createdUsers, createdHabitLogs, createdAchievements);
+        await UserAchievement.create(userAchievements);
+        console.log('User achievements seeded successfully');
+
+        // Seed other data
+        await Tip.create(tips);
         await createLevelProgression();
-        console.log('Level Thresholds and related Achievements seeded successfully');
-
-        // Seed additional Achievements
-        await Achievement.insertMany(achievements);
-        console.log('Additional Achievements seeded successfully');
-
-        // Seed Tips
-        await Tip.insertMany(tips);
-        console.log('Tips seeded successfully');
-
-        // Seed BadgeTiers
-        // This would need to be implemented based on your specific badge tier requirements
-        // await seedBadgeTiers();
-        // console.log('Badge Tiers seeded successfully');
+        await BadgeTier.create(badgeTiers);
 
         console.log('Database seeded successfully');
     } catch (error) {

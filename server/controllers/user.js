@@ -40,15 +40,6 @@ export const getUserHabits = async (req, res) => {
     }
 };
 
-export const getUserAchievements = async (req, res) => {
-    try {
-        const achievements = await Achievement.find({ userId: req.user.userId });
-        res.json(achievements);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
 export const getUserXPAndLevel = async (req, res) => {
     try {
         const user = await User.findById(req.user.userId).select('xp level');

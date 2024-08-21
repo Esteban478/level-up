@@ -10,7 +10,8 @@ import {
     xpTransactionRouter,
     achievementRouter,
     tipRouter,
-    badgeTierRouter
+    badgeTierRouter,
+    userAchievementRouter
 } from './routes/index.js';
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -36,6 +37,7 @@ const establishRoutes = (app) => {
     app.use('/api/achievements', achievementRouter);
     app.use('/api/tips', tipRouter);
     app.use('/api/badgetiers', badgeTierRouter);
+    app.use('/api/user-achievements', userAchievementRouter);
     app.use('*', (req, res) => {
         res.status(404).json({ error: 'Endpoint not found. Typo somewhere maybe?' });
     });

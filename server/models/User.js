@@ -84,7 +84,7 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
 };
 
 // Method to add XP and level up if necessary
-userSchema.methods.addXP = async function (amount, reason, metadata = {}) {
+userSchema.methods.addXP = async function (amount, source, metadata = {}) {
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -93,7 +93,7 @@ userSchema.methods.addXP = async function (amount, reason, metadata = {}) {
         const transaction = new XPTransaction({
             userId: this._id,
             amount,
-            reason,
+            source,
             metadata
         });
         await transaction.save({ session });
