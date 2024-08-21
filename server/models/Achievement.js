@@ -35,7 +35,7 @@ const achievementSchema = new mongoose.Schema({
     },
     tier: {
         type: String,
-        enum: ['bronze', 'silver', 'gold', 'platinum'],
+        enum: ['bronze', 'silver', 'gold', 'platinum', 'diamond'],
         required: true
     },
     isRepeatable: {

@@ -1,31 +1,30 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const tipSchema = new mongoose.Schema({
     content: {
         type: String,
-        required: true,
+        required: true
     },
     category: {
         type: String,
-        enum: ['starting', 'maintaining', 'overcoming obstacles', 'general'],
+        enum: ['General', 'Habit Loop - Cue', 'Habit Loop - Craving', 'Habit Loop - Response', 'Habit Loop - Reward', 'Habit-Specific'],
+        default: 'General',
         required: true,
     },
-    relatedHabitTypes: [{
+    relatedAreas: [{
         type: String,
-        enum: ['boolean', 'numeric', 'duration', 'checklist'],
+        enum: ['Health', 'Fitness', 'Mental Health', 'Productivity', 'Personal Development',
+            'Skill Development', 'Education', 'Creativity', 'Home Management',
+            'Financial Health', 'Social Connection', 'Environmental Consciousness',
+            'Professional Development', 'Digital Wellbeing', 'Lifestyle',
+            'Stress Management', 'Career Development', 'Other', 'All'],
     }],
     difficulty: {
         type: String,
-        enum: ['beginner', 'intermediate', 'advanced'],
-        default: 'beginner',
-    },
-    source: String,
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updatedAt: Date,
-});
+        enum: ['Beginner', 'Intermediate', 'Advanced'],
+        default: 'Beginner'
+    }
+}, { timestamps: true });
 
 const Tip = mongoose.model('Tip', tipSchema);
 

@@ -11,6 +11,8 @@ let userId;
 let testTipId;
 
 const setupTestData = async () => {
+    await Tip.deleteMany({}); // Clear existing tips
+
     const testUser = new User({
         username: 'tipuser',
         email: 'tipuser@example.com',
@@ -27,9 +29,9 @@ const setupTestData = async () => {
 
     const testTip = new Tip({
         content: 'Test tip',
-        category: 'general',
-        relatedHabitTypes: ['boolean'],
-        difficulty: 'beginner'
+        category: 'General',
+        relatedAreas: ['All'],
+        difficulty: 'Beginner'
     });
     await testTip.save();
     testTipId = testTip._id;
@@ -37,10 +39,10 @@ const setupTestData = async () => {
 
 const testCreateTip = async () => {
     const tipData = {
-        content: "New test tip",
-        category: "starting",
-        relatedHabitTypes: ["numeric"],
-        difficulty: "intermediate"
+        content: 'New test tip',
+        category: 'Habit Loop - Cue',
+        relatedAreas: ['All'],
+        difficulty: 'Intermediate'
     };
 
     const response = await makeRequest(`${BASE_URL}/tips`, 'POST', tipData, token);
@@ -62,7 +64,7 @@ const testGetTipById = async (tipId) => {
 };
 
 const testUpdateTip = async (tipId) => {
-    const updateData = { content: "Updated test tip" };
+    const updateData = { content: "Updated test tip", category: 'Habit-Specific' };
     const response = await makeRequest(`${BASE_URL}/tips/${tipId}`, 'PUT', updateData, token);
     console.log('Update Tip:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
     console.log('Response:', response.body);
@@ -81,14 +83,14 @@ const testGetRandomTip = async () => {
 };
 
 const testGetTipsByCategory = async () => {
-    const response = await makeRequest(`${BASE_URL}/tips/category/general`, 'GET');
+    const response = await makeRequest(`${BASE_URL}/tips/category/General`, 'GET');
     console.log('Get Tips by Category:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
     console.log('Response:', response.body);
 };
 
-const testGetTipsByHabitType = async () => {
-    const response = await makeRequest(`${BASE_URL}/tips/habitType/boolean`, 'GET');
-    console.log('Get Tips by Habit Type:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
+const testGetTipsByRelatedAreas = async () => {
+    const response = await makeRequest(`${BASE_URL}/tips/relatedareas/All`, 'GET');
+    console.log('Get Tips by Related Areas:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
     console.log('Response:', response.body);
 };
 
@@ -101,7 +103,7 @@ const runTests = async () => {
         await testUpdateTip(createdTip._id);
         await testGetRandomTip();
         await testGetTipsByCategory();
-        await testGetTipsByHabitType();
+        await testGetTipsByRelatedAreas();
         await testDeleteTip(createdTip._id);
     } catch (error) {
         console.error('An error occurred during testing:', error);

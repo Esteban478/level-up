@@ -82,12 +82,12 @@ export const getTipsByCategory = async (req, res) => {
     }
 };
 
-// Get tips by habit type
-export const getTipsByHabitType = async (req, res) => {
+// Get tips by related area of the habit
+export const getTipsByrelatedAreas = async (req, res) => {
     try {
-        const tips = await Tip.find({ relatedHabitTypes: req.params.habitType });
+        const tips = await Tip.find({ relatedAreas: { $in: [req.params.relatedAreas] } });
         res.status(200).json(tips);
     } catch (error) {
-        res.status(500).json({ message: "Error fetching tips by habit type", error: error.message });
+        res.status(500).json({ message: "Error fetching tips by related areas", error: error.message });
     }
 };

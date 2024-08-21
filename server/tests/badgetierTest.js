@@ -1,5 +1,5 @@
 import { makeRequest } from '../utils/testUtils.js';
-import { User, BadgeTier, Achievement } from '../models/index.js';
+import { User, BadgeTier } from '../models/index.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -8,12 +8,10 @@ const BASE_URL = process.env.BASE_URL;
 
 let token;
 let userId;
-let achievementId;
 
 const setupTestData = async () => {
-    // Clear existing badge tiers and achievements
+    // Clear existing badge tiers
     await BadgeTier.deleteMany({});
-    await Achievement.deleteMany({});
 
     const testUser = new User({
         username: 'badgetieruser',
@@ -29,26 +27,20 @@ const setupTestData = async () => {
     });
     token = loginResponse.body.token;
 
-    // Create a sample achievement
-    const achievement = await Achievement.create({
-        name: 'Test Achievement',
-        description: 'This is a test achievement',
-        type: 'custom',
-        category: 'general',
-        condition: { customCondition: 'test' },
-        reward: { xp: 100 },
-        tier: 'gold'
+    // Create a sample badge tier
+    const badgeTier = new BadgeTier({
+        tier: 'bronze',
+        name: 'Bronze Badge',
+        icon: 'bronze_icon.png'
     });
-    achievementId = achievement._id;
+    await badgeTier.save();
 };
 
 const testCreateBadgeTier = async () => {
     const badgeTierData = {
-        achievementId,
         tier: 'bronze',
         name: 'Bronze Badge',
-        icon: 'bronze_icon.png',
-        condition: { count: 1 }
+        icon: 'bronze_icon.png'
     };
 
     const response = await makeRequest(`${BASE_URL}/badgetiers`, 'POST', badgeTierData, token);
@@ -61,8 +53,7 @@ const testUpdateBadgeTier = async (badgeTierId) => {
     const updateData = {
         tier: 'silver',
         name: 'Silver Badge',
-        icon: 'silver_icon.png',
-        condition: { count: 5 }
+        icon: 'silver_icon.png'
     };
     const response = await makeRequest(`${BASE_URL}/badgetiers/${badgeTierId}`, 'PUT', updateData, token);
     console.log('Update Badge Tier:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
