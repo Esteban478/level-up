@@ -3,7 +3,10 @@ import mongoose from 'mongoose';
 const habitSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'User'
+    },
+    habitId: {
+        type: Number,
         required: true
     },
     name: {
@@ -13,7 +16,7 @@ const habitSchema = new mongoose.Schema({
     description: String,
     area: {
         type: String,
-        enum: ['Health', 'Fitness', 'Mental Health', 'Productivity', 'Personal Development', 'Skill Development', 'Education', 'Creativity', 'Home Management', 'Financial Health', 'Social Connection', 'Environmental Consciousness', 'Professional Development', 'Digital Wellbeing', 'Lifestyle', 'Stress Management', 'Career Development', 'Other'],
+        enum: ['Health', 'Fitness', 'Mental Health', 'Home Management', 'Productivity', 'Personal Development', 'Skill Development', 'Education', 'Creativity', 'Finance', 'Social', 'Environmental Consciousness', 'Professional Development', 'Digital Wellbeing', 'Lifestyle', 'Stress Management', 'Career Development', 'Other'],
         default: 'Other'
     },
     type: {

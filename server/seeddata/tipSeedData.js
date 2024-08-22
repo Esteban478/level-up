@@ -1,4 +1,4 @@
-const tips = [
+export const tips = [
     {
         content: "Start with small, achievable goals to build momentum",
         category: "General",
@@ -62,7 +62,7 @@ const tips = [
     {
         content: "For exercise habits, lay out your workout clothes the night before",
         category: "Habit-Specific",
-        relatedAreas: ["Fitness", "Health"],
+        relatedAreas: ["Health"],
         difficulty: "Beginner"
     },
     {
@@ -122,7 +122,7 @@ const tips = [
     {
         content: "For strength training, focus on proper form before increasing weights",
         category: "Habit-Specific",
-        relatedAreas: ["Fitness", "Health"],
+        relatedAreas: ["Health"],
         difficulty: "Intermediate"
     },
     {
@@ -140,13 +140,13 @@ const tips = [
     {
         content: "For better financial health, review your expenses weekly and categorize them",
         category: "Habit-Specific",
-        relatedAreas: ["Financial Health"],
+        relatedAreas: ["Finance"],
         difficulty: "Intermediate"
     },
     {
         content: "To enhance social connections, schedule regular check-ins with friends and family",
         category: "Habit-Specific",
-        relatedAreas: ["Social Connection", "Personal Development"],
+        relatedAreas: ["Social", "Personal Development"],
         difficulty: "Beginner"
     },
     {
@@ -212,7 +212,7 @@ const tips = [
     {
         content: "For networking, aim to make one new professional connection each week",
         category: "Habit-Specific",
-        relatedAreas: ["Career Development", "Social Connection"],
+        relatedAreas: ["Career Development", "Social"],
         difficulty: "Intermediate"
     },
     {
@@ -224,7 +224,7 @@ const tips = [
     {
         content: "For personal finance, automate your savings by setting up automatic transfers on payday",
         category: "Habit-Specific",
-        relatedAreas: ["Financial Health"],
+        relatedAreas: ["Finance"],
         difficulty: "Beginner"
     },
     {

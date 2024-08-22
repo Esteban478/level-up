@@ -1,17 +1,8 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import { User, Habit, HabitLog, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, UserAchievement } from '../models/index.js';
-import { habits } from './habitSeedData.js';
-import { achievements } from './achievementSeedData.js';
-import { tips } from './tipSeedData.js';
+import { achievements, badgeTiers, habits, tips, userProfiles, generateHabitLogs, generateXPTransactions, generateUserAchievements } from '../seeddata/index.js';
 import { createLevelProgression } from '../services/levelProgressionService.js';
-import { badgeTiers } from './updatedBadgeTierSeedData.js';
-import { userProfiles } from './userProfileSeedData.js';
-import { generateHabitLogs } from './habitLogSeedData.js';
-import { generateXPTransactions } from './xpTransactionSeedData.js';
-import { generateUserAchievements } from './userAchievementSeedData.js';
-
-dotenv.config();
 
 const seedDatabase = async () => {
     try {
@@ -33,7 +24,7 @@ const seedDatabase = async () => {
         const createdUsers = await User.create(userProfiles);
         console.log('Users seeded successfully');
 
-        // Seed habits
+        // Generate and seed habits
         const createdHabits = await Habit.create(habits);
         console.log('Habits seeded successfully');
 
@@ -44,7 +35,7 @@ const seedDatabase = async () => {
 
         // Generate and seed XP transactions
         const xpTransactions = generateXPTransactions(createdHabitLogs, createdHabits);
-        await XPTransaction.create(xpTransactions);
+        const createdXPTransactions = await XPTransaction.create(xpTransactions);
         console.log('XP transactions seeded successfully');
 
         // Seed achievements
@@ -52,7 +43,7 @@ const seedDatabase = async () => {
         console.log('Achievements seeded successfully');
 
         // Generate and seed user achievements
-        const userAchievements = generateUserAchievements(createdUsers, createdHabitLogs, createdAchievements);
+        const userAchievements = generateUserAchievements(createdUsers, createdHabitLogs, createdAchievements, createdXPTransactions);
         await UserAchievement.create(userAchievements);
         console.log('User achievements seeded successfully');
 

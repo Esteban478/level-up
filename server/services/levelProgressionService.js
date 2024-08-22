@@ -34,8 +34,8 @@ const createLevelAchievement = async (level) => {
     const achievement = new Achievement({
         name: `Reach Level ${level}`,
         description: `Achieve level ${level} in your personal growth journey.`,
-        type: 'level',
-        category: 'general',
+        type: 'Level',
+        category: 'General',
         condition: { level },
         reward: { xp: level * 10 },
         tier: getTierForLevel(level),

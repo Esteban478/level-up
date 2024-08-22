@@ -1,10 +1,10 @@
-const achievements = [
+export const achievements = [
     // General Achievements
     {
         name: "Novice Achiever",
         description: "Reach level 5",
-        type: "level",
-        category: "general",
+        type: "Level",
+        category: "General",
         icon: "level_icon",
         condition: { level: 5 },
         reward: { xp: 100 },
@@ -14,8 +14,8 @@ const achievements = [
     {
         name: "Intermediate Achiever",
         description: "Reach level 25",
-        type: "level",
-        category: "general",
+        type: "Level",
+        category: "General",
         icon: "level_icon",
         condition: { level: 25 },
         reward: { xp: 500 },
@@ -25,8 +25,8 @@ const achievements = [
     {
         name: "Expert Achiever",
         description: "Reach level 50",
-        type: "level",
-        category: "general",
+        type: "Level",
+        category: "General",
         icon: "level_icon",
         condition: { level: 50 },
         reward: { xp: 1000 },
@@ -36,8 +36,8 @@ const achievements = [
     {
         name: "Master Achiever",
         description: "Reach level 75",
-        type: "level",
-        category: "general",
+        type: "Level",
+        category: "General",
         icon: "level_icon",
         condition: { level: 75 },
         reward: { xp: 1500 },
@@ -47,8 +47,8 @@ const achievements = [
     {
         name: "Legendary Achiever",
         description: "Reach level 100",
-        type: "level",
-        category: "general",
+        type: "Level",
+        category: "General",
         icon: "level_icon",
         condition: { level: 100 },
         reward: { xp: 2000 },
@@ -58,8 +58,8 @@ const achievements = [
     {
         name: "Consistent",
         description: "Maintain a 7-day streak for any habit",
-        type: "habit_streak",
-        category: "general",
+        type: "Habit_streak",
+        category: "General",
         icon: "streak_icon",
         condition: { streakDays: 7 },
         reward: { xp: 50 },
@@ -69,8 +69,8 @@ const achievements = [
     {
         name: "Dedicated",
         description: "Maintain a 30-day streak for any habit",
-        type: "habit_streak",
-        category: "general",
+        type: "Habit_streak",
+        category: "General",
         icon: "streak_icon",
         condition: { streakDays: 30 },
         reward: { xp: 200 },
@@ -80,8 +80,8 @@ const achievements = [
     {
         name: "Committed",
         description: "Maintain a 60-day streak for any habit",
-        type: "habit_streak",
-        category: "general",
+        type: "Habit_streak",
+        category: "General",
         icon: "streak_icon",
         condition: { streakDays: 60 },
         reward: { xp: 500 },
@@ -91,8 +91,8 @@ const achievements = [
     {
         name: "Unstoppable",
         description: "Maintain a 100-day streak for any habit",
-        type: "habit_streak",
-        category: "general",
+        type: "Habit_streak",
+        category: "General",
         icon: "streak_icon",
         condition: { streakDays: 100 },
         reward: { xp: 1000 },
@@ -102,8 +102,8 @@ const achievements = [
     {
         name: "Legendary Streak",
         description: "Maintain a 365-day streak for any habit",
-        type: "habit_streak",
-        category: "general",
+        type: "Habit_streak",
+        category: "General",
         icon: "streak_icon",
         condition: { streakDays: 365 },
         reward: { xp: 5000 },
@@ -113,8 +113,8 @@ const achievements = [
     {
         name: "Getting Started",
         description: "Complete any habit 10 times",
-        type: "habit_milestone",
-        category: "general",
+        type: "Habit_milestone",
+        category: "General",
         icon: "complete_icon",
         condition: { totalCount: 10 },
         reward: { xp: 50 },
@@ -124,8 +124,8 @@ const achievements = [
     {
         name: "On a Roll",
         description: "Complete any habit 50 times",
-        type: "habit_milestone",
-        category: "general",
+        type: "Habit_milestone",
+        category: "General",
         icon: "complete_icon",
         condition: { totalCount: 50 },
         reward: { xp: 100 },
@@ -135,8 +135,8 @@ const achievements = [
     {
         name: "Century Club",
         description: "Complete any habit 100 times",
-        type: "habit_milestone",
-        category: "general",
+        type: "Habit_milestone",
+        category: "General",
         icon: "complete_icon",
         condition: { totalCount: 100 },
         reward: { xp: 200 },
@@ -146,8 +146,8 @@ const achievements = [
     {
         name: "Habit Expert",
         description: "Complete any habit 500 times",
-        type: "habit_milestone",
-        category: "general",
+        type: "Habit_milestone",
+        category: "General",
         icon: "complete_icon",
         condition: { totalCount: 500 },
         reward: { xp: 500 },
@@ -157,8 +157,8 @@ const achievements = [
     {
         name: "Habit Master",
         description: "Complete any habit 1000 times",
-        type: "habit_milestone",
-        category: "general",
+        type: "Habit_milestone",
+        category: "General",
         icon: "complete_icon",
         condition: { totalCount: 1000 },
         reward: { xp: 1000 },
@@ -168,8 +168,8 @@ const achievements = [
     {
         name: "Jack of All Trades",
         description: "Complete habits in 5 different areas",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         icon: "diverse_icon",
         condition: { uniqueAreas: 5 },
         reward: { xp: 100 },
@@ -179,8 +179,8 @@ const achievements = [
     {
         name: "Renaissance Person",
         description: "Complete habits in 10 different areas",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         icon: "diverse_icon",
         condition: { uniqueAreas: 10 },
         reward: { xp: 500 },
@@ -190,8 +190,8 @@ const achievements = [
     {
         name: "Habit Hunter",
         description: "Use the app for 7 consecutive days",
-        type: "login_streak",
-        category: "general",
+        type: "Login_streak",
+        category: "General",
         icon: "login_icon",
         condition: { loginDays: 7 },
         reward: { xp: 50 },
@@ -201,8 +201,8 @@ const achievements = [
     {
         name: "Habit Enthusiast",
         description: "Use the app for 30 consecutive days",
-        type: "login_streak",
-        category: "general",
+        type: "Login_streak",
+        category: "General",
         icon: "login_icon",
         condition: { loginDays: 30 },
         reward: { xp: 200 },
@@ -212,8 +212,8 @@ const achievements = [
     {
         name: "Habit Aficionado",
         description: "Use the app for 90 consecutive days",
-        type: "login_streak",
-        category: "general",
+        type: "Login_streak",
+        category: "General",
         icon: "login_icon",
         condition: { loginDays: 90 },
         reward: { xp: 500 },
@@ -223,8 +223,8 @@ const achievements = [
     {
         name: "Habit Devotee",
         description: "Use the app for 180 consecutive days",
-        type: "login_streak",
-        category: "general",
+        type: "Login_streak",
+        category: "General",
         icon: "login_icon",
         condition: { loginDays: 180 },
         reward: { xp: 1000 },
@@ -234,8 +234,8 @@ const achievements = [
     {
         name: "Habit Guru",
         description: "Use the app for 365 consecutive days",
-        type: "login_streak",
-        category: "general",
+        type: "Login_streak",
+        category: "General",
         icon: "login_icon",
         condition: { loginDays: 365 },
         reward: { xp: 2000 },
@@ -245,8 +245,8 @@ const achievements = [
     {
         name: "XP Novice",
         description: "Earn a total of 1,000 XP",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         icon: "xp_icon",
         condition: { totalXp: 1000 },
         reward: { xp: 100 },
@@ -256,8 +256,8 @@ const achievements = [
     {
         name: "XP Collector",
         description: "Earn a total of 5,000 XP",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         icon: "xp_icon",
         condition: { totalXp: 5000 },
         reward: { xp: 200 },
@@ -267,8 +267,8 @@ const achievements = [
     {
         name: "XP Hoarder",
         description: "Earn a total of 10,000 XP",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         icon: "xp_icon",
         condition: { totalXp: 10000 },
         reward: { xp: 500 },
@@ -278,8 +278,8 @@ const achievements = [
     {
         name: "XP Magnate",
         description: "Earn a total of 25,000 XP",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         icon: "xp_icon",
         condition: { totalXp: 25000 },
         reward: { xp: 1000 },
@@ -289,8 +289,8 @@ const achievements = [
     {
         name: "XP Tycoon",
         description: "Earn a total of 50,000 XP",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         icon: "xp_icon",
         condition: { totalXp: 50000 },
         reward: { xp: 2000 },
@@ -300,8 +300,8 @@ const achievements = [
     {
         name: "Social Newbie",
         description: "Add 5 friends",
-        type: "social",
-        category: "social",
+        type: "Social",
+        category: "Social",
         icon: "friend_icon",
         condition: { friendCount: 5 },
         reward: { xp: 100 },
@@ -309,10 +309,10 @@ const achievements = [
         isRepeatable: false
     },
     {
-        name: "Social Butterfly",
+        name: "Social Fanatic",
         description: "Add 10 friends",
-        type: "social",
-        category: "social",
+        type: "Social",
+        category: "Social",
         icon: "friend_icon",
         condition: { friendCount: 10 },
         reward: { xp: 200 },
@@ -322,8 +322,8 @@ const achievements = [
     {
         name: "Social Star",
         description: "Add 25 friends",
-        type: "social",
-        category: "social",
+        type: "Social",
+        category: "Social",
         icon: "friend_icon",
         condition: { friendCount: 25 },
         reward: { xp: 500 },
@@ -333,8 +333,8 @@ const achievements = [
     {
         name: "Social Influencer",
         description: "Add 50 friends",
-        type: "social",
-        category: "social",
+        type: "Social",
+        category: "Social",
         icon: "friend_icon",
         condition: { friendCount: 50 },
         reward: { xp: 1000 },
@@ -344,8 +344,8 @@ const achievements = [
     {
         name: "Social Legend",
         description: "Add 100 friends",
-        type: "social",
-        category: "social",
+        type: "Social",
+        category: "Social",
         icon: "friend_icon",
         condition: { friendCount: 100 },
         reward: { xp: 2000 },
@@ -358,7 +358,7 @@ const achievements = [
     {
         name: "Exercise Beginner",
         description: "Complete daily exercise for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "exercise_icon",
         condition: { habitId: 1, streakDays: 7 },
@@ -369,7 +369,7 @@ const achievements = [
     {
         name: "Exercise Enthusiast",
         description: "Complete daily exercise for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "exercise_icon",
         condition: { habitId: 1, streakDays: 30 },
@@ -380,7 +380,7 @@ const achievements = [
     {
         name: "Exercise Addict",
         description: "Complete daily exercise for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "exercise_icon",
         condition: { habitId: 1, streakDays: 90 },
@@ -391,7 +391,7 @@ const achievements = [
     {
         name: "Exercise Master",
         description: "Complete daily exercise for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "exercise_icon",
         condition: { habitId: 1, streakDays: 180 },
@@ -402,7 +402,7 @@ const achievements = [
     {
         name: "Exercise Legend",
         description: "Complete daily exercise for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "exercise_icon",
         condition: { habitId: 1, streakDays: 365 },
@@ -415,7 +415,7 @@ const achievements = [
     {
         name: "Meditation Novice",
         description: "Meditate for 7 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "meditation_icon",
         condition: { habitId: 2, streakDays: 7 },
@@ -426,7 +426,7 @@ const achievements = [
     {
         name: "Meditation Practitioner",
         description: "Meditate for 30 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "meditation_icon",
         condition: { habitId: 2, streakDays: 30 },
@@ -437,7 +437,7 @@ const achievements = [
     {
         name: "Meditation Adept",
         description: "Meditate for 90 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "meditation_icon",
         condition: { habitId: 2, streakDays: 90 },
@@ -448,7 +448,7 @@ const achievements = [
     {
         name: "Meditation Master",
         description: "Meditate for 180 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "meditation_icon",
         condition: { habitId: 2, streakDays: 180 },
@@ -459,7 +459,7 @@ const achievements = [
     {
         name: "Zen Master",
         description: "Meditate for 365 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "meditation_icon",
         condition: { habitId: 2, streakDays: 365 },
@@ -472,7 +472,7 @@ const achievements = [
     {
         name: "Bookworm Initiate",
         description: "Read for a total of 10 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Personal Development",
         icon: "book_icon",
         condition: { habitId: 3, totalDuration: 600 },
@@ -483,7 +483,7 @@ const achievements = [
     {
         name: "Bookworm",
         description: "Read for a total of 50 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Personal Development",
         icon: "book_icon",
         condition: { habitId: 3, totalDuration: 3000 },
@@ -494,7 +494,7 @@ const achievements = [
     {
         name: "Avid Reader",
         description: "Read for a total of 100 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Personal Development",
         icon: "book_icon",
         condition: { habitId: 3, totalDuration: 6000 },
@@ -505,7 +505,7 @@ const achievements = [
     {
         name: "Bibliophile",
         description: "Read for a total of 200 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Personal Development",
         icon: "book_icon",
         condition: { habitId: 3, totalDuration: 12000 },
@@ -516,7 +516,7 @@ const achievements = [
     {
         name: "Literary Master",
         description: "Read for a total of 500 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Personal Development",
         icon: "book_icon",
         condition: { habitId: 3, totalDuration: 30000 },
@@ -529,7 +529,7 @@ const achievements = [
     {
         name: "Sleep Scheduler",
         description: "Maintain sleep schedule for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "sleep_icon",
         condition: { habitId: 4, streakDays: 7 },
@@ -540,7 +540,7 @@ const achievements = [
     {
         name: "Sleep Regulator",
         description: "Maintain sleep schedule for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "sleep_icon",
         condition: { habitId: 4, streakDays: 30 },
@@ -551,7 +551,7 @@ const achievements = [
     {
         name: "Sleep Master",
         description: "Maintain sleep schedule for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "sleep_icon",
         condition: { habitId: 4, streakDays: 90 },
@@ -562,7 +562,7 @@ const achievements = [
     {
         name: "Sleep Guru",
         description: "Maintain sleep schedule for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "sleep_icon",
         condition: { habitId: 4, streakDays: 180 },
@@ -573,7 +573,7 @@ const achievements = [
     {
         name: "Sleep Legend",
         description: "Maintain sleep schedule for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "sleep_icon",
         condition: { habitId: 4, streakDays: 365 },
@@ -586,7 +586,7 @@ const achievements = [
     {
         name: "Healthy Eater Initiate",
         description: "Eat 30 nutritious meals",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "meal_icon",
         condition: { habitId: 5, totalCount: 30 },
@@ -597,7 +597,7 @@ const achievements = [
     {
         name: "Healthy Eater",
         description: "Eat 100 nutritious meals",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "meal_icon",
         condition: { habitId: 5, totalCount: 100 },
@@ -608,7 +608,7 @@ const achievements = [
     {
         name: "Nutrition Enthusiast",
         description: "Eat 250 nutritious meals",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "meal_icon",
         condition: { habitId: 5, totalCount: 250 },
@@ -619,7 +619,7 @@ const achievements = [
     {
         name: "Nutrition Master",
         description: "Eat 500 nutritious meals",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "meal_icon",
         condition: { habitId: 5, totalCount: 500 },
@@ -630,7 +630,7 @@ const achievements = [
     {
         name: "Nutrition Guru",
         description: "Eat 1000 nutritious meals",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "meal_icon",
         condition: { habitId: 5, totalCount: 1000 },
@@ -643,7 +643,7 @@ const achievements = [
     {
         name: "Flossing Beginner",
         description: "Floss for 7 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "floss_icon",
         condition: { habitId: 6, streakDays: 7 },
@@ -654,7 +654,7 @@ const achievements = [
     {
         name: "Flossing Enthusiast",
         description: "Floss for 30 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "floss_icon",
         condition: { habitId: 6, streakDays: 30 },
@@ -665,7 +665,7 @@ const achievements = [
     {
         name: "Flossing Addict",
         description: "Floss for 90 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "floss_icon",
         condition: { habitId: 6, streakDays: 90 },
@@ -676,7 +676,7 @@ const achievements = [
     {
         name: "Flossing Master",
         description: "Floss for 180 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "floss_icon",
         condition: { habitId: 6, streakDays: 180 },
@@ -687,7 +687,7 @@ const achievements = [
     {
         name: "Flossing Legend",
         description: "Floss for 365 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "floss_icon",
         condition: { habitId: 6, streakDays: 365 },
@@ -700,7 +700,7 @@ const achievements = [
     {
         name: "Bed Maker Initiate",
         description: "Make bed for 7 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "bed_icon",
         condition: { habitId: 7, streakDays: 7 },
@@ -711,7 +711,7 @@ const achievements = [
     {
         name: "Bed Maker",
         description: "Make bed for 30 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "bed_icon",
         condition: { habitId: 7, streakDays: 30 },
@@ -722,7 +722,7 @@ const achievements = [
     {
         name: "Bed Making Enthusiast",
         description: "Make bed for 90 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "bed_icon",
         condition: { habitId: 7, streakDays: 90 },
@@ -733,7 +733,7 @@ const achievements = [
     {
         name: "Bed Making Master",
         description: "Make bed for 180 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "bed_icon",
         condition: { habitId: 7, streakDays: 180 },
@@ -744,7 +744,7 @@ const achievements = [
     {
         name: "Bed Making Legend",
         description: "Make bed for 365 days in a row",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "bed_icon",
         condition: { habitId: 7, streakDays: 365 },
@@ -757,7 +757,7 @@ const achievements = [
     {
         name: "Hydration Beginner",
         description: "Drink 100 glasses of water",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "water_icon",
         condition: { habitId: 8, totalCount: 100 },
@@ -768,7 +768,7 @@ const achievements = [
     {
         name: "Hydration Enthusiast",
         description: "Drink 500 glasses of water",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "water_icon",
         condition: { habitId: 8, totalCount: 500 },
@@ -779,7 +779,7 @@ const achievements = [
     {
         name: "Hydration Addict",
         description: "Drink 1000 glasses of water",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "water_icon",
         condition: { habitId: 8, totalCount: 1000 },
@@ -790,7 +790,7 @@ const achievements = [
     {
         name: "Hydration Master",
         description: "Drink 2500 glasses of water",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "water_icon",
         condition: { habitId: 8, totalCount: 2500 },
@@ -801,7 +801,7 @@ const achievements = [
     {
         name: "Hydration Guru",
         description: "Drink 5000 glasses of water",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Health",
         icon: "water_icon",
         condition: { habitId: 8, totalCount: 5000 },
@@ -814,8 +814,8 @@ const achievements = [
     {
         name: "Step Taker",
         description: "Take 100,000 steps",
-        type: "habit_milestone",
-        category: "Fitness",
+        type: "Habit_milestone",
+        category: "Health",
         icon: "steps_icon",
         condition: { habitId: 9, totalCount: 100000 },
         reward: { xp: 100 },
@@ -825,8 +825,8 @@ const achievements = [
     {
         name: "Walker",
         description: "Take 500,000 steps",
-        type: "habit_milestone",
-        category: "Fitness",
+        type: "Habit_milestone",
+        category: "Health",
         icon: "steps_icon",
         condition: { habitId: 9, totalCount: 500000 },
         reward: { xp: 250 },
@@ -836,8 +836,8 @@ const achievements = [
     {
         name: "Hiker",
         description: "Take 1,000,000 steps",
-        type: "habit_milestone",
-        category: "Fitness",
+        type: "Habit_milestone",
+        category: "Health",
         icon: "steps_icon",
         condition: { habitId: 9, totalCount: 1000000 },
         reward: { xp: 500 },
@@ -847,8 +847,8 @@ const achievements = [
     {
         name: "Trekker",
         description: "Take 2,500,000 steps",
-        type: "habit_milestone",
-        category: "Fitness",
+        type: "Habit_milestone",
+        category: "Health",
         icon: "steps_icon",
         condition: { habitId: 9, totalCount: 2500000 },
         reward: { xp: 750 },
@@ -858,8 +858,8 @@ const achievements = [
     {
         name: "Marathon Walker",
         description: "Take 5,000,000 steps",
-        type: "habit_milestone",
-        category: "Fitness",
+        type: "Habit_milestone",
+        category: "Health",
         icon: "steps_icon",
         condition: { habitId: 9, totalCount: 5000000 },
         reward: { xp: 1500 },
@@ -869,7 +869,7 @@ const achievements = [
     {
         name: "Gratitude Novice",
         description: "Write 30 gratitude entries",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Mental Health",
         icon: "gratitude_icon",
         condition: { habitId: 10, totalCount: 30 },
@@ -880,7 +880,7 @@ const achievements = [
     {
         name: "Gratitude Practitioner",
         description: "Write 100 gratitude entries",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Mental Health",
         icon: "gratitude_icon",
         condition: { habitId: 10, totalCount: 100 },
@@ -891,7 +891,7 @@ const achievements = [
     {
         name: "Gratitude Enthusiast",
         description: "Write 250 gratitude entries",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Mental Health",
         icon: "gratitude_icon",
         condition: { habitId: 10, totalCount: 250 },
@@ -902,7 +902,7 @@ const achievements = [
     {
         name: "Gratitude Master",
         description: "Write 500 gratitude entries",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Mental Health",
         icon: "gratitude_icon",
         condition: { habitId: 10, totalCount: 500 },
@@ -913,7 +913,7 @@ const achievements = [
     {
         name: "Gratitude Guru",
         description: "Write 1000 gratitude entries",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Mental Health",
         icon: "gratitude_icon",
         condition: { habitId: 10, totalCount: 1000 },
@@ -926,7 +926,7 @@ const achievements = [
     {
         name: "Focus Initiate",
         description: "Complete 10 hours of deep work",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Productivity",
         icon: "focus_icon",
         condition: { habitId: 11, totalDuration: 600 },
@@ -937,7 +937,7 @@ const achievements = [
     {
         name: "Focus Practitioner",
         description: "Complete 50 hours of deep work",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Productivity",
         icon: "focus_icon",
         condition: { habitId: 11, totalDuration: 3000 },
@@ -948,7 +948,7 @@ const achievements = [
     {
         name: "Focus Expert",
         description: "Complete 100 hours of deep work",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Productivity",
         icon: "focus_icon",
         condition: { habitId: 11, totalDuration: 6000 },
@@ -959,7 +959,7 @@ const achievements = [
     {
         name: "Focus Master",
         description: "Complete 250 hours of deep work",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Productivity",
         icon: "focus_icon",
         condition: { habitId: 11, totalDuration: 15000 },
@@ -970,7 +970,7 @@ const achievements = [
     {
         name: "Focus Guru",
         description: "Complete 500 hours of deep work",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Productivity",
         icon: "focus_icon",
         condition: { habitId: 11, totalDuration: 30000 },
@@ -983,8 +983,8 @@ const achievements = [
     {
         name: "Music Novice",
         description: "Practice instrument for 10 hours",
-        type: "habit_milestone",
-        category: "Skill Development",
+        type: "Habit_milestone",
+        category: "Creativity",
         icon: "music_icon",
         condition: { habitId: 12, totalDuration: 600 },
         reward: { xp: 100 },
@@ -994,8 +994,8 @@ const achievements = [
     {
         name: "Music Enthusiast",
         description: "Practice instrument for 50 hours",
-        type: "habit_milestone",
-        category: "Skill Development",
+        type: "Habit_milestone",
+        category: "Creativity",
         icon: "music_icon",
         condition: { habitId: 12, totalDuration: 3000 },
         reward: { xp: 250 },
@@ -1005,8 +1005,8 @@ const achievements = [
     {
         name: "Music Adept",
         description: "Practice instrument for 100 hours",
-        type: "habit_milestone",
-        category: "Skill Development",
+        type: "Habit_milestone",
+        category: "Creativity",
         icon: "music_icon",
         condition: { habitId: 12, totalDuration: 6000 },
         reward: { xp: 500 },
@@ -1016,8 +1016,8 @@ const achievements = [
     {
         name: "Music Virtuoso",
         description: "Practice instrument for 250 hours",
-        type: "habit_milestone",
-        category: "Skill Development",
+        type: "Habit_milestone",
+        category: "Creativity",
         icon: "music_icon",
         condition: { habitId: 12, totalDuration: 15000 },
         reward: { xp: 750 },
@@ -1027,8 +1027,8 @@ const achievements = [
     {
         name: "Music Maestro",
         description: "Practice instrument for 500 hours",
-        type: "habit_milestone",
-        category: "Skill Development",
+        type: "Habit_milestone",
+        category: "Creativity",
         icon: "music_icon",
         condition: { habitId: 12, totalDuration: 30000 },
         reward: { xp: 1500 },
@@ -1040,7 +1040,7 @@ const achievements = [
     {
         name: "Language Learner",
         description: "Study a language for 10 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Education",
         icon: "language_icon",
         condition: { habitId: 13, totalDuration: 600 },
@@ -1051,7 +1051,7 @@ const achievements = [
     {
         name: "Language Enthusiast",
         description: "Study a language for 50 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Education",
         icon: "language_icon",
         condition: { habitId: 13, totalDuration: 3000 },
@@ -1062,7 +1062,7 @@ const achievements = [
     {
         name: "Language Adept",
         description: "Study a language for 100 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Education",
         icon: "language_icon",
         condition: { habitId: 13, totalDuration: 6000 },
@@ -1073,7 +1073,7 @@ const achievements = [
     {
         name: "Language Expert",
         description: "Study a language for 250 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Education",
         icon: "language_icon",
         condition: { habitId: 13, totalDuration: 15000 },
@@ -1084,7 +1084,7 @@ const achievements = [
     {
         name: "Polyglot",
         description: "Study a language for 500 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Education",
         icon: "language_icon",
         condition: { habitId: 13, totalDuration: 30000 },
@@ -1097,7 +1097,7 @@ const achievements = [
     {
         name: "Morning Person Initiate",
         description: "Complete morning routine for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "morning_icon",
         condition: { habitId: 14, streakDays: 7 },
@@ -1108,7 +1108,7 @@ const achievements = [
     {
         name: "Morning Person",
         description: "Complete morning routine for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "morning_icon",
         condition: { habitId: 14, streakDays: 30 },
@@ -1119,7 +1119,7 @@ const achievements = [
     {
         name: "Early Bird",
         description: "Complete morning routine for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "morning_icon",
         condition: { habitId: 14, streakDays: 90 },
@@ -1130,7 +1130,7 @@ const achievements = [
     {
         name: "Dawn Treader",
         description: "Complete morning routine for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "morning_icon",
         condition: { habitId: 14, streakDays: 180 },
@@ -1141,7 +1141,7 @@ const achievements = [
     {
         name: "Sunrise Legend",
         description: "Complete morning routine for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Personal Development",
         icon: "morning_icon",
         condition: { habitId: 14, streakDays: 365 },
@@ -1154,7 +1154,7 @@ const achievements = [
     {
         name: "Skincare Novice",
         description: "Complete skincare routine for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "skincare_icon",
         condition: { habitId: 15, streakDays: 7 },
@@ -1165,7 +1165,7 @@ const achievements = [
     {
         name: "Skincare Enthusiast",
         description: "Complete skincare routine for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "skincare_icon",
         condition: { habitId: 15, streakDays: 30 },
@@ -1176,7 +1176,7 @@ const achievements = [
     {
         name: "Skincare Adept",
         description: "Complete skincare routine for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "skincare_icon",
         condition: { habitId: 15, streakDays: 90 },
@@ -1187,7 +1187,7 @@ const achievements = [
     {
         name: "Skincare Expert",
         description: "Complete skincare routine for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "skincare_icon",
         condition: { habitId: 15, streakDays: 180 },
@@ -1198,7 +1198,7 @@ const achievements = [
     {
         name: "Skincare Guru",
         description: "Complete skincare routine for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "skincare_icon",
         condition: { habitId: 15, streakDays: 365 },
@@ -1211,8 +1211,8 @@ const achievements = [
     {
         name: "Tidy Beginner",
         description: "Complete weekly cleaning 4 times",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "cleaning_icon",
         condition: { habitId: 16, totalCount: 4 },
         reward: { xp: 100 },
@@ -1222,8 +1222,8 @@ const achievements = [
     {
         name: "Tidy Enthusiast",
         description: "Complete weekly cleaning 13 times",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "cleaning_icon",
         condition: { habitId: 16, totalCount: 13 },
         reward: { xp: 250 },
@@ -1233,8 +1233,8 @@ const achievements = [
     {
         name: "Tidy Expert",
         description: "Complete weekly cleaning 26 times",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "cleaning_icon",
         condition: { habitId: 16, totalCount: 26 },
         reward: { xp: 500 },
@@ -1244,8 +1244,8 @@ const achievements = [
     {
         name: "Tidy Master",
         description: "Complete weekly cleaning 52 times",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "cleaning_icon",
         condition: { habitId: 16, totalCount: 52 },
         reward: { xp: 750 },
@@ -1255,8 +1255,8 @@ const achievements = [
     {
         name: "Cleaning Guru",
         description: "Complete weekly cleaning 104 times",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "cleaning_icon",
         condition: { habitId: 16, totalCount: 104 },
         reward: { xp: 1500 },
@@ -1268,8 +1268,8 @@ const achievements = [
     {
         name: "Budget Tracker",
         description: "Review budget for 4 weeks",
-        type: "habit_streak",
-        category: "Financial Health",
+        type: "Habit_streak",
+        category: "Finance",
         icon: "budget_icon",
         condition: { habitId: 17, streakDays: 28 },
         reward: { xp: 100 },
@@ -1279,8 +1279,8 @@ const achievements = [
     {
         name: "Budget Manager",
         description: "Review budget for 13 weeks",
-        type: "habit_streak",
-        category: "Financial Health",
+        type: "Habit_streak",
+        category: "Finance",
         icon: "budget_icon",
         condition: { habitId: 17, streakDays: 91 },
         reward: { xp: 250 },
@@ -1290,8 +1290,8 @@ const achievements = [
     {
         name: "Budget Expert",
         description: "Review budget for 26 weeks",
-        type: "habit_streak",
-        category: "Financial Health",
+        type: "Habit_streak",
+        category: "Finance",
         icon: "budget_icon",
         condition: { habitId: 17, streakDays: 182 },
         reward: { xp: 500 },
@@ -1301,8 +1301,8 @@ const achievements = [
     {
         name: "Financial Wizard",
         description: "Review budget for 52 weeks",
-        type: "habit_streak",
-        category: "Financial Health",
+        type: "Habit_streak",
+        category: "Finance",
         icon: "budget_icon",
         condition: { habitId: 17, streakDays: 364 },
         reward: { xp: 750 },
@@ -1312,8 +1312,8 @@ const achievements = [
     {
         name: "Financial Guru",
         description: "Review budget for 104 weeks",
-        type: "habit_streak",
-        category: "Financial Health",
+        type: "Habit_streak",
+        category: "Finance",
         icon: "budget_icon",
         condition: { habitId: 17, streakDays: 728 },
         reward: { xp: 1500 },
@@ -1325,8 +1325,8 @@ const achievements = [
     {
         name: "Social Starter",
         description: "Reach out to 5 friends",
-        type: "habit_milestone",
-        category: "Social Connection",
+        type: "Habit_milestone",
+        category: "Social",
         icon: "friend_icon",
         condition: { habitId: 18, totalCount: 5 },
         reward: { xp: 100 },
@@ -1336,8 +1336,8 @@ const achievements = [
     {
         name: "Social Butterfly",
         description: "Reach out to 25 friends",
-        type: "habit_milestone",
-        category: "Social Connection",
+        type: "Habit_milestone",
+        category: "Social",
         icon: "friend_icon",
         condition: { habitId: 18, totalCount: 25 },
         reward: { xp: 250 },
@@ -1347,8 +1347,8 @@ const achievements = [
     {
         name: "Social Networker",
         description: "Reach out to 50 friends",
-        type: "habit_milestone",
-        category: "Social Connection",
+        type: "Habit_milestone",
+        category: "Social",
         icon: "friend_icon",
         condition: { habitId: 18, totalCount: 50 },
         reward: { xp: 500 },
@@ -1358,8 +1358,8 @@ const achievements = [
     {
         name: "Social Guru",
         description: "Reach out to 100 friends",
-        type: "habit_milestone",
-        category: "Social Connection",
+        type: "Habit_milestone",
+        category: "Social",
         icon: "friend_icon",
         condition: { habitId: 18, totalCount: 100 },
         reward: { xp: 750 },
@@ -1367,10 +1367,10 @@ const achievements = [
         isRepeatable: false
     },
     {
-        name: "Social Legend",
+        name: "Socialist",
         description: "Reach out to 200 friends",
-        type: "habit_milestone",
-        category: "Social Connection",
+        type: "Habit_milestone",
+        category: "Social",
         icon: "friend_icon",
         condition: { habitId: 18, totalCount: 200 },
         reward: { xp: 1500 },
@@ -1382,7 +1382,7 @@ const achievements = [
     {
         name: "Sketch Novice",
         description: "Complete daily sketches for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "sketch_icon",
         condition: { habitId: 19, streakDays: 7 },
@@ -1393,7 +1393,7 @@ const achievements = [
     {
         name: "Sketch Enthusiast",
         description: "Complete daily sketches for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "sketch_icon",
         condition: { habitId: 19, streakDays: 30 },
@@ -1404,7 +1404,7 @@ const achievements = [
     {
         name: "Sketch Artist",
         description: "Complete daily sketches for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "sketch_icon",
         condition: { habitId: 19, streakDays: 90 },
@@ -1415,7 +1415,7 @@ const achievements = [
     {
         name: "Sketch Master",
         description: "Complete daily sketches for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "sketch_icon",
         condition: { habitId: 19, streakDays: 180 },
@@ -1426,7 +1426,7 @@ const achievements = [
     {
         name: "Sketch Virtuoso",
         description: "Complete daily sketches for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "sketch_icon",
         condition: { habitId: 19, streakDays: 365 },
@@ -1439,7 +1439,7 @@ const achievements = [
     {
         name: "Eco Beginner",
         description: "Reduce plastic use for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Environmental Consciousness",
         icon: "eco_icon",
         condition: { habitId: 20, streakDays: 7 },
@@ -1450,7 +1450,7 @@ const achievements = [
     {
         name: "Eco Enthusiast",
         description: "Reduce plastic use for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Environmental Consciousness",
         icon: "eco_icon",
         condition: { habitId: 20, streakDays: 30 },
@@ -1461,7 +1461,7 @@ const achievements = [
     {
         name: "Eco Warrior",
         description: "Reduce plastic use for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Environmental Consciousness",
         icon: "eco_icon",
         condition: { habitId: 20, streakDays: 90 },
@@ -1472,7 +1472,7 @@ const achievements = [
     {
         name: "Eco Champion",
         description: "Reduce plastic use for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Environmental Consciousness",
         icon: "eco_icon",
         condition: { habitId: 20, streakDays: 180 },
@@ -1483,7 +1483,7 @@ const achievements = [
     {
         name: "Eco Legend",
         description: "Reduce plastic use for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Environmental Consciousness",
         icon: "eco_icon",
         condition: { habitId: 20, streakDays: 365 },
@@ -1496,7 +1496,7 @@ const achievements = [
     {
         name: "Skill Seeker",
         description: "Learn new skills for 5 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Professional Development",
         icon: "skill_icon",
         condition: { habitId: 21, totalDuration: 300 },
@@ -1507,7 +1507,7 @@ const achievements = [
     {
         name: "Skill Enthusiast",
         description: "Learn new skills for 25 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Professional Development",
         icon: "skill_icon",
         condition: { habitId: 21, totalDuration: 1500 },
@@ -1518,7 +1518,7 @@ const achievements = [
     {
         name: "Skill Adept",
         description: "Learn new skills for 50 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Professional Development",
         icon: "skill_icon",
         condition: { habitId: 21, totalDuration: 3000 },
@@ -1529,7 +1529,7 @@ const achievements = [
     {
         name: "Skill Master",
         description: "Learn new skills for 100 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Professional Development",
         icon: "skill_icon",
         condition: { habitId: 21, totalDuration: 6000 },
@@ -1540,7 +1540,7 @@ const achievements = [
     {
         name: "Skill Guru",
         description: "Learn new skills for 200 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Professional Development",
         icon: "skill_icon",
         condition: { habitId: 21, totalDuration: 12000 },
@@ -1553,7 +1553,7 @@ const achievements = [
     {
         name: "Journal Starter",
         description: "Write in journal for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "journal_icon",
         condition: { habitId: 22, streakDays: 7 },
@@ -1564,7 +1564,7 @@ const achievements = [
     {
         name: "Journal Enthusiast",
         description: "Write in journal for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "journal_icon",
         condition: { habitId: 22, streakDays: 30 },
@@ -1575,7 +1575,7 @@ const achievements = [
     {
         name: "Journal Adept",
         description: "Write in journal for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "journal_icon",
         condition: { habitId: 22, streakDays: 90 },
@@ -1586,7 +1586,7 @@ const achievements = [
     {
         name: "Journal Master",
         description: "Write in journal for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "journal_icon",
         condition: { habitId: 22, streakDays: 180 },
@@ -1597,7 +1597,7 @@ const achievements = [
     {
         name: "Journaling Guru",
         description: "Write in journal for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "journal_icon",
         condition: { habitId: 22, streakDays: 365 },
@@ -1610,7 +1610,7 @@ const achievements = [
     {
         name: "Writing Novice",
         description: "Write daily for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "writing_icon",
         condition: { habitId: 23, streakDays: 7 },
@@ -1621,7 +1621,7 @@ const achievements = [
     {
         name: "Writing Enthusiast",
         description: "Write daily for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "writing_icon",
         condition: { habitId: 23, streakDays: 30 },
@@ -1632,7 +1632,7 @@ const achievements = [
     {
         name: "Writing Adept",
         description: "Write daily for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "writing_icon",
         condition: { habitId: 23, streakDays: 90 },
@@ -1643,7 +1643,7 @@ const achievements = [
     {
         name: "Writing Master",
         description: "Write daily for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "writing_icon",
         condition: { habitId: 23, streakDays: 180 },
@@ -1654,7 +1654,7 @@ const achievements = [
     {
         name: "Writing Virtuoso",
         description: "Write daily for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Creativity",
         icon: "writing_icon",
         condition: { habitId: 23, streakDays: 365 },
@@ -1667,7 +1667,7 @@ const achievements = [
     {
         name: "Music Producer Novice",
         description: "Produce music for 10 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "music_prod_icon",
         condition: { habitId: 24, totalDuration: 600 },
@@ -1678,7 +1678,7 @@ const achievements = [
     {
         name: "Music Producer Enthusiast",
         description: "Produce music for 50 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "music_prod_icon",
         condition: { habitId: 24, totalDuration: 3000 },
@@ -1689,7 +1689,7 @@ const achievements = [
     {
         name: "Music Producer Adept",
         description: "Produce music for 100 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "music_prod_icon",
         condition: { habitId: 24, totalDuration: 6000 },
@@ -1700,7 +1700,7 @@ const achievements = [
     {
         name: "Music Producer Master",
         description: "Produce music for 250 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "music_prod_icon",
         condition: { habitId: 24, totalDuration: 15000 },
@@ -1711,7 +1711,7 @@ const achievements = [
     {
         name: "Music Production Guru",
         description: "Produce music for 500 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "music_prod_icon",
         condition: { habitId: 24, totalDuration: 30000 },
@@ -1722,7 +1722,7 @@ const achievements = [
     {
         name: "Video Creator Novice",
         description: "Create videos for 10 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "video_icon",
         condition: { habitId: 25, totalDuration: 600 },
@@ -1733,7 +1733,7 @@ const achievements = [
     {
         name: "Video Creator Enthusiast",
         description: "Create videos for 50 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "video_icon",
         condition: { habitId: 25, totalDuration: 3000 },
@@ -1744,7 +1744,7 @@ const achievements = [
     {
         name: "Video Creator Adept",
         description: "Create videos for 100 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "video_icon",
         condition: { habitId: 25, totalDuration: 6000 },
@@ -1755,7 +1755,7 @@ const achievements = [
     {
         name: "Video Creator Master",
         description: "Create videos for 250 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "video_icon",
         condition: { habitId: 25, totalDuration: 15000 },
@@ -1766,7 +1766,7 @@ const achievements = [
     {
         name: "Video Production Guru",
         description: "Create videos for 500 hours",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Creativity",
         icon: "video_icon",
         condition: { habitId: 25, totalDuration: 30000 },
@@ -1779,7 +1779,7 @@ const achievements = [
     {
         name: "Digital Detox Beginner",
         description: "Reduce screen time for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "screen_icon",
         condition: { habitId: 26, streakDays: 7 },
@@ -1790,7 +1790,7 @@ const achievements = [
     {
         name: "Digital Detox Enthusiast",
         description: "Reduce screen time for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "screen_icon",
         condition: { habitId: 26, streakDays: 30 },
@@ -1801,7 +1801,7 @@ const achievements = [
     {
         name: "Digital Detox Adept",
         description: "Reduce screen time for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "screen_icon",
         condition: { habitId: 26, streakDays: 90 },
@@ -1812,7 +1812,7 @@ const achievements = [
     {
         name: "Digital Detox Master",
         description: "Reduce screen time for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "screen_icon",
         condition: { habitId: 26, streakDays: 180 },
@@ -1823,7 +1823,7 @@ const achievements = [
     {
         name: "Digital Wellbeing Guru",
         description: "Reduce screen time for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "screen_icon",
         condition: { habitId: 26, streakDays: 365 },
@@ -1836,7 +1836,7 @@ const achievements = [
     {
         name: "Social Media Reducer",
         description: "Limit social media for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "social_media_icon",
         condition: { habitId: 27, streakDays: 7 },
@@ -1847,7 +1847,7 @@ const achievements = [
     {
         name: "Social Media Manager",
         description: "Limit social media for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "social_media_icon",
         condition: { habitId: 27, streakDays: 30 },
@@ -1858,7 +1858,7 @@ const achievements = [
     {
         name: "Social Media Master",
         description: "Limit social media for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "social_media_icon",
         condition: { habitId: 27, streakDays: 90 },
@@ -1869,7 +1869,7 @@ const achievements = [
     {
         name: "Social Media Guru",
         description: "Limit social media for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "social_media_icon",
         condition: { habitId: 27, streakDays: 180 },
@@ -1880,7 +1880,7 @@ const achievements = [
     {
         name: "Social Media Zen Master",
         description: "Limit social media for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Digital Wellbeing",
         icon: "social_media_icon",
         condition: { habitId: 27, streakDays: 365 },
@@ -1893,7 +1893,7 @@ const achievements = [
     {
         name: "TV Reducer",
         description: "Reduce TV watching for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Lifestyle",
         icon: "tv_icon",
         condition: { habitId: 28, streakDays: 7 },
@@ -1904,7 +1904,7 @@ const achievements = [
     {
         name: "TV Manager",
         description: "Reduce TV watching for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Lifestyle",
         icon: "tv_icon",
         condition: { habitId: 28, streakDays: 30 },
@@ -1915,7 +1915,7 @@ const achievements = [
     {
         name: "TV Master",
         description: "Reduce TV watching for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Lifestyle",
         icon: "tv_icon",
         condition: { habitId: 28, streakDays: 90 },
@@ -1926,7 +1926,7 @@ const achievements = [
     {
         name: "TV Guru",
         description: "Reduce TV watching for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Lifestyle",
         icon: "tv_icon",
         condition: { habitId: 28, streakDays: 180 },
@@ -1937,7 +1937,7 @@ const achievements = [
     {
         name: "TV-Free Legend",
         description: "Reduce TV watching for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Lifestyle",
         icon: "tv_icon",
         condition: { habitId: 28, streakDays: 365 },
@@ -1950,7 +1950,7 @@ const achievements = [
     {
         name: "Tobacco Reducer",
         description: "Reduce tobacco use for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "tobacco_icon",
         condition: { habitId: 29, streakDays: 7 },
@@ -1961,7 +1961,7 @@ const achievements = [
     {
         name: "Tobacco Manager",
         description: "Reduce tobacco use for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "tobacco_icon",
         condition: { habitId: 29, streakDays: 30 },
@@ -1972,7 +1972,7 @@ const achievements = [
     {
         name: "Tobacco Master",
         description: "Reduce tobacco use for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "tobacco_icon",
         condition: { habitId: 29, streakDays: 90 },
@@ -1983,7 +1983,7 @@ const achievements = [
     {
         name: "Tobacco Guru",
         description: "Reduce tobacco use for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "tobacco_icon",
         condition: { habitId: 29, streakDays: 180 },
@@ -1994,7 +1994,7 @@ const achievements = [
     {
         name: "Tobacco-Free Legend",
         description: "Reduce tobacco use for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "tobacco_icon",
         condition: { habitId: 29, streakDays: 365 },
@@ -2007,7 +2007,7 @@ const achievements = [
     {
         name: "Alcohol Moderator",
         description: "Moderate alcohol intake for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "alcohol_icon",
         condition: { habitId: 30, streakDays: 7 },
@@ -2018,7 +2018,7 @@ const achievements = [
     {
         name: "Alcohol Manager",
         description: "Moderate alcohol intake for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "alcohol_icon",
         condition: { habitId: 30, streakDays: 30 },
@@ -2029,7 +2029,7 @@ const achievements = [
     {
         name: "Alcohol Master",
         description: "Moderate alcohol intake for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "alcohol_icon",
         condition: { habitId: 30, streakDays: 90 },
@@ -2040,7 +2040,7 @@ const achievements = [
     {
         name: "Alcohol Guru",
         description: "Moderate alcohol intake for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "alcohol_icon",
         condition: { habitId: 30, streakDays: 180 },
@@ -2051,7 +2051,7 @@ const achievements = [
     {
         name: "Sobriety Champion",
         description: "Moderate alcohol intake for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "alcohol_icon",
         condition: { habitId: 30, streakDays: 365 },
@@ -2064,7 +2064,7 @@ const achievements = [
     {
         name: "Breathing Novice",
         description: "Practice mindful breathing for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Stress Management",
         icon: "breathing_icon",
         condition: { habitId: 31, streakDays: 7 },
@@ -2075,7 +2075,7 @@ const achievements = [
     {
         name: "Breathing Enthusiast",
         description: "Practice mindful breathing for 30 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Stress Management",
         icon: "breathing_icon",
         condition: { habitId: 31, streakDays: 30 },
@@ -2086,7 +2086,7 @@ const achievements = [
     {
         name: "Breathing Adept",
         description: "Practice mindful breathing for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Stress Management",
         icon: "breathing_icon",
         condition: { habitId: 31, streakDays: 90 },
@@ -2097,7 +2097,7 @@ const achievements = [
     {
         name: "Breathing Master",
         description: "Practice mindful breathing for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Stress Management",
         icon: "breathing_icon",
         condition: { habitId: 31, streakDays: 180 },
@@ -2108,7 +2108,7 @@ const achievements = [
     {
         name: "Zen Breather",
         description: "Practice mindful breathing for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Stress Management",
         icon: "breathing_icon",
         condition: { habitId: 31, streakDays: 365 },
@@ -2121,7 +2121,7 @@ const achievements = [
     {
         name: "Affirmation Beginner",
         description: "Practice daily affirmations for 7 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "affirmation_icon",
         condition: { habitId: 32, streakDays: 7 },
@@ -2132,7 +2132,7 @@ const achievements = [
     {
         name: "Affirmation Adept",
         description: "Practice daily affirmations for 90 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "affirmation_icon",
         condition: { habitId: 32, streakDays: 90 },
@@ -2143,7 +2143,7 @@ const achievements = [
     {
         name: "Affirmation Master",
         description: "Practice daily affirmations for 180 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "affirmation_icon",
         condition: { habitId: 32, streakDays: 180 },
@@ -2154,7 +2154,7 @@ const achievements = [
     {
         name: "Positivity Guru",
         description: "Practice daily affirmations for 365 days",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Mental Health",
         icon: "affirmation_icon",
         condition: { habitId: 32, streakDays: 365 },
@@ -2167,8 +2167,8 @@ const achievements = [
     {
         name: "Declutter Novice",
         description: "Declutter for 5 hours",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "declutter_icon",
         condition: { habitId: 33, totalDuration: 300 },
         reward: { xp: 100 },
@@ -2178,8 +2178,8 @@ const achievements = [
     {
         name: "Declutter Enthusiast",
         description: "Declutter for 25 hours",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "declutter_icon",
         condition: { habitId: 33, totalDuration: 1500 },
         reward: { xp: 250 },
@@ -2189,8 +2189,8 @@ const achievements = [
     {
         name: "Declutter Adept",
         description: "Declutter for 50 hours",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "declutter_icon",
         condition: { habitId: 33, totalDuration: 3000 },
         reward: { xp: 500 },
@@ -2200,8 +2200,8 @@ const achievements = [
     {
         name: "Declutter Master",
         description: "Declutter for 100 hours",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "declutter_icon",
         condition: { habitId: 33, totalDuration: 6000 },
         reward: { xp: 750 },
@@ -2211,8 +2211,8 @@ const achievements = [
     {
         name: "Minimalism Guru",
         description: "Declutter for 200 hours",
-        type: "habit_milestone",
-        category: "Home Management",
+        type: "Habit_milestone",
+        category: "Productivity",
         icon: "declutter_icon",
         condition: { habitId: 33, totalDuration: 12000 },
         reward: { xp: 1500 },
@@ -2224,7 +2224,7 @@ const achievements = [
     {
         name: "Network Starter",
         description: "Make 5 professional connections",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Career Development",
         icon: "network_icon",
         condition: { habitId: 34, totalCount: 5 },
@@ -2235,7 +2235,7 @@ const achievements = [
     {
         name: "Network Builder",
         description: "Make 25 professional connections",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Career Development",
         icon: "network_icon",
         condition: { habitId: 34, totalCount: 25 },
@@ -2246,7 +2246,7 @@ const achievements = [
     {
         name: "Network Expander",
         description: "Make 50 professional connections",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Career Development",
         icon: "network_icon",
         condition: { habitId: 34, totalCount: 50 },
@@ -2257,7 +2257,7 @@ const achievements = [
     {
         name: "Network Master",
         description: "Make 100 professional connections",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Career Development",
         icon: "network_icon",
         condition: { habitId: 34, totalCount: 100 },
@@ -2268,7 +2268,7 @@ const achievements = [
     {
         name: "Networking Guru",
         description: "Make 200 professional connections",
-        type: "habit_milestone",
+        type: "Habit_milestone",
         category: "Career Development",
         icon: "network_icon",
         condition: { habitId: 34, totalCount: 200 },
@@ -2281,7 +2281,7 @@ const achievements = [
     {
         name: "Meal Planner Beginner",
         description: "Plan meals for 4 weeks",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "meal_plan_icon",
         condition: { habitId: 35, streakDays: 28 },
@@ -2292,7 +2292,7 @@ const achievements = [
     {
         name: "Meal Planner Enthusiast",
         description: "Plan meals for 13 weeks",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "meal_plan_icon",
         condition: { habitId: 35, streakDays: 91 },
@@ -2303,7 +2303,7 @@ const achievements = [
     {
         name: "Meal Planner Adept",
         description: "Plan meals for 26 weeks",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "meal_plan_icon",
         condition: { habitId: 35, streakDays: 182 },
@@ -2314,7 +2314,7 @@ const achievements = [
     {
         name: "Meal Planner Master",
         description: "Plan meals for 52 weeks",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "meal_plan_icon",
         condition: { habitId: 35, streakDays: 364 },
@@ -2325,7 +2325,7 @@ const achievements = [
     {
         name: "Nutrition Planning Guru",
         description: "Plan meals for 104 weeks",
-        type: "habit_streak",
+        type: "Habit_streak",
         category: "Health",
         icon: "meal_plan_icon",
         condition: { habitId: 35, streakDays: 728 },

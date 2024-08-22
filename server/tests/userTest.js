@@ -53,7 +53,7 @@ const setupTestData = async () => {
         achievement = new Achievement({
             name: 'Test Achievement',
             description: 'This is a test achievement',
-            type: 'habit_streak',
+            type: 'Habit_streak',
             category: 'health',
             icon: 'test_icon',
             condition: {

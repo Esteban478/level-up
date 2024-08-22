@@ -13,7 +13,7 @@ const xpTransactionSchema = new mongoose.Schema({
     source: {
         type: String,
         required: true,
-        enum: ['habit_completion', 'streak', 'achievement', 'friend_added', 'daily_login', 'other']
+        enum: ['Habit_completion', 'Streak', 'Achievement', 'Friend_added', 'Daily_login', 'Other']
     },
     sourceId: {
         type: mongoose.Schema.Types.ObjectId,

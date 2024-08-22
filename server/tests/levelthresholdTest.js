@@ -33,8 +33,8 @@ const setupTestData = async () => {
     const achievement1 = await Achievement.create({
         name: 'Novice',
         description: 'Reached level 1',
-        type: 'level',
-        category: 'general',
+        type: 'Level',
+        category: 'General',
         condition: { level: 1 },
         reward: { xp: 10 },
         tier: 'bronze'
@@ -43,8 +43,8 @@ const setupTestData = async () => {
     const achievement2 = await Achievement.create({
         name: 'Apprentice',
         description: 'Reached level 2',
-        type: 'level',
-        category: 'general',
+        type: 'Level',
+        category: 'General',
         condition: { level: 2 },
         reward: { xp: 20 },
         tier: 'silver'
@@ -71,8 +71,8 @@ const testCreateLevelThreshold = async () => {
     const achievement = await Achievement.create({
         name: 'Expert',
         description: 'Reached level 4',
-        type: 'level',
-        category: 'general',
+        type: 'Level',
+        category: 'General',
         condition: { level: 4 },
         reward: { xp: 40 },
         tier: 'gold'
@@ -96,8 +96,8 @@ const testUpdateLevelThreshold = async (levelThresholdId) => {
     const achievement = await Achievement.create({
         name: 'Master',
         description: 'Reached level 4 (updated)',
-        type: 'level',
-        category: 'general',
+        type: 'Level',
+        category: 'General',
         condition: { level: 4 },
         reward: { xp: 50 },
         tier: 'platinum'

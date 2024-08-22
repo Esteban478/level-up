@@ -6,7 +6,7 @@ export const generateXPTransactions = (habitLogs, habits) => {
         return {
             userId: log.userId,
             amount: xpEarned,
-            source: 'habit_completion',
+            source: 'Habit_completion',
             sourceId: log.habitId,
             timestamp: log.date
         };

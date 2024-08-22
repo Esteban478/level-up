@@ -28,7 +28,7 @@ const setupTestData = async () => {
 const testCreateXPTransaction = async () => {
     const xpTransactionData = {
         amount: 100,
-        source: 'habit_completion'
+        source: 'Habit_completion'
     };
 
     const response = await makeRequest(`${BASE_URL}/xp`, 'POST', xpTransactionData, token);

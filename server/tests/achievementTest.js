@@ -29,8 +29,8 @@ const testCreateAchievement = async () => {
     const achievementData = {
         name: "Test Achievement",
         description: "This is a test achievement",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         icon: "test_icon",
         condition: { customCondition: { testCondition: true } },
         reward: { xp: 100, badge: "test_badge" },

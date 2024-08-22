@@ -55,7 +55,7 @@ export const getCurrentLevel = async (req, res) => {
 
 export const getLevelThresholds = async (req, res) => {
     try {
-        const levelThresholds = await LevelThreshold.find().sort('level').populate('rewards.achievementId');
+        const levelThresholds = await LevelThreshold.find().sort('Level').populate('rewards.achievementId');
         res.json(levelThresholds);
     } catch (error) {
         res.status(500).json({ error: error.message });

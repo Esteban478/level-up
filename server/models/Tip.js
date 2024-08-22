@@ -15,7 +15,7 @@ const tipSchema = new mongoose.Schema({
         type: String,
         enum: ['Health', 'Fitness', 'Mental Health', 'Productivity', 'Personal Development',
             'Skill Development', 'Education', 'Creativity', 'Home Management',
-            'Financial Health', 'Social Connection', 'Environmental Consciousness',
+            'Finance', 'Social', 'Environmental Consciousness',
             'Professional Development', 'Digital Wellbeing', 'Lifestyle',
             'Stress Management', 'Career Development', 'Other', 'All'],
     }],

@@ -34,8 +34,8 @@ const setupTestData = async () => {
     const testAchievement = new Achievement({
         name: "Test Achievement",
         description: "This is a test achievement",
-        type: "custom",
-        category: "general",
+        type: "Custom",
+        category: "General",
         tier: "bronze"
     });
     await testAchievement.save();

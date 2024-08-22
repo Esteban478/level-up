@@ -3,27 +3,27 @@ export const badgeTiers = [
     {
         tier: 'bronze',
         name: 'Habit Starter',
-        icon: '/badges/habit_streak_bronze.png'
+        icon: '/badges/Habit_streak_bronze.png'
     },
     {
         tier: 'silver',
         name: 'Habit Builder',
-        icon: '/badges/habit_streak_silver.png'
+        icon: '/badges/Habit_streak_silver.png'
     },
     {
         tier: 'gold',
         name: 'Habit Master',
-        icon: '/badges/habit_streak_gold.png'
+        icon: '/badges/Habit_streak_gold.png'
     },
     {
         tier: 'platinum',
         name: 'Habit Champion',
-        icon: '/badges/habit_streak_platinum.png'
+        icon: '/badges/Habit_streak_platinum.png'
     },
     {
         tier: 'diamond',
         name: 'Habit Legend',
-        icon: '/badges/habit_streak_diamond.png'
+        icon: '/badges/Habit_streak_diamond.png'
     },
 
     // Milestone Badges

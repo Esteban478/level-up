@@ -103,7 +103,7 @@ userSchema.methods.addXP = async function (amount, source, metadata = {}) {
         this.totalXp += amount;
 
         // Check for level up
-        const nextLevel = await LevelThreshold.findOne({ totalXpRequired: { $gt: this.totalXp } }).sort('level').limit(1);
+        const nextLevel = await LevelThreshold.findOne({ totalXpRequired: { $gt: this.totalXp } }).sort('Level').limit(1);
         if (nextLevel && this.level < nextLevel.level - 1) {
             this.level = nextLevel.level - 1;
             // Apply level-up rewards here
@@ -123,7 +123,7 @@ userSchema.methods.addXP = async function (amount, source, metadata = {}) {
 };
 
 // Example usage:
-// await user.addXP(50, 'habit_completion', { habitId: habit._id });
+// await user.addXP(50, 'Habit_completion', { habitId: habit._id });
 
 // Method to update streak
 userSchema.methods.updateStreak = async function () {
