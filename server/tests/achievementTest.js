@@ -40,39 +40,39 @@ const testCreateAchievement = async () => {
 
     const response = await makeRequest(`${BASE_URL}/achievements`, 'POST', achievementData, token);
     console.log('Create Achievement:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
     return response.body;
 };
 
 const testGetAchievements = async () => {
     const response = await makeRequest(`${BASE_URL}/achievements`, 'GET', null, token);
     console.log('Get Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetAchievementById = async (achievementId) => {
     const response = await makeRequest(`${BASE_URL}/achievements/${achievementId}`, 'GET', null, token);
     console.log('Get Achievement by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testUpdateAchievement = async (achievementId) => {
     const updateData = { description: "Updated test achievement" };
     const response = await makeRequest(`${BASE_URL}/achievements/${achievementId}`, 'PUT', updateData, token);
     console.log('Update Achievement:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testDeleteAchievement = async (achievementId) => {
     const response = await makeRequest(`${BASE_URL}/achievements/${achievementId}`, 'DELETE', null, token);
     console.log('Delete Achievement:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetUserAchievements = async () => {
     const response = await makeRequest(`${BASE_URL}/achievements/user/achievements`, 'GET', null, token);
     console.log('Get User Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const runTests = async () => {

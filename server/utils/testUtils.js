@@ -1,6 +1,6 @@
 import http from 'http';
 import mongoose from 'mongoose';
-import { User, Habit, Achievement } from '../models/index.js';
+import { User, Habit, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, UserAchievement, HabitLog } from '../models/index.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -62,9 +62,23 @@ export const cleanupDatabase = async () => {
         return;
     }
     try {
-        await User.deleteMany({});
-        await Habit.deleteMany({});
-        await Achievement.deleteMany({});
+        const deletionResults = await Promise.all([
+            User.deleteMany({}),
+            Habit.deleteMany({}),
+            HabitLog.deleteMany({}),
+            Achievement.deleteMany({}),
+            Tip.deleteMany({}),
+            LevelThreshold.deleteMany({}),
+            BadgeTier.deleteMany({}),
+            XPTransaction.deleteMany({}),
+            UserAchievement.deleteMany({})
+        ]);
+
+        const collectionNames = ['User', 'Habit', 'HabitLog', 'Achievement', 'Tip', 'LevelThreshold', 'BadgeTier', 'XPTransaction', 'UserAchievement'];
+        deletionResults.forEach((result, index) => {
+            console.log(`${collectionNames[index]} documents deleted: ${result.deletedCount}`);
+        });
+
         console.log('Database cleaned');
     } catch (error) {
         console.error('Error cleaning database:', error);

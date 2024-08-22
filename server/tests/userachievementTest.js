@@ -45,14 +45,14 @@ const setupTestData = async () => {
 const testCreateUserAchievement = async () => {
     const response = await makeRequest(`${BASE_URL}/user-achievements`, 'POST', { achievementId }, token);
     console.log('Create User Achievement:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
     userAchievementId = response.body._id;
 };
 
 const testGetUserAchievements = async () => {
     const response = await makeRequest(`${BASE_URL}/user-achievements`, 'GET', null, token);
     console.log('Get User Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testDeleteUserAchievement = async () => {
@@ -62,7 +62,7 @@ const testDeleteUserAchievement = async () => {
     }
     const response = await makeRequest(`${BASE_URL}/user-achievements/${userAchievementId}`, 'DELETE', null, token);
     console.log('Delete User Achievement:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const runTests = async () => {

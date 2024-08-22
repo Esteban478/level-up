@@ -33,26 +33,26 @@ const testCreateXPTransaction = async () => {
 
     const response = await makeRequest(`${BASE_URL}/xp`, 'POST', xpTransactionData, token);
     console.log('Create XP Transaction:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
     return response.body;
 };
 
 const testGetXPTransactions = async () => {
     const response = await makeRequest(`${BASE_URL}/xp`, 'GET', null, token);
     console.log('Get XP Transactions:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetXPTransactionById = async (xpTransactionId) => {
     const response = await makeRequest(`${BASE_URL}/xp/${xpTransactionId}`, 'GET', null, token);
     console.log('Get XP Transaction by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetUserTotalXP = async () => {
     const response = await makeRequest(`${BASE_URL}/xp/total`, 'GET', null, token);
     console.log('Get User Total XP:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const runTests = async () => {

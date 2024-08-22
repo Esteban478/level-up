@@ -45,7 +45,7 @@ const testCreateBadgeTier = async () => {
 
     const response = await makeRequest(`${BASE_URL}/badgetiers`, 'POST', badgeTierData, token);
     console.log('Create Badge Tier:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
     return response.body;
 };
 
@@ -57,25 +57,25 @@ const testUpdateBadgeTier = async (badgeTierId) => {
     };
     const response = await makeRequest(`${BASE_URL}/badgetiers/${badgeTierId}`, 'PUT', updateData, token);
     console.log('Update Badge Tier:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetBadgeTiers = async () => {
     const response = await makeRequest(`${BASE_URL}/badgetiers`, 'GET', null, token);
     console.log('Get Badge Tiers:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetBadgeTierById = async (badgeTierId) => {
     const response = await makeRequest(`${BASE_URL}/badgetiers/${badgeTierId}`, 'GET', null, token);
     console.log('Get Badge Tier by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testDeleteBadgeTier = async (badgeTierId) => {
     const response = await makeRequest(`${BASE_URL}/badgetiers/${badgeTierId}`, 'DELETE', null, token);
     console.log('Delete Badge Tier:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const runTests = async () => {

@@ -88,7 +88,7 @@ const testCreateLevelThreshold = async () => {
 
     const response = await makeRequest(`${BASE_URL}/levels`, 'POST', levelThresholdData, token);
     console.log('Create Level Threshold:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
     return response.body;
 };
 
@@ -111,31 +111,31 @@ const testUpdateLevelThreshold = async (levelThresholdId) => {
     };
     const response = await makeRequest(`${BASE_URL}/levels/${levelThresholdId}`, 'PUT', updateData, token);
     console.log('Update Level Threshold:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetLevelThresholds = async () => {
     const response = await makeRequest(`${BASE_URL}/levels`, 'GET', null, token);
     console.log('Get Level Thresholds:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetLevelThresholdById = async (levelThresholdId) => {
     const response = await makeRequest(`${BASE_URL}/levels/${levelThresholdId}`, 'GET', null, token);
     console.log('Get Level Threshold by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testDeleteLevelThreshold = async (levelThresholdId) => {
     const response = await makeRequest(`${BASE_URL}/levels/${levelThresholdId}`, 'DELETE', null, token);
     console.log('Delete Level Threshold:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetCurrentLevel = async () => {
     const response = await makeRequest(`${BASE_URL}/levels/user/current`, 'GET', null, token);
     console.log('Get Current Level:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const runTests = async () => {

@@ -26,6 +26,7 @@ const setupTestData = async () => {
     let habit = await Habit.findOne({ userId: testUser._id });
     if (!habit) {
         habit = new Habit({
+            habitId: 1,
             userId: testUser._id,
             name: 'Test Habit',
             description: 'This is a test habit',
@@ -54,10 +55,10 @@ const setupTestData = async () => {
             name: 'Test Achievement',
             description: 'This is a test achievement',
             type: 'Habit_streak',
-            category: 'health',
+            category: 'Health',
             icon: 'test_icon',
             condition: {
-                habitId: habit._id,
+                habitId: habit.habitId,
                 streakDays: 7
             },
             reward: {
@@ -94,7 +95,7 @@ const createTestUserAndGetToken = async (email, password) => {
 const testUserProfile = async () => {
     const response = await makeRequest(`${BASE_URL}/users/profile`, 'GET', null, token);
     console.log('Get user profile:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 // Test update user profile
@@ -104,28 +105,28 @@ const testUpdateUserProfile = async () => {
         email: 'updateduser@example.com'
     }, token);
     console.log('Update user profile:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 // Test get user habits
 const testGetUserHabits = async () => {
     const response = await makeRequest(`${BASE_URL}/users/habits`, 'GET', null, token);
     console.log('Get user habits:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 // Test get user achievements
 const testGetUserAchievements = async () => {
     const response = await makeRequest(`${BASE_URL}/users/achievements`, 'GET', null, token);
     console.log('Get User Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 // Test get user XP and level
 const testGetUserXPAndLevel = async () => {
     const response = await makeRequest(`${BASE_URL}/users/xp`, 'GET', null, token);
     console.log('Get user XP and level:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 // Main test function

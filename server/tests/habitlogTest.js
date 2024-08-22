@@ -35,6 +35,7 @@ const setupTestData = async () => {
 
     // Create a test habit
     const habitData = {
+        habitId: 1,
         name: 'Test Habit',
         description: 'This is a test habit',
         area: 'Health',
@@ -57,33 +58,33 @@ const testCreateHabitLog = async () => {
 
     const response = await makeRequest(`${BASE_URL}/habitlogs`, 'POST', habitLogData, token);
     console.log('Create HabitLog:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
     return response.body;
 };
 
 const testGetHabitLogs = async () => {
     const response = await makeRequest(`${BASE_URL}/habitlogs`, 'GET', null, token);
     console.log('Get HabitLogs:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetHabitLogById = async (habitLogId) => {
     const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'GET', null, token);
     console.log('Get HabitLog by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testUpdateHabitLog = async (habitLogId) => {
     const updateData = { value: false };
     const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'PUT', updateData, token);
     console.log('Update HabitLog:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testDeleteHabitLog = async (habitLogId) => {
     const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'DELETE', null, token);
     console.log('Delete HabitLog:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const runTests = async () => {

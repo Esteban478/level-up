@@ -47,51 +47,51 @@ const testCreateTip = async () => {
 
     const response = await makeRequest(`${BASE_URL}/tips`, 'POST', tipData, token);
     console.log('Create Tip:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
     return response.body;
 };
 
 const testGetAllTips = async () => {
     const response = await makeRequest(`${BASE_URL}/tips`, 'GET', null, token);
     console.log('Get All Tips:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetTipById = async (tipId) => {
     const response = await makeRequest(`${BASE_URL}/tips/${tipId}`, 'GET', null, token);
     console.log('Get Tip by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testUpdateTip = async (tipId) => {
     const updateData = { content: "Updated test tip", category: 'Habit-Specific' };
     const response = await makeRequest(`${BASE_URL}/tips/${tipId}`, 'PUT', updateData, token);
     console.log('Update Tip:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testDeleteTip = async (tipId) => {
     const response = await makeRequest(`${BASE_URL}/tips/${tipId}`, 'DELETE', null, token);
     console.log('Delete Tip:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetRandomTip = async () => {
     const response = await makeRequest(`${BASE_URL}/tips/random`, 'GET');
     console.log('Get Random Tip:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetTipsByCategory = async () => {
     const response = await makeRequest(`${BASE_URL}/tips/category/General`, 'GET');
     console.log('Get Tips by Category:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const testGetTipsByRelatedAreas = async () => {
     const response = await makeRequest(`${BASE_URL}/tips/relatedareas/All`, 'GET');
     console.log('Get Tips by Related Areas:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    console.log('Response:', response.body);
+    // console.log('Response:', response.body);
 };
 
 const runTests = async () => {

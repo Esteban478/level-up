@@ -1,8 +1,8 @@
 import LevelThreshold from '../models/LevelThreshold.js';
 import Achievement from '../models/Achievement.js';
 
-const createLevelProgression = async (maxLevel = 100) => {
-    const levels = [];
+const generateLevelThresholds = async (maxLevel) => {
+    const levelThresholds = [];
     let totalXp = 0;
 
     for (let i = 1; i <= maxLevel; i++) {
@@ -24,10 +24,10 @@ const createLevelProgression = async (maxLevel = 100) => {
             levelData.featureUnlock = getFeatureUnlock(i);
         }
 
-        levels.push(levelData);
+        levelThresholds.push(levelData);
     }
 
-    await LevelThreshold.insertMany(levels);
+    return levelThresholds;
 };
 
 const createLevelAchievement = async (level) => {
@@ -70,4 +70,4 @@ const getTierForLevel = (level) => {
     return 'diamond';
 };
 
-export { createLevelProgression };
+export default generateLevelThresholds;

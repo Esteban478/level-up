@@ -6,4 +6,4 @@ export { default as tips } from './tipSeedData.js';
 export { default as generateUserAchievements } from './userAchievementSeedData.js';
 export { default as generateXPTransactions } from './xpTransactionSeedData.js';
 export { default as generateHabitLogs } from './habitLogSeedData.js';
-
+export { default as generateLevelThresholds } from './levelThresholdSeedData.js';

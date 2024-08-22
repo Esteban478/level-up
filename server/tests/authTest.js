@@ -70,7 +70,7 @@ const testUserRegistration = async () => {
             } else {
                 console.log(`${testCase.name}: FAILED - Expected ${testCase.expectedStatus}, got ${response.statusCode}`);
             }
-            console.log('Response:', response.body);
+            // console.log('Response:', response.body);
         } catch (error) {
             console.error(`${testCase.name}: ERROR - ${error.message}`);
         }
@@ -114,7 +114,7 @@ const testUserLogin = async () => {
             } else {
                 console.log(`${testCase.name}: FAILED - Expected ${testCase.expectedStatus}, got ${response.statusCode}`);
             }
-            console.log('Response:', response.body);
+            // console.log('Response:', response.body);
         } catch (error) {
             console.error(`${testCase.name}: ERROR - ${error.message}`);
         }

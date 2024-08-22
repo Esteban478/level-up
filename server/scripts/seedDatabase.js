@@ -1,8 +1,11 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import { User, Habit, HabitLog, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, UserAchievement } from '../models/index.js';
-import { achievements, badgeTiers, habits, tips, userProfiles, generateHabitLogs, generateXPTransactions, generateUserAchievements } from '../seeddata/index.js';
-import { createLevelProgression } from '../services/levelProgressionService.js';
+import {
+    achievements, badgeTiers, habits, tips, userProfiles, generateHabitLogs, generateXPTransactions,
+    generateUserAchievements, generateLevelThresholds
+} from '../seeddata/index.js';
+import { cleanupDatabase } from '../utils/testUtils.js';
 
 const seedDatabase = async () => {
     try {
@@ -10,15 +13,7 @@ const seedDatabase = async () => {
         console.log('Connected to MongoDB');
 
         // Clear existing data
-        await User.deleteMany({});
-        await Habit.deleteMany({});
-        await HabitLog.deleteMany({});
-        await Achievement.deleteMany({});
-        await Tip.deleteMany({});
-        await LevelThreshold.deleteMany({});
-        await BadgeTier.deleteMany({});
-        await XPTransaction.deleteMany({});
-        await UserAchievement.deleteMany({});
+        await cleanupDatabase();
 
         // Seed users
         const createdUsers = await User.create(userProfiles);
@@ -47,10 +42,18 @@ const seedDatabase = async () => {
         await UserAchievement.create(userAchievements);
         console.log('User achievements seeded successfully');
 
-        // Seed other data
+        // Generate and seed level progression
+        const levelThresholds = await generateLevelThresholds(100);
+        await LevelThreshold.create(levelThresholds);
+        console.log('Level thresholds seeded successfully');
+
+        // Seed tips
         await Tip.create(tips);
-        await createLevelProgression();
+        console.log('Tips seeded successfully');
+
+        // Seed badge tiers
         await BadgeTier.create(badgeTiers);
+        console.log('Badge tiers seeded successfully');
 
         console.log('Database seeded successfully');
     } catch (error) {
