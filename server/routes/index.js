@@ -9,3 +9,4 @@ export { default as xpTransactionRouter } from './xptransaction.js';
 export { default as tipRouter } from './tip.js'
 export { default as badgeTierRouter } from './badgetier.js'
 export { default as userAchievementRouter } from './userachievement.js'
+export { default as userAvatarRouter } from './useravatar.js'

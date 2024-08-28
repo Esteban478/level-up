@@ -11,10 +11,12 @@ import {
     achievementRouter,
     tipRouter,
     badgeTierRouter,
-    userAchievementRouter
+    userAchievementRouter,
+    userAvatarRouter
 } from './routes/index.js';
 import "dotenv/config";
 import mongoose from "mongoose";
+import bodyParser from 'body-parser';
 
 const middlewares = (app) => {
     app.use(express.json());
@@ -24,6 +26,8 @@ const middlewares = (app) => {
         })
     );
     app.use(cors());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 };
 
 const establishRoutes = (app) => {
@@ -38,6 +42,7 @@ const establishRoutes = (app) => {
     app.use('/api/tips', tipRouter);
     app.use('/api/badgetiers', badgeTierRouter);
     app.use('/api/user-achievements', userAchievementRouter);
+    app.use('/api/user-avatars', userAvatarRouter);
     app.use('*', (req, res) => {
         res.status(404).json({ error: 'Endpoint not found. Typo somewhere maybe?' });
     });

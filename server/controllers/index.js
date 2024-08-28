@@ -9,3 +9,4 @@ export * from './achievement.js';
 export * from './tip.js';
 export * from './badgetier.js';
 export * from './userachievement.js';
+export * from './useravatar.js';

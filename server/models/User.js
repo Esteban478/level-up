@@ -16,7 +16,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    profilePic: String,
+    avatar: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserAvatar'
+    },
     bio: String,
     level: {
         type: Number,

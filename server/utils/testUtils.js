@@ -1,4 +1,7 @@
 import http from 'http';
+import https from 'https';
+import { URL } from 'url';
+import FormData from 'form-data';
 import mongoose from 'mongoose';
 import { User, Habit, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, UserAchievement, HabitLog } from '../models/index.js';
 import dotenv from 'dotenv';
@@ -22,34 +25,37 @@ export const connectDB = async () => {
 // Make HTTP requests
 export const makeRequest = (url, method, data = null, token = null) => {
     return new Promise((resolve, reject) => {
+        const parsedUrl = new URL(url);
         const options = {
             method: method,
+            hostname: parsedUrl.hostname,
+            port: parsedUrl.port,
+            path: parsedUrl.pathname + parsedUrl.search,
             headers: {
                 'Content-Type': 'application/json',
                 ...(token && { 'Authorization': `Bearer ${token}` })
             },
         };
 
-        const req = http.request(url, options, (res) => {
+        const req = (parsedUrl.protocol === 'https:' ? https : http).request(options, (res) => {
             let body = '';
-            res.on('data', (chunk) => {
-                body += chunk;
-            });
+            res.on('data', (chunk) => body += chunk.toString());
             res.on('end', () => {
                 try {
-                    resolve({ statusCode: res.statusCode, body: JSON.parse(body) });
+                    resolve({
+                        statusCode: res.statusCode,
+                        body: body ? JSON.parse(body) : {}
+                    });
                 } catch (error) {
                     reject(new Error(`Failed to parse response body: ${body}`));
                 }
             });
         });
 
-        req.on('error', (error) => {
-            reject(error);
-        });
+        req.on('error', (error) => reject(error));
 
         if (data) {
-            req.write(JSON.stringify(data));
+            req.write(typeof data === 'string' ? data : JSON.stringify(data));
         }
         req.end();
     });

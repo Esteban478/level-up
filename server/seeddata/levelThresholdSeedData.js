@@ -53,7 +53,9 @@ const getLevelXpBoost = (level) => {
 
 const getFeatureUnlock = (level) => {
     const features = {
-        10: 'Weekly Progress Summary',
+        5: 'Custom User Avatars',
+        10: 'Enable Users to Upload Avatars',
+        15: 'Weekly Progress Summary',
         25: 'Habit Streaks Tracking',
         50: 'Advanced Habit Analytics',
         75: 'Custom Habit Creation',
