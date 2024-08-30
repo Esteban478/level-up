@@ -83,16 +83,31 @@ export const register = async (req, res) => {
  */
 export const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email });
+        const { usernameOrEmail, password } = req.body;
+        let user = await User.findOne({ email: usernameOrEmail });
+
+        if (!user) {
+            user = await User.findOne({ username: usernameOrEmail });
+        }
+
         if (!user || !(await user.comparePassword(password))) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
         // Generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-        res.json({ user: { id: user._id, username: user.username, email }, token });
+        res.json({ user: { id: user._id, username: user.username, email: user.email }, token });
     } catch (error) {
         res.status(400).json({ error: error.message });
+    }
+};
+
+export const verifyToken = async (req, res) => {
+    try {
+        // The user object is attached to the request by the auth middleware
+        const { _id, username, email } = req.user;
+        res.json({ user: { id: _id, username, email } });
+    } catch (error) {
+        res.status(401).json({ error: 'Invalid token' });
     }
 };

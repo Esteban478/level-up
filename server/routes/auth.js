@@ -1,5 +1,6 @@
 import express from 'express';
-import { register, login, registerLimiter, loginLimiter, conditionalRateLimiter } from '../controllers/index.js';
+import { authMiddleware } from '../middleware/auth.js';
+import { register, login, registerLimiter, loginLimiter, conditionalRateLimiter, verifyToken } from '../controllers/index.js';
 
 const authRouter = express.Router();
 
@@ -11,5 +12,6 @@ const authRouter = express.Router();
 // Bypass rate limiting in testing mode
 authRouter.post('/register', conditionalRateLimiter(registerLimiter), register);
 authRouter.post('/login', conditionalRateLimiter(loginLimiter), login);
+authRouter.get('/verify-token', authMiddleware, verifyToken);
 
 export default authRouter;

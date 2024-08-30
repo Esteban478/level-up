@@ -1,80 +1,161 @@
+@font-face {
+  font-family: 'Lexend';
+  src: url(.assets/fonts/Lexend-VariableFont_wght.ttf) format("truetype");
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Color variables */
+  --color-primary: #00C2FF;
+  --color-secondary: #00FF94;
+  --color-accent: #FF00E5;
+  --color-background: #282828;
+  --color-text: #FFFFFF;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Background color shades */
+  --color-background-100: #1E1E1E;
+  --color-background-200: #2A2A2A;
+  --color-background-300: #363636;
+  --color-background-400: #424242;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Text color shades */
+  --color-text-100: #E0E0E0;
+  --color-text-200: #BDBDBD;
+  --color-text-300: #757575;
+  --color-text-400: #616161;
+
+/* Size variables */
+  font-size: 20px;
+  --xxs: .25rem;
+  --xs: .5rem;
+  --sm: .75rem;
+  --md: 1rem;
+  --lg: 1.25rem;
+  --xl: 1.75rem;
+  --xxl: 2.5rem;
+
+/* Font variables */
+  --fss: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  --h1: bold 3rem/1.2em var(--fss);
+  --h2: bold 2.25rem/1.2em var(--fss);
+  --h3: bold 1.5rem/1.2em var(--fss);
+  --h4: bold 1.12rem/1.6em var(--fss);
+  --big: 1rem/1.6em var(--fss);
+  --p: .8rem/1.6em var(--fss);
+  --small: .75rem/1.8em var(--fss);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Reset box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-body {
+/* Remove default margin and padding */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+}
+
+/* Set core body defaults */
+body {
   min-height: 100vh;
+  min-height: 100svh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: var(--fss);
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* */
+#root > div > div {
+  width: 100%;
+  height: 100%;
+  padding: var(--md)
 }
 
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+/* Enhance touch areas for interactive elements */
+button,
+input,
+select,
+textarea {
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-tertiary);
+}
+
+/* Simple button styles */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-primary);
+  color: var(--color-tertiary);
+  border: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  padding: 0.75rem 1rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Links */
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+/* Focus styles */
+:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 @media (width <=768px) {
-  body {
-    background-color: #646cff;
-  }
+
 }
 
-@media (width >= 768px) {
-  body {
-    background-color: #242424;
-  }
+@media (width >= 414px) {
+
 }

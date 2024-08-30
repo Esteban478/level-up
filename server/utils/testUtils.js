@@ -1,7 +1,6 @@
 import http from 'http';
 import https from 'https';
 import { URL } from 'url';
-import FormData from 'form-data';
 import mongoose from 'mongoose';
 import { User, Habit, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, UserAchievement, HabitLog } from '../models/index.js';
 import dotenv from 'dotenv';
