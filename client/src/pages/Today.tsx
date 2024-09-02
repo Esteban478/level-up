@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/Auth';
+import { useAuth } from '../hooks/useAuth';
 
 const Today: React.FC = () => {
     const { user, logout } = useAuth();
@@ -12,9 +12,9 @@ const Today: React.FC = () => {
 
   return (
     <div>
-      <h1>Welcome, {user?.username}!</h1>
-          <p>You've successfully logged in.</p>
-          <button onClick={handleLogout}>Logout</button>
+      <h2>Welcome, {user?.username}!</h2>
+      <p>You've successfully logged in.</p>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

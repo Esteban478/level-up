@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/Auth';
+import { useAuth } from '../hooks/useAuth';
 import Notification from '../components/Notification';
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
 import '../styles/AuthPage.css';
 
 const Auth: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +46,7 @@ const Auth: React.FC = () => {
       } else {
         await signup(username, email, password);
       }
-      navigate('/success');
+      navigate('/today');
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

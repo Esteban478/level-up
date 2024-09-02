@@ -1,7 +1,21 @@
-import Auth from "./pages/Auth";
-import Today from "./pages/Today";
-import { useAuth } from "./context/Auth";
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import MainLayout from './components/layouts/MainLayout';
+import FullScreenLayout from './components/layouts/FullScreenLayout';
+import Auth from './pages/Auth';
+import Today from './pages/Today';
+import Feed from './pages/Feed';
+import Profile from './pages/Profile';
+import AddHabit from './pages/AddHabit';
+import Achievements from './pages/Achievements';
+import TopNav from './components/shared/TopNav';
+import HabitArchive from './pages/HabitArchive';
+import ArchiveHabit from './pages/ArchiveHabit';
+import EditHabit from './pages/EditHabit';
+import ProfileSettings from './pages/ProfileSettings';
+import BackButton from './components/shared/BackButton';
+import TextButton from './components/shared/TextButton';
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -9,16 +23,69 @@ const App: React.FC = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <Router>
       <Routes>
-        <Route path="/auth" element={user ? <Navigate to="/success" /> : <Auth />} />
-        <Route path="/success" element={user ? <Today /> : <Navigate to="/auth" />} />
-        <Route path="/" element={<Navigate to={user ? "/success" : "/auth"} />} />
+        {/* Public routes */}
+        <Route path="/auth" element={
+            <Auth />
+        } />
+
+        {/* Protected routes */}
+        <Route path="/today" element={
+          <MainLayout topNav={<TopNav />}>
+            <Today />
+          </MainLayout>
+        } />
+        <Route path="/achievements" element={
+          <MainLayout title="Achievements">
+            <Achievements />
+          </MainLayout>
+        } />
+        <Route path="/profile" element={
+          <MainLayout title="Profile">
+            <Profile />
+          </MainLayout>
+        } />
+        <Route path="/feed" element={
+          <MainLayout title="Feed">
+            <Feed />
+          </MainLayout>
+        } />
+
+        {/* Full-screen overlays */}
+        <Route path="/add-habit" element={
+          <FullScreenLayout title="Add Habit" leftAction={<BackButton />}>
+            <AddHabit />
+          </FullScreenLayout>
+        } />
+        <Route path="/edit-habit" element={
+          <FullScreenLayout title="Edit Habit" rightAction={<TextButton />}>
+            <EditHabit />
+          </FullScreenLayout>
+        } />
+        <Route path="/archive-habit" element={
+          <FullScreenLayout title="Archive Habit" leftAction={<BackButton />}>
+            <ArchiveHabit />
+          </FullScreenLayout>
+        } />
+        <Route path="/archive" element={
+          <FullScreenLayout title="Habit Archive" leftAction={<BackButton />}>
+            <HabitArchive />
+          </FullScreenLayout>
+        } />
+        <Route path="/profile-settings" element={
+          <FullScreenLayout title="Edit Profile" leftAction={<BackButton />}>
+            <ProfileSettings />
+          </FullScreenLayout>
+        } />
+
+        {/* Redirects */}
+        <Route path="/" element={<Navigate to={user ? "/today" : "/auth"} replace />} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

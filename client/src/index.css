@@ -35,13 +35,33 @@
 
 /* Font variables */
   --fss: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  --h1: bold 3rem/1.2em var(--fss);
-  --h2: bold 2.25rem/1.2em var(--fss);
+  --h1: bold 3rem/1.6em var(--fss);
+  --h2: bold 2.25rem/1.6em var(--fss);
   --h3: bold 1.5rem/1.2em var(--fss);
   --h4: bold 1.12rem/1.6em var(--fss);
   --big: 1rem/1.6em var(--fss);
-  --p: .8rem/1.6em var(--fss);
+  --p: .8rem/1.2em var(--fss);
   --small: .75rem/1.8em var(--fss);
+}
+
+h1 {
+  font-size: var(--h1);
+}
+
+h2 {
+  font-size: var(--h2);
+}
+
+h3 {
+  font-size: var(--h3);
+}
+
+h4 {
+  font-size: var(--h4);
+}
+
+p {
+  font-size: var(--p);
 }
 
 /* Reset box-sizing */
@@ -85,7 +105,11 @@ body {
 #root > div > div {
   width: 100%;
   height: 100%;
-  padding: var(--md)
+}
+
+.full-screen > div {
+  min-height: 100vh;
+  min-height: 100svh;
 }
 
 /* Make images easier to work with */
@@ -151,6 +175,33 @@ a {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
+
+/* Animations */
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    /* Start at original size */
+  }
+
+  33% {
+    transform: scale(0.85);
+    /* Shrink to 85% */
+  }
+
+  66% {
+    transform: scale(1.1);
+    /* Return to original size */
+  }
+
+  100% {
+    transform: scale(1);
+    /* Return to original size */
+  }
+}
+
+
+/* Media queries */
 
 @media (width <=768px) {
 

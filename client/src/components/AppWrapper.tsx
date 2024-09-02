@@ -48,7 +48,7 @@ const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   };
 
   return (
-    <div style={wrapperStyle}>
+    <div style={wrapperStyle} className={isFullScreen ? 'full-screen' : ''}>
       {children}
     </div>
   );
