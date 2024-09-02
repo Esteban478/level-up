@@ -1,0 +1,21 @@
+.top-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: var(--xs);
+    border-bottom: var(--color-text-400) 2px solid;
+}
+
+.top-nav a {
+    text-align: center;
+    box-sizing: border-box;
+    padding: var(--xs);
+    border-radius: var(--xs);
+    border: 1px solid transparent;
+}
+
+.top-nav a:focus {
+    outline: none;
+}

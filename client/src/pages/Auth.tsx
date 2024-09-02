@@ -86,10 +86,10 @@ const Auth: React.FC = () => {
         {!isLogin && password.length > 0 && <PasswordStrengthMeter password={password} />}
         <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
       </form>
+      {error && <Notification message={error} type="error" />}
       <button onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? 'Need to create an account?' : 'Already have an account?'}
       </button>
-      {error && <Notification message={error} type="error" />}
     </div>
   );
 };

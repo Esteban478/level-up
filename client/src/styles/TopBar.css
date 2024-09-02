@@ -1,0 +1,21 @@
+.top-bar {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    align-content: center;
+    justify-items: center;
+    height: 50px;
+    padding: var(--sm);
+    border-bottom: var(--color-text-400) 2px solid;
+}
+
+.top-bar .left-action {
+    cursor: pointer;
+    min-width: 30px;
+}
+
+.top-bar .right-action .text-button {
+    color: var(--color-primary);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+}
