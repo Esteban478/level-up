@@ -1,4 +1,5 @@
 .bottom-nav {
+    height: 70px;
     display: flex;
     justify-content: space-between;
     padding: var(--xs);
@@ -11,6 +12,9 @@
     padding: var(--xs);
     border-radius: var(--xs);
     border: 1px solid transparent;
+}
+.bottom-nav a svg {
+    font-size: var(--lg);
 }
 .bottom-nav a.active {
     border: var(--color-primary) 1px solid;

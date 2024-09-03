@@ -12,6 +12,13 @@
 
 .auth-page form input {
     width: 100%;
+    padding: var(--xs);
+    font-size: var(--sm);
+}  
+
+.auth-page form input:focus {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
 }
 
 .auth-buttons {

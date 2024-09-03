@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
+import ProtectedRoute from './components/shared/ProtectedRoute';
 import MainLayout from './components/layouts/MainLayout';
 import FullScreenLayout from './components/layouts/FullScreenLayout';
 import Auth from './pages/Auth';
@@ -28,58 +29,58 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         {/* Public routes */}
-        <Route path="/auth" element={
-            <Auth />
-        } />
+        <Route path="/auth" element={<Auth />} />
 
         {/* Protected routes */}
-        <Route path="/today" element={
-          <MainLayout topNav={<TopNav />}>
-            <Today />
-          </MainLayout>
-        } />
-        <Route path="/achievements" element={
-          <MainLayout title="Achievements">
-            <Achievements />
-          </MainLayout>
-        } />
-        <Route path="/profile" element={
-          <MainLayout title="Profile">
-            <Profile />
-          </MainLayout>
-        } />
-        <Route path="/feed" element={
-          <MainLayout title="Feed">
-            <Feed />
-          </MainLayout>
-        } />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/today" element={
+            <MainLayout topNav={<TopNav />}>
+              <Today />
+            </MainLayout>
+          } />
+          <Route path="/achievements" element={
+            <MainLayout title="Achievements">
+              <Achievements />
+            </MainLayout>
+          } />
+          <Route path="/profile" element={
+            <MainLayout title="Profile">
+              <Profile />
+            </MainLayout>
+          } />
+          <Route path="/feed" element={
+            <MainLayout title="Feed">
+              <Feed />
+            </MainLayout>
+          } />
 
-        {/* Full-screen overlays */}
-        <Route path="/add-habit" element={
-          <FullScreenLayout title="Add Habit" leftAction={<BackButton />}>
-            <AddHabit />
-          </FullScreenLayout>
-        } />
-        <Route path="/edit-habit" element={
-          <FullScreenLayout title="Edit Habit" rightAction={<TextButton />}>
-            <EditHabit />
-          </FullScreenLayout>
-        } />
-        <Route path="/archive-habit" element={
-          <FullScreenLayout title="Archive Habit" leftAction={<BackButton />}>
-            <ArchiveHabit />
-          </FullScreenLayout>
-        } />
-        <Route path="/archive" element={
-          <FullScreenLayout title="Habit Archive" leftAction={<BackButton />}>
-            <HabitArchive />
-          </FullScreenLayout>
-        } />
-        <Route path="/profile-settings" element={
-          <FullScreenLayout title="Edit Profile" leftAction={<BackButton />}>
-            <ProfileSettings />
-          </FullScreenLayout>
-        } />
+          {/* Full-screen overlays */}
+          <Route path="/add-habit" element={
+            <FullScreenLayout title="Add Habit" leftAction={<BackButton />}>
+              <AddHabit />
+            </FullScreenLayout>
+          } />
+          <Route path="/edit-habit" element={
+            <FullScreenLayout title="Edit Habit" rightAction={<TextButton />}>
+              <EditHabit />
+            </FullScreenLayout>
+          } />
+          <Route path="/archive-habit" element={
+            <FullScreenLayout title="Archive Habit" leftAction={<BackButton />}>
+              <ArchiveHabit />
+            </FullScreenLayout>
+          } />
+          <Route path="/archive" element={
+            <FullScreenLayout title="Habit Archive" leftAction={<BackButton />}>
+              <HabitArchive />
+            </FullScreenLayout>
+          } />
+          <Route path="/profile-settings" element={
+            <FullScreenLayout title="Edit Profile" leftAction={<BackButton />}>
+              <ProfileSettings />
+            </FullScreenLayout>
+          } />
+        </Route>
 
         {/* Redirects */}
         <Route path="/" element={<Navigate to={user ? "/today" : "/auth"} replace />} />

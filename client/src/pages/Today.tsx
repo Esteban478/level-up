@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 const Today: React.FC = () => {
-    const { user, logout } = useAuth();
+    const { user, logout } = useAuth(); 
     const navigate = useNavigate();
 
     const handleLogout = () => {

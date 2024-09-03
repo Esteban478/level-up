@@ -104,7 +104,6 @@ export const login = async (req, res) => {
 
 export const verifyToken = async (req, res) => {
     try {
-        // The user object is attached to the request by the auth middleware
         const { _id, username, email } = req.user;
         res.json({ user: { id: _id, username, email } });
     } catch (error) {
