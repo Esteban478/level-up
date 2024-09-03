@@ -3,6 +3,7 @@ import { authMiddleware } from '../middleware/auth.js';
 import {
     createHabit,
     getHabits,
+    getTemplateHabits,
     getHabitById,
     updateHabit,
     deleteHabit
@@ -15,6 +16,9 @@ habitRouter.post('/', authMiddleware, createHabit);
 
 // Get all habits for the authenticated user
 habitRouter.get('/', authMiddleware, getHabits);
+
+// Get all habit templates
+habitRouter.get('/templates', authMiddleware, getTemplateHabits);
 
 // Get a specific habit by ID
 habitRouter.get('/:id', authMiddleware, getHabitById);

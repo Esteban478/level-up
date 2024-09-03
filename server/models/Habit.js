@@ -49,22 +49,39 @@ const habitSchema = new mongoose.Schema({
             }
         }
     },
-    goal: {
-        type: {
-            type: String,
-            enum: ['atLeast', 'atMost', 'exactly'],
-            required: true
+    isTemplate: {
+        type: Boolean,
+        default: false
+    },
+    templateId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Habit'
+    },
+    customizations: {
+        goal: {
+            type: {
+                type: String,
+                enum: ['atLeast', 'atMost', 'exactly'],
+            },
+            value: mongoose.Schema.Types.Mixed,
+            unit: String,
+            direction: {
+                type: String,
+                enum: ['increase', 'decrease', 'maintain'],
+            }
         },
-        value: {
-            type: mongoose.Schema.Types.Mixed,
-            required: true
+        frequency: {
+            type: {
+                type: String,
+                enum: ['Daily', 'Weekly', 'Monthly'],
+            },
+            daysOfWeek: [Number],
+            daysOfMonth: [Number]
         },
-        unit: String,
-        direction: {
-            type: String,
-            enum: ['increase', 'decrease', 'maintain'],
-            default: 'increase'
-        }
+        isPublic: {
+            type: Boolean,
+            default: false
+        },
     },
     xpReward: {
         base: {

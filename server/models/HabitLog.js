@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import AuditLog from './AuditLog.js';
 
 const habitLogSchema = new mongoose.Schema({
     habitId: {
@@ -43,7 +44,7 @@ habitLogSchema.statics.logCompletion = async function (habitId, userId, value, d
         const log = new this({
             habitId,
             userId,
-            date,
+            date: new Date(date), // Ensure date is a Date object
             value,
             notes
         });
@@ -51,7 +52,7 @@ habitLogSchema.statics.logCompletion = async function (habitId, userId, value, d
         await log.save({ session });
 
         habit.totalCompletions += 1;
-        await habit.updateStreak(date, session);
+        await habit.updateStreak(new Date(date), session);
         await habit.save({ session });
 
         await session.commitTransaction();

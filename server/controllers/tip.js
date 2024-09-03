@@ -1,6 +1,6 @@
 import Tip from '../models/Tip.js';
 
-// Get all tips
+// Get all tips (protected)
 export const getAllTips = async (req, res) => {
     try {
         const tips = await Tip.find();
@@ -10,7 +10,7 @@ export const getAllTips = async (req, res) => {
     }
 };
 
-// Get a single tip by ID
+// Get a single tip by ID (protected)
 export const getTipById = async (req, res) => {
     try {
         const tip = await Tip.findById(req.params.id);
@@ -23,7 +23,7 @@ export const getTipById = async (req, res) => {
     }
 };
 
-// Create a new tip
+// Create a new tip (protected)
 export const createTip = async (req, res) => {
     try {
         const newTip = new Tip(req.body);
@@ -34,10 +34,10 @@ export const createTip = async (req, res) => {
     }
 };
 
-// Update a tip
+// Update a tip (protected)
 export const updateTip = async (req, res) => {
     try {
-        const updatedTip = await Tip.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedTip = await Tip.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!updatedTip) {
             return res.status(404).json({ message: "Tip not found" });
         }
@@ -47,7 +47,7 @@ export const updateTip = async (req, res) => {
     }
 };
 
-// Delete a tip
+// Delete a tip (protected)
 export const deleteTip = async (req, res) => {
     try {
         const deletedTip = await Tip.findByIdAndDelete(req.params.id);
@@ -60,7 +60,7 @@ export const deleteTip = async (req, res) => {
     }
 };
 
-// Get a random tip
+// Get a random tip (unprotected)
 export const getRandomTip = async (req, res) => {
     try {
         const count = await Tip.countDocuments();
@@ -72,7 +72,7 @@ export const getRandomTip = async (req, res) => {
     }
 };
 
-// Get tips by category
+// Get tips by category (unprotected)
 export const getTipsByCategory = async (req, res) => {
     try {
         const tips = await Tip.find({ category: req.params.category });
@@ -82,8 +82,8 @@ export const getTipsByCategory = async (req, res) => {
     }
 };
 
-// Get tips by related area of the habit
-export const getTipsByrelatedAreas = async (req, res) => {
+// Get tips by related area of the habit (unprotected)
+export const getTipsByRelatedAreas = async (req, res) => {
     try {
         const tips = await Tip.find({ relatedAreas: { $in: [req.params.relatedAreas] } });
         res.status(200).json(tips);

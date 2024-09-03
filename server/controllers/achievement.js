@@ -55,9 +55,21 @@ export const deleteAchievement = async (req, res) => {
     }
 };
 
+// export const getAchievementsForUser = async (req, res) => {
+//     try {
+//         const user = await User.findById(req.user.userId).populate('achievements');
+//         if (!user) {
+//             return res.status(404).json({ error: 'User not found' });
+//         }
+//         res.json(user.achievements);
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// };
+
 export const getAchievementsForUser = async (req, res) => {
     try {
-        const user = await User.findById(req.user.userId).populate('achievements');
+        const user = await User.findById(req.user._id).populate('achievements');
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }

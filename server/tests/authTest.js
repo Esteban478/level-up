@@ -81,17 +81,25 @@ const testUserRegistration = async () => {
 const testUserLogin = async () => {
     const testCases = [
         {
-            name: 'Valid login',
+            name: 'Valid login with email',
             data: {
-                email: 'testuser@example.com',
+                usernameOrEmail: 'testuser@example.com',
                 password: 'testpassword',
             },
             expectedStatus: 200,
         },
         {
-            name: 'Invalid email',
+            name: 'Valid login with username',
             data: {
-                email: 'nonexistent@example.com',
+                usernameOrEmail: 'testuser',
+                password: 'testpassword',
+            },
+            expectedStatus: 200,
+        },
+        {
+            name: 'Invalid email/username',
+            data: {
+                usernameOrEmail: 'nonexistent@example.com',
                 password: 'testpassword',
             },
             expectedStatus: 401,
@@ -99,7 +107,7 @@ const testUserLogin = async () => {
         {
             name: 'Wrong password',
             data: {
-                email: 'testuser@example.com',
+                usernameOrEmail: 'testuser@example.com',
                 password: 'wrongpassword',
             },
             expectedStatus: 401,
@@ -113,8 +121,8 @@ const testUserLogin = async () => {
                 console.log(`${testCase.name}: PASSED`);
             } else {
                 console.log(`${testCase.name}: FAILED - Expected ${testCase.expectedStatus}, got ${response.statusCode}`);
+                console.log('Response:', response.body);  // Log the response body for failed tests
             }
-            // console.log('Response:', response.body);
         } catch (error) {
             console.error(`${testCase.name}: ERROR - ${error.message}`);
         }

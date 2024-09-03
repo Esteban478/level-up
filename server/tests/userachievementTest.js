@@ -27,8 +27,17 @@ const setupTestData = async () => {
     await testUser.save();
     userId = testUser._id;
 
-    // Create a token manually
-    token = jwt.sign({ _id: userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const loginResponse = await makeRequest(`${BASE_URL}/auth/login`, 'POST', {
+        usernameOrEmail: 'achievementuser@example.com',
+        password: 'password123'
+    });
+
+    if (loginResponse.statusCode !== 200) {
+        console.error('Login failed:', loginResponse.body);
+        throw new Error('Login failed');
+    }
+
+    token = loginResponse.body.token;
 
     // Create a test achievement
     const testAchievement = new Achievement({

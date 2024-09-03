@@ -9,6 +9,16 @@ const BASE_URL = process.env.BASE_URL;
 let token;
 let userId;
 
+const verifyToken = async (token) => {
+    try {
+        const response = await makeRequest(`${BASE_URL}/auth/verify-token`, 'GET', null, token);
+        return response.statusCode === 200;
+    } catch (error) {
+        console.error('Token verification failed:', error);
+        return false;
+    }
+};
+
 const setupTestData = async () => {
     const testUser = new User({
         username: 'achievementuser',
@@ -19,10 +29,23 @@ const setupTestData = async () => {
     userId = testUser._id;
 
     const loginResponse = await makeRequest(`${BASE_URL}/auth/login`, 'POST', {
-        email: 'achievementuser@example.com',
+        usernameOrEmail: 'achievementuser@example.com',
         password: 'password123'
     });
+
+    if (loginResponse.statusCode !== 200) {
+        console.error('Login failed:', loginResponse.body);
+        throw new Error('Login failed');
+    }
+
     token = loginResponse.body.token;
+
+    // Verify that the user ID in the token matches the test user's ID
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    if (tokenPayload.userId !== userId.toString()) {
+        console.error('User ID mismatch:', tokenPayload.userId, userId.toString());
+        throw new Error('User ID mismatch');
+    }
 };
 
 const testCreateAchievement = async () => {
@@ -70,20 +93,36 @@ const testDeleteAchievement = async (achievementId) => {
 };
 
 const testGetUserAchievements = async () => {
-    const response = await makeRequest(`${BASE_URL}/achievements/user/achievements`, 'GET', null, token);
-    console.log('Get User Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    try {
+        const response = await makeRequest(`${BASE_URL}/achievements/user/achievements`, 'GET', null, token);
+        console.log('Get User Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
+        if (response.statusCode !== 200) {
+            console.error('Get User Achievements failed:', response.body);
+        }
+        return response.body;
+    } catch (error) {
+        console.error('Error in Get User Achievements test:', error);
+    }
 };
 
 const runTests = async () => {
     try {
         await setupTestData();
+
+        if (!await verifyToken(token)) {
+            throw new Error('Token verification failed');
+        }
+
         const createdAchievement = await testCreateAchievement();
         await testGetAchievements();
-        await testGetAchievementById(createdAchievement._id);
-        await testUpdateAchievement(createdAchievement._id);
+        if (createdAchievement && createdAchievement._id) {
+            await testGetAchievementById(createdAchievement._id);
+            await testUpdateAchievement(createdAchievement._id);
+            await testDeleteAchievement(createdAchievement._id);
+        } else {
+            console.error('Failed to create achievement, skipping related tests');
+        }
         await testGetUserAchievements();
-        await testDeleteAchievement(createdAchievement._id);
     } catch (error) {
         console.error('An error occurred during testing:', error);
     }

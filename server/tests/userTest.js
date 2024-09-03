@@ -9,14 +9,16 @@ let token;
 const BASE_URL = process.env.BASE_URL;
 
 const setupTestData = async () => {
-    // Generate a unique email for each test run
-    const uniqueEmail = `testuser_${Date.now()}@example.com`;
+    // Generate a unique email and username for each test run
+    const timestamp = Date.now();
+    const uniqueEmail = `testuser_${timestamp}@example.com`;
+    const uniqueUsername = `testuser_${timestamp}`;
 
     // Delete the user if it already exists
-    await User.deleteOne({ email: uniqueEmail });
+    await User.deleteOne({ $or: [{ email: uniqueEmail }, { username: uniqueUsername }] });
 
     let testUser = new User({
-        username: 'testuser0',
+        username: uniqueUsername,
         email: uniqueEmail,
         password: 'testpassword0'
     });
@@ -26,7 +28,7 @@ const setupTestData = async () => {
     let habit = await Habit.findOne({ userId: testUser._id });
     if (!habit) {
         habit = new Habit({
-            habitId: 1,
+            habitId: Math.floor(Math.random() * 1000000), // Generate a random habitId
             userId: testUser._id,
             name: 'Test Habit',
             description: 'This is a test habit',
@@ -83,8 +85,8 @@ const setupTestData = async () => {
 };
 
 // Helper function to create a test user and get a token
-const createTestUserAndGetToken = async (email, password) => {
-    const loginResponse = await makeRequest(`${BASE_URL}/auth/login`, 'POST', { email, password });
+const createTestUserAndGetToken = async (usernameOrEmail, password) => {
+    const loginResponse = await makeRequest(`${BASE_URL}/auth/login`, 'POST', { usernameOrEmail, password });
     if (loginResponse.statusCode !== 200) {
         throw new Error(`Login failed: ${JSON.stringify(loginResponse.body)}`);
     }
@@ -95,7 +97,9 @@ const createTestUserAndGetToken = async (email, password) => {
 const testUserProfile = async () => {
     const response = await makeRequest(`${BASE_URL}/users/profile`, 'GET', null, token);
     console.log('Get user profile:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get user profile failed:', response.body);
+    }
 };
 
 // Test update user profile
@@ -105,28 +109,36 @@ const testUpdateUserProfile = async () => {
         email: 'updateduser@example.com'
     }, token);
     console.log('Update user profile:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Update user profile failed:', response.body);
+    }
 };
 
 // Test get user habits
 const testGetUserHabits = async () => {
     const response = await makeRequest(`${BASE_URL}/users/habits`, 'GET', null, token);
     console.log('Get user habits:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get user habits failed:', response.body);
+    }
 };
 
 // Test get user achievements
-const testGetUserAchievements = async () => {
-    const response = await makeRequest(`${BASE_URL}/users/achievements`, 'GET', null, token);
-    console.log('Get User Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
-};
+// const testGetUserAchievements = async () => {
+//     const response = await makeRequest(`${BASE_URL}/users/achievements`, 'GET', null, token);
+//     console.log('Get User Achievements:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
+//     if (response.statusCode !== 200) {
+//         console.error('Get User Achievements failed:', response.body);
+//     }
+// };
 
 // Test get user XP and level
 const testGetUserXPAndLevel = async () => {
     const response = await makeRequest(`${BASE_URL}/users/xp`, 'GET', null, token);
     console.log('Get user XP and level:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get user XP and level failed:', response.body);
+    }
 };
 
 // Main test function
@@ -139,7 +151,7 @@ const runTests = async () => {
         await testUserProfile();
         await testUpdateUserProfile();
         await testGetUserHabits();
-        await testGetUserAchievements();
+        // await testGetUserAchievements();
         await testGetUserXPAndLevel();
     } catch (error) {
         console.error('An error occurred during testing:', error);

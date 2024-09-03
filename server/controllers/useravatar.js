@@ -68,7 +68,7 @@ export const uploadAvatar = async (req, res) => {
             return res.status(400).json({ message: "No file uploaded" });
         }
 
-        const userId = req.user?.userId;
+        const userId = req.user._id;
         if (!userId) {
             return res.status(400).json({ message: "User ID not found in request" });
         }

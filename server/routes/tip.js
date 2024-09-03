@@ -7,7 +7,7 @@ import {
     deleteTip,
     getRandomTip,
     getTipsByCategory,
-    getTipsByrelatedAreas
+    getTipsByRelatedAreas
 } from '../controllers/tip.js';
 import { authMiddleware } from '../middleware/auth.js';
 
@@ -20,7 +20,7 @@ tipRouter.get('/random', getRandomTip);
 tipRouter.get('/category/:category', getTipsByCategory);
 
 // Get tips by related area
-tipRouter.get('/relatedAreas/:relatedAreas', getTipsByrelatedAreas);
+tipRouter.get('/relatedAreas/:relatedAreas', getTipsByRelatedAreas);
 
 // Protected routes
 tipRouter.use(authMiddleware);

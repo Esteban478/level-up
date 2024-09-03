@@ -2,7 +2,7 @@ import http from 'http';
 import https from 'https';
 import { URL } from 'url';
 import mongoose from 'mongoose';
-import { User, Habit, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, UserAchievement, HabitLog } from '../models/index.js';
+import { User, Habit, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, HabitLog, AuditLog, UserAchievement } from '../models/index.js';
 import dotenv from 'dotenv';
 dotenv.config();
 

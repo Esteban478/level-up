@@ -36,7 +36,7 @@ export const updateLevelThreshold = async (req, res) => {
 
 export const getCurrentLevel = async (req, res) => {
     try {
-        const user = await User.findById(req.user.userId);
+        const user = await User.findById(req.user._id);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -55,7 +55,7 @@ export const getCurrentLevel = async (req, res) => {
 
 export const getLevelThresholds = async (req, res) => {
     try {
-        const levelThresholds = await LevelThreshold.find().sort('Level').populate('rewards.achievementId');
+        const levelThresholds = await LevelThreshold.find().sort('level').populate('rewards.achievementId');
         res.json(levelThresholds);
     } catch (error) {
         res.status(500).json({ error: error.message });

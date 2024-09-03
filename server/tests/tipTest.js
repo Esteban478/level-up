@@ -22,7 +22,7 @@ const setupTestData = async () => {
     userId = testUser._id;
 
     const loginResponse = await makeRequest(`${BASE_URL}/auth/login`, 'POST', {
-        email: 'tipuser@example.com',
+        usernameOrEmail: 'tipuser@example.com',
         password: 'password123'
     });
     token = loginResponse.body.token;
@@ -47,64 +47,88 @@ const testCreateTip = async () => {
 
     const response = await makeRequest(`${BASE_URL}/tips`, 'POST', tipData, token);
     console.log('Create Tip:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 201) {
+        console.error('Create Tip failed:', response.body);
+    }
     return response.body;
 };
 
 const testGetAllTips = async () => {
     const response = await makeRequest(`${BASE_URL}/tips`, 'GET', null, token);
     console.log('Get All Tips:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get All Tips failed:', response.body);
+    }
 };
 
 const testGetTipById = async (tipId) => {
     const response = await makeRequest(`${BASE_URL}/tips/${tipId}`, 'GET', null, token);
     console.log('Get Tip by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get Tip by ID failed:', response.body);
+    }
 };
 
 const testUpdateTip = async (tipId) => {
     const updateData = { content: "Updated test tip", category: 'Habit-Specific' };
     const response = await makeRequest(`${BASE_URL}/tips/${tipId}`, 'PUT', updateData, token);
     console.log('Update Tip:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Update Tip failed:', response.body);
+    }
 };
 
 const testDeleteTip = async (tipId) => {
     const response = await makeRequest(`${BASE_URL}/tips/${tipId}`, 'DELETE', null, token);
     console.log('Delete Tip:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Delete Tip failed:', response.body);
+    }
 };
 
 const testGetRandomTip = async () => {
     const response = await makeRequest(`${BASE_URL}/tips/random`, 'GET');
     console.log('Get Random Tip:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get Random Tip failed:', response.body);
+    }
 };
 
 const testGetTipsByCategory = async () => {
     const response = await makeRequest(`${BASE_URL}/tips/category/General`, 'GET');
     console.log('Get Tips by Category:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get Tips by Category failed:', response.body);
+    }
 };
 
 const testGetTipsByRelatedAreas = async () => {
-    const response = await makeRequest(`${BASE_URL}/tips/relatedareas/All`, 'GET');
+    const response = await makeRequest(`${BASE_URL}/tips/relatedAreas/All`, 'GET');
     console.log('Get Tips by Related Areas:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get Tips by Related Areas failed:', response.body);
+    }
 };
 
 const runTests = async () => {
     try {
         await setupTestData();
-        const createdTip = await testCreateTip();
-        await testGetAllTips();
-        await testGetTipById(createdTip._id);
-        await testUpdateTip(createdTip._id);
+
+        // Test unprotected routes first
         await testGetRandomTip();
         await testGetTipsByCategory();
         await testGetTipsByRelatedAreas();
-        await testDeleteTip(createdTip._id);
+
+        // Then test protected routes
+        const createdTip = await testCreateTip();
+        if (createdTip && createdTip._id) {
+            await testGetAllTips();
+            await testGetTipById(createdTip._id);
+            await testUpdateTip(createdTip._id);
+            await testDeleteTip(createdTip._id);
+        } else {
+            console.error('Failed to create Tip, skipping related tests');
+        }
     } catch (error) {
         console.error('An error occurred during testing:', error);
     }

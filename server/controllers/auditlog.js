@@ -4,7 +4,7 @@ export const createAuditLog = async (req, res) => {
     try {
         const { action, details, affectedResource } = req.body;
         const auditLog = new AuditLog({
-            performedBy: req.user.userId,
+            performedBy: req.user._id,
             action,
             details,
             affectedResource
@@ -39,7 +39,7 @@ export const getAuditLogById = async (req, res) => {
 
 export const getUserAuditLogs = async (req, res) => {
     try {
-        const auditLogs = await AuditLog.find({ performedBy: req.user.userId }).sort('-createdAt');
+        const auditLogs = await AuditLog.find({ performedBy: req.user._id }).sort('-createdAt');
         res.json(auditLogs);
     } catch (error) {
         res.status(500).json({ error: error.message });

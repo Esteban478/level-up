@@ -1,5 +1,5 @@
 import { makeRequest } from '../utils/testUtils.js';
-import { User } from '../models/index.js';
+import { User, Habit } from '../models/index.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -28,14 +28,14 @@ const setupTestData = async () => {
     userId = testUser._id;
 
     const loginResponse = await makeRequest(`${BASE_URL}/auth/login`, 'POST', {
-        email: uniqueEmail,
+        usernameOrEmail: uniqueEmail,
         password: 'password123'
     });
     token = loginResponse.body.token;
 
     // Create a test habit
     const habitData = {
-        habitId: 1,
+        habitId: Math.floor(Math.random() * 1000000), // Generate a random habitId
         name: 'Test Habit',
         description: 'This is a test habit',
         area: 'Health',
@@ -52,49 +52,63 @@ const setupTestData = async () => {
 const testCreateHabitLog = async () => {
     const habitLogData = {
         habitId,
-        date: new Date().toISOString(),
+        date: new Date().toISOString().split('T')[0],
         value: true
     };
 
     const response = await makeRequest(`${BASE_URL}/habitlogs`, 'POST', habitLogData, token);
     console.log('Create HabitLog:', response.statusCode === 201 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 201) {
+        console.error('Create HabitLog failed:', response.body);
+    }
     return response.body;
 };
 
 const testGetHabitLogs = async () => {
     const response = await makeRequest(`${BASE_URL}/habitlogs`, 'GET', null, token);
     console.log('Get HabitLogs:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get HabitLogs failed:', response.body);
+    }
 };
 
 const testGetHabitLogById = async (habitLogId) => {
     const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'GET', null, token);
     console.log('Get HabitLog by ID:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Get HabitLog by ID failed:', response.body);
+    }
 };
 
 const testUpdateHabitLog = async (habitLogId) => {
     const updateData = { value: false };
     const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'PUT', updateData, token);
     console.log('Update HabitLog:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Update HabitLog failed:', response.body);
+    }
 };
 
 const testDeleteHabitLog = async (habitLogId) => {
     const response = await makeRequest(`${BASE_URL}/habitlogs/${habitLogId}`, 'DELETE', null, token);
     console.log('Delete HabitLog:', response.statusCode === 200 ? 'PASSED' : 'FAILED');
-    // console.log('Response:', response.body);
+    if (response.statusCode !== 200) {
+        console.error('Delete HabitLog failed:', response.body);
+    }
 };
 
 const runTests = async () => {
     try {
         await setupTestData();
         const createdHabitLog = await testCreateHabitLog();
-        await testGetHabitLogs();
-        await testGetHabitLogById(createdHabitLog._id);
-        await testUpdateHabitLog(createdHabitLog._id);
-        await testDeleteHabitLog(createdHabitLog._id);
+        if (createdHabitLog && createdHabitLog._id) {
+            await testGetHabitLogs();
+            await testGetHabitLogById(createdHabitLog._id);
+            await testUpdateHabitLog(createdHabitLog._id);
+            await testDeleteHabitLog(createdHabitLog._id);
+        } else {
+            console.error('Failed to create HabitLog, skipping related tests');
+        }
     } catch (error) {
         console.error('An error occurred during testing:', error);
     }

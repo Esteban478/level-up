@@ -37,7 +37,7 @@ const establishRoutes = (app) => {
     app.use('/api/habitlogs', habitLogRouter);
     app.use('/api/xp', xpTransactionRouter);
     app.use('/api/levels', levelThresholdRouter);
-    app.use('/api/audit', auditLogRouter);
+    app.use('/api/auditlogs', auditLogRouter);
     app.use('/api/achievements', achievementRouter);
     app.use('/api/tips', tipRouter);
     app.use('/api/badgetiers', badgeTierRouter);
