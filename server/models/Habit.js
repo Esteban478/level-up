@@ -16,7 +16,7 @@ const habitSchema = new mongoose.Schema({
     description: String,
     area: {
         type: String,
-        enum: ['Health', 'Fitness', 'Mental Health', 'Home Management', 'Productivity', 'Personal Development', 'Skill Development', 'Education', 'Creativity', 'Finance', 'Social', 'Environmental Consciousness', 'Professional Development', 'Digital Wellbeing', 'Lifestyle', 'Stress Management', 'Career Development', 'Other'],
+        enum: ['Keystone', 'Health', 'Fitness', 'Mental Health', 'Home Management', 'Productivity', 'Personal Development', 'Skill Development', 'Education', 'Creativity', 'Finance', 'Social', 'Environmental Consciousness', 'Professional Development', 'Digital Wellbeing', 'Lifestyle', 'Stress Management', 'Career Development', 'Other'],
         default: 'Other'
     },
     type: {

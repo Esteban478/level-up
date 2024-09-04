@@ -7,7 +7,7 @@ import {
     getHabitById,
     updateHabit,
     deleteHabit,
-    archiveHabit,
+    toggleArchiveHabit,
     getArchivedHabits
 } from '../controllers/index.js';
 
@@ -36,8 +36,7 @@ habitRouter.put('/:id', updateHabit);
 // Delete a habit
 habitRouter.delete('/:id', deleteHabit);
 
-// Archive a habit
-habitRouter.put('/:id/archive', archiveHabit);
-
+// Archive or Unarchive a habit based on the "archive" parameter
+habitRouter.put('/:id/archive', toggleArchiveHabit);
 
 export default habitRouter;

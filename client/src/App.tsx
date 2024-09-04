@@ -9,10 +9,9 @@ import Today from './pages/Today';
 import Feed from './pages/Feed';
 import Profile from './pages/Profile';
 import AddHabit from './pages/AddHabit';
+import Archive from './pages/Archive';
 import Achievements from './pages/Achievements';
 import TopNav from './components/shared/TopNav';
-import HabitArchive from './pages/HabitArchive';
-import ArchiveHabit from './pages/ArchiveHabit';
 import EditHabit from './pages/EditHabit';
 import ProfileSettings from './pages/ProfileSettings';
 import BackButton from './components/shared/BackButton';
@@ -67,12 +66,12 @@ const App: React.FC = () => {
           } />
           <Route path="/archive-habit" element={
             <FullScreenLayout title="Archive Habit" leftAction={<BackButton />}>
-              <ArchiveHabit />
+              <Archive />
             </FullScreenLayout>
           } />
           <Route path="/archive" element={
             <FullScreenLayout title="Habit Archive" leftAction={<BackButton />}>
-              <HabitArchive />
+              <Archive />
             </FullScreenLayout>
           } />
           <Route path="/profile-settings" element={

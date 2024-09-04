@@ -9,5 +9,5 @@
 
 .full-screen-layout main {
     padding: var(--md);
-    height: 100%;
+    height: calc(100% - 50px);
 }

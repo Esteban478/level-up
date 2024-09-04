@@ -65,21 +65,27 @@ export const getTemplateHabits = async (req, res) => {
     }
 };
 
-export const archiveHabit = async (req, res) => {
+export const toggleArchiveHabit = async (req, res) => {
     try {
+        const { archive } = req.body;
+
+        // Find the habit by ID and user ID
         const habit = await Habit.findOne({ _id: req.params.id, userId: req.user._id });
+
         if (!habit) {
             return res.status(404).json({ error: 'Habit not found' });
         }
 
-        habit.isArchived = true;
+        // Set the isArchived field based on the request body
+        habit.isArchived = archive;
         await habit.save();
 
-        res.json({ message: 'Habit archived successfully', habit });
+        res.json({ message: `Habit ${archive ? 'archived' : 'unarchived'} successfully`, habit });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 export const getArchivedHabits = async (req, res) => {
     try {
