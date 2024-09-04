@@ -73,6 +73,14 @@ userSchema.virtual('activeHabits', {
     foreignField: 'userId'
 });
 
+// New virtual for archived habits
+userSchema.virtual('archivedHabits', {
+    ref: 'Habit',
+    localField: '_id',
+    foreignField: 'userId',
+    match: { isArchived: true }
+});
+
 // Hash password before saving
 userSchema.pre('save', async function (next) {
     if (this.isModified('password')) {

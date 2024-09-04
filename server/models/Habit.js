@@ -94,6 +94,10 @@ const habitSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isArchived: {
+        type: Boolean,
+        default: false
+    },
     streak: {
         current: { type: Number, default: 0 },
         longest: { type: Number, default: 0 }

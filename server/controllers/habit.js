@@ -44,9 +44,13 @@ export const createHabit = async (req, res) => {
 
 export const getHabits = async (req, res) => {
     try {
-        const userHabits = await Habit.find({ userId: req.user._id, isTemplate: false });
-        const templateHabits = await Habit.find({ isTemplate: true });
-        res.json({ userHabits, templateHabits });
+        const { includeArchived } = req.query;
+        const query = { userId: req.user._id };
+        if (includeArchived !== 'true') {
+            query.isArchived = false;
+        }
+        const habits = await Habit.find(query);
+        res.json(habits);  // Directly return the array of habits
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -56,6 +60,31 @@ export const getTemplateHabits = async (req, res) => {
     try {
         const templateHabits = await Habit.find({ isTemplate: true });
         res.json(templateHabits);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const archiveHabit = async (req, res) => {
+    try {
+        const habit = await Habit.findOne({ _id: req.params.id, userId: req.user._id });
+        if (!habit) {
+            return res.status(404).json({ error: 'Habit not found' });
+        }
+
+        habit.isArchived = true;
+        await habit.save();
+
+        res.json({ message: 'Habit archived successfully', habit });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+export const getArchivedHabits = async (req, res) => {
+    try {
+        const archivedHabits = await Habit.find({ userId: req.user._id, isArchived: true });
+        res.json(archivedHabits);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
