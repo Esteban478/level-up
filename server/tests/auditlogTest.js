@@ -32,7 +32,7 @@ const setupTestData = async () => {
         area: 'Health',
         type: 'Boolean',
         frequency: { type: 'Daily' },
-        goal: { type: 'atLeast', value: 1, direction: 'increase' },
+        goal: { type: 'At least', value: 1, direction: 'increase' },
         xpReward: { base: 10 }
     };
 

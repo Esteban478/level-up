@@ -42,7 +42,7 @@ const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     height: isFullScreen ? '100%' : '736px',
     margin: '0 auto',
     overflow: 'hidden',
-    position: 'relative',
+    position: isFullScreen ? 'absolute' : 'relative',
     border: !isFullScreen ? '1px solid #ccc' : 'none',
     boxShadow: !isFullScreen ? '0 0 10px rgba(0,0,0,0.1)' : 'none',
   };

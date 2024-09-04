@@ -2,23 +2,25 @@ import React, { useState } from 'react';
 import { useActiveHabits } from '../hooks/habits/useActiveHabits';
 import { useArchiveHabit } from '../hooks/habits/useArchiveHabit';
 import { Habit } from '../@types/habit';
+import HabitList from '../components/shared/HabitList';
+import ConfirmationDialog from '../components/shared/ConfirmationDialog';
 
 const Today: React.FC = () => {
   const { habits, loading, error, refetch } = useActiveHabits();
   const { archiveHabit, loading: archiving } = useArchiveHabit();
-  const [confirmArchive, setConfirmArchive] = useState<string | null>(null);
+  const [habitToArchive, setHabitToArchive] = useState<Habit | null>(null);
 
   const handleArchive = async (habit: Habit) => {
-    setConfirmArchive(habit._id);
+    setHabitToArchive(habit);
   };
 
   const confirmArchiveHabit = async () => {
-    if (confirmArchive) {
-      const success = await archiveHabit(confirmArchive, true);
+    if (habitToArchive) {
+      const success = await archiveHabit(habitToArchive._id, true);
       if (success) {
         await refetch();
       }
-      setConfirmArchive(null);
+      setHabitToArchive(null);
     }
   };
 
@@ -26,28 +28,21 @@ const Today: React.FC = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
-      <h2>Today's Habits</h2>
-      {habits.length === 0 ? (
-        <p>No active habits. Add some habits to get started!</p>
-      ) : (
-        habits.map(habit => (
-          <div key={habit._id}>
-            <h3>{habit.name}</h3>
-            <p>{habit.description}</p>
-            <button onClick={() => handleArchive(habit)} disabled={archiving}>
-              Archive
-            </button>
-            {confirmArchive === habit._id && (
-              <div>
-                <p>Are you sure you want to archive this habit?</p>
-                <button onClick={confirmArchiveHabit}>Yes</button>
-                <button onClick={() => setConfirmArchive(null)}>No</button>
-              </div>
-            )}
-          </div>
-        ))
-      )}
+    <div className="today-container">
+      <h2 className="today-title">Today's Habits</h2>
+      <HabitList
+        habits={habits}
+        isArchived={false}
+        onArchive={handleArchive}
+        onReactivate={() => {}}
+        archiving={archiving}
+      />
+      <ConfirmationDialog
+        isOpen={!!habitToArchive}
+        message="Are you sure you want to archive this habit?"
+        onConfirm={confirmArchiveHabit}
+        onCancel={() => setHabitToArchive(null)}
+      />
     </div>
   );
 };

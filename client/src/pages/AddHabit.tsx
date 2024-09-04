@@ -70,7 +70,7 @@ const AddHabit: React.FC = () => {
   return (
     <div>
       {addingHabit && <div>Adding habit...</div>}
-      <div>
+      <>
         <h3>Keystone Habits</h3>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {keystoneHabits.map(template => (
@@ -90,9 +90,9 @@ const AddHabit: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      </>
       {sortedAreas.map(area => (
-        <div key={area}>
+        <>
           <h3>{area}</h3>
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
             {otherHabits[area].map(template => (
@@ -112,7 +112,7 @@ const AddHabit: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
+        </>
       ))}
     </div>
   );

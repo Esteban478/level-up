@@ -8,7 +8,7 @@ export const habits = [
         area: "Keystone",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 10, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 10, unit: "minutes", direction: "increase" },
         xpReward: { base: 20, max: 30 }
     },
     {
@@ -20,7 +20,7 @@ export const habits = [
         area: "Keystone",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 5, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 5, unit: "minutes", direction: "increase" },
         xpReward: { base: 15, max: 25 }
     },
     {
@@ -32,7 +32,7 @@ export const habits = [
         area: "Keystone",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 15, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 15, unit: "minutes", direction: "increase" },
         xpReward: { base: 20, max: 30 }
     },
     {
@@ -44,7 +44,7 @@ export const habits = [
         area: "Keystone",
         type: "Boolean",
         frequency: { type: "Daily" },
-        goal: { type: "exactly", value: true, direction: "maintain" },
+        goal: { type: "Exactly", value: true, direction: "maintain" },
         xpReward: { base: 20, max: 20 }
     },
     {
@@ -56,7 +56,7 @@ export const habits = [
         area: "Keystone",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 1, unit: "meal", direction: "increase" },
+        goal: { type: "At least", value: 1, unit: "meal", direction: "increase" },
         xpReward: { base: 15, max: 45 }
     },
     {
@@ -68,7 +68,7 @@ export const habits = [
         area: "Health",
         type: "Boolean",
         frequency: { type: "Daily" },
-        goal: { type: "exactly", value: true, direction: "maintain" },
+        goal: { type: "Exactly", value: true, direction: "maintain" },
         xpReward: { base: 10, max: 10 }
     },
     {
@@ -80,7 +80,7 @@ export const habits = [
         area: "Personal Development",
         type: "Boolean",
         frequency: { type: "Daily" },
-        goal: { type: "exactly", value: true, direction: "maintain" },
+        goal: { type: "Exactly", value: true, direction: "maintain" },
         xpReward: { base: 5, max: 5 }
     },
     {
@@ -92,7 +92,7 @@ export const habits = [
         area: "Keystone",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 4, unit: "glasses", direction: "increase" },
+        goal: { type: "At least", value: 4, unit: "glasses", direction: "increase" },
         xpReward: { base: 5, max: 20 }
     },
     {
@@ -104,7 +104,7 @@ export const habits = [
         area: "Fitness",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 5000, unit: "steps", direction: "increase" },
+        goal: { type: "At least", value: 5000, unit: "steps", direction: "increase" },
         xpReward: { base: 5, max: 15 }
     },
     {
@@ -116,7 +116,7 @@ export const habits = [
         area: "Keystone",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 1, unit: "item", direction: "increase" },
+        goal: { type: "At least", value: 1, unit: "item", direction: "increase" },
         xpReward: { base: 10, max: 10 }
     },
     {
@@ -128,7 +128,7 @@ export const habits = [
         area: "Productivity",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 30, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 30, unit: "minutes", direction: "increase" },
         xpReward: { base: 20, max: 40 }
     },
     {
@@ -140,7 +140,7 @@ export const habits = [
         area: "Skill Development",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 15, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 15, unit: "minutes", direction: "increase" },
         xpReward: { base: 15, max: 30 }
     },
     {
@@ -152,7 +152,7 @@ export const habits = [
         area: "Education",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 10, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 10, unit: "minutes", direction: "increase" },
         xpReward: { base: 15, max: 30 }
     },
     {
@@ -164,7 +164,7 @@ export const habits = [
         area: "Personal Development",
         type: "Checklist",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 2, unit: "items", direction: "increase" },
+        goal: { type: "At least", value: 2, unit: "items", direction: "increase" },
         xpReward: { base: 5, max: 10 }
     },
     {
@@ -176,7 +176,7 @@ export const habits = [
         area: "Health",
         type: "Checklist",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 2, unit: "items", direction: "increase" },
+        goal: { type: "At least", value: 2, unit: "items", direction: "increase" },
         xpReward: { base: 5, max: 10 }
     },
     {
@@ -188,7 +188,7 @@ export const habits = [
         area: "Home Management",
         type: "Checklist",
         frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "atLeast", value: 2, unit: "items", direction: "increase" },
+        goal: { type: "At least", value: 2, unit: "items", direction: "increase" },
         xpReward: { base: 10, max: 20 }
     },
     {
@@ -200,7 +200,7 @@ export const habits = [
         area: "Finance",
         type: "Boolean",
         frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "exactly", value: true, direction: "maintain" },
+        goal: { type: "Exactly", value: true, direction: "maintain" },
         xpReward: { base: 20, max: 20 }
     },
     {
@@ -212,7 +212,7 @@ export const habits = [
         area: "Social",
         type: "Numeric",
         frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "atLeast", value: 1, unit: "contact", direction: "increase" },
+        goal: { type: "At least", value: 1, unit: "contact", direction: "increase" },
         xpReward: { base: 15, max: 15 }
     },
     {
@@ -224,7 +224,7 @@ export const habits = [
         area: "Creativity",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 5, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 5, unit: "minutes", direction: "increase" },
         xpReward: { base: 10, max: 20 }
     },
     {
@@ -236,7 +236,7 @@ export const habits = [
         area: "Environmental Consciousness",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "atMost", value: 3, unit: "items", direction: "decrease" },
+        goal: { type: "At most", value: 3, unit: "items", direction: "decrease" },
         xpReward: { base: 5, max: 15 }
     },
     {
@@ -248,7 +248,7 @@ export const habits = [
         area: "Professional Development",
         type: "Duration",
         frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "atLeast", value: 15, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 15, unit: "minutes", direction: "increase" },
         xpReward: { base: 20, max: 40 }
     },
     {
@@ -260,7 +260,7 @@ export const habits = [
         area: "Keystone",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 10, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 10, unit: "minutes", direction: "increase" },
         xpReward: { base: 15, max: 25 }
     },
     {
@@ -272,7 +272,7 @@ export const habits = [
         area: "Creativity",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 15, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 15, unit: "minutes", direction: "increase" },
         xpReward: { base: 20, max: 35 }
     },
     {
@@ -284,7 +284,7 @@ export const habits = [
         area: "Creativity",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 20, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 20, unit: "minutes", direction: "increase" },
         xpReward: { base: 25, max: 40 }
     },
     {
@@ -296,7 +296,7 @@ export const habits = [
         area: "Creativity",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 15, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 15, unit: "minutes", direction: "increase" },
         xpReward: { base: 20, max: 35 }
     },
     {
@@ -308,7 +308,7 @@ export const habits = [
         area: "Digital Wellbeing",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atMost", value: 120, unit: "minutes", direction: "decrease" },
+        goal: { type: "At most", value: 120, unit: "minutes", direction: "decrease" },
         xpReward: { base: 10, max: 40 }
     },
     {
@@ -320,7 +320,7 @@ export const habits = [
         area: "Digital Wellbeing",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atMost", value: 30, unit: "minutes", direction: "decrease" },
+        goal: { type: "At most", value: 30, unit: "minutes", direction: "decrease" },
         xpReward: { base: 15, max: 30 }
     },
     {
@@ -332,7 +332,7 @@ export const habits = [
         area: "Lifestyle",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atMost", value: 60, unit: "minutes", direction: "decrease" },
+        goal: { type: "At most", value: 60, unit: "minutes", direction: "decrease" },
         xpReward: { base: 10, max: 30 }
     },
     {
@@ -344,7 +344,7 @@ export const habits = [
         area: "Health",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "atMost", value: 5, unit: "uses", direction: "decrease" },
+        goal: { type: "At most", value: 5, unit: "uses", direction: "decrease" },
         xpReward: { base: 10, max: 50 }
     },
     {
@@ -356,7 +356,7 @@ export const habits = [
         area: "Health",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "atMost", value: 1, unit: "drink", direction: "decrease" },
+        goal: { type: "At most", value: 1, unit: "drink", direction: "decrease" },
         xpReward: { base: 20, max: 20 }
     },
     {
@@ -368,7 +368,7 @@ export const habits = [
         area: "Stress Management",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 2, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 2, unit: "minutes", direction: "increase" },
         xpReward: { base: 10, max: 20 }
     },
     {
@@ -380,7 +380,7 @@ export const habits = [
         area: "Mental Health",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 3, unit: "affirmations", direction: "increase" },
+        goal: { type: "At least", value: 3, unit: "affirmations", direction: "increase" },
         xpReward: { base: 5, max: 15 }
     },
     {
@@ -392,7 +392,7 @@ export const habits = [
         area: "Keystone",
         type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 5, unit: "minutes", direction: "increase" },
+        goal: { type: "At least", value: 5, unit: "minutes", direction: "increase" },
         xpReward: { base: 10, max: 20 }
     },
     {
@@ -404,7 +404,7 @@ export const habits = [
         area: "Career Development",
         type: "Numeric",
         frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "atLeast", value: 1, unit: "connection", direction: "increase" },
+        goal: { type: "At least", value: 1, unit: "connection", direction: "increase" },
         xpReward: { base: 20, max: 40 }
     },
     {
@@ -416,7 +416,7 @@ export const habits = [
         area: "Health",
         type: "Boolean",
         frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "exactly", value: true, direction: "maintain" },
+        goal: { type: "Exactly", value: true, direction: "maintain" },
         xpReward: { base: 25, max: 25 }
     },
     {
@@ -428,7 +428,7 @@ export const habits = [
         area: "Keystone",
         type: "Boolean",
         frequency: { type: "Daily" },
-        goal: { type: "atLeast", value: 1, unit: "prioritization", direction: "increase" },
+        goal: { type: "At least", value: 1, unit: "prioritization", direction: "increase" },
         xpReward: { base: 20, max: 25 }
     }
 ];

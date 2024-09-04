@@ -1,0 +1,42 @@
+.habit-card {
+    background-color: var(--color-background-100);
+    border: 1px solid var(--color-background-400);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.habit-card__title {
+    font-size: var(--h3);
+    margin-bottom: var(--xxs);
+}
+
+.habit-card__description {
+    color: var(--color-text-200);
+    font-size: var(--sm);
+    margin-bottom: 0.5rem;
+}
+
+.habit-card__details {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.habit-card__actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.habit-card__button {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.habit-card__button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

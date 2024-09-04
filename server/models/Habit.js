@@ -24,6 +24,18 @@ const habitSchema = new mongoose.Schema({
         enum: ['Boolean', 'Numeric', 'Duration', 'Checklist'],
         required: true
     },
+    goal: {
+        type: {
+            type: String,
+            enum: ['At least', 'At most', 'Exactly'],
+        },
+        value: mongoose.Schema.Types.Mixed,
+        unit: String,
+        direction: {
+            type: String,
+            enum: ['increase', 'decrease', 'maintain'],
+        }
+    },
     frequency: {
         type: {
             type: String,
@@ -49,19 +61,11 @@ const habitSchema = new mongoose.Schema({
             }
         }
     },
-    isTemplate: {
-        type: Boolean,
-        default: false
-    },
-    templateId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Habit'
-    },
     customizations: {
         goal: {
             type: {
                 type: String,
-                enum: ['atLeast', 'atMost', 'exactly'],
+                enum: ['At least', 'At most', 'Exactly'],
             },
             value: mongoose.Schema.Types.Mixed,
             unit: String,
@@ -89,6 +93,14 @@ const habitSchema = new mongoose.Schema({
             required: true
         },
         max: Number
+    },
+    isTemplate: {
+        type: Boolean,
+        default: false
+    },
+    templateId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Habit'
     },
     isPublic: {
         type: Boolean,

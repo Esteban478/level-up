@@ -15,7 +15,7 @@ export interface Habit {
   templateId?: string;
   customizations?: {
     goal?: {
-      type: 'atLeast' | 'atMost' | 'exactly';
+      type: 'At least' | 'At most' | 'Exactly';
       value: number;
       unit?: string;
       direction: 'increase' | 'decrease' | 'maintain';
@@ -28,7 +28,7 @@ export interface Habit {
     isPublic?: boolean;
   };
   goal: {
-    type: 'atLeast' | 'atMost' | 'exactly';
+    type: 'At least' | 'At most' | 'Exactly';
     value: number;
     unit?: string;
     direction: 'increase' | 'decrease' | 'maintain';

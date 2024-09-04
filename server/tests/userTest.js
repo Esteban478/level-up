@@ -38,7 +38,7 @@ const setupTestData = async () => {
                 type: 'Daily',
             },
             goal: {
-                type: 'atLeast',
+                type: 'At least',
                 value: 1,
                 direction: 'increase'
             },

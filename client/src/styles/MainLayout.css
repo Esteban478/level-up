@@ -5,6 +5,11 @@
 }
 
 .main-layout main {
-    padding: var(--md);
-    height: 100%;
+    padding: 0 var(--md);
+    height: calc(100% - 50px - 70px);
+    overflow-y: scroll;
+}
+
+.main-layout main h2 {
+    margin: var(--xs) 0 var(--md);
 }

@@ -1,13 +1,5 @@
-/* .full-screen-layout  {
-    transform: translateY(100%);
-    transition: transform 0.3s ease-out;
-}
-
-.full-screen-layout.active {
-    transform: translateY(0);
-} */
-
 .full-screen-layout main {
     padding: var(--md);
     height: calc(100% - 50px);
+    overflow-y: auto;
 }

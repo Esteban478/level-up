@@ -71,6 +71,16 @@ p {
   box-sizing: border-box;
 }
 
+/* Balance line breaks for headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
 /* Remove default margin and padding */
 html,
 body,
@@ -169,6 +179,86 @@ button {
 a {
   color: var(--color-secondary);
   text-decoration: none;
+}
+
+/* Button and Link styles */
+
+/* Button base styles */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #00A8E6;
+  /* Slightly darker shade of primary */
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-secondary);
+  border: 2px solid var(--color-secondary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-background);
+}
+
+/* Tertiary Button */
+.btn-tertiary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-text-300);
+}
+
+.btn-tertiary:hover {
+  background-color: var(--color-background-300);
+}
+
+/* Link styles */
+.link {
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.link-primary {
+  color: var(--color-primary);
+}
+
+.link-primary:hover {
+  color: #00A8E6;
+  /* Slightly darker shade of primary */
+}
+
+.link-secondary {
+  color: var(--color-secondary);
+}
+
+.link-secondary:hover {
+  color: #00E085;
+  /* Slightly darker shade of secondary */
+}
+
+.link-tertiary {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+.link-tertiary:hover {
+  color: var(--color-text-200);
 }
 
 /* Animations */

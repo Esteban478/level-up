@@ -43,7 +43,7 @@ const setupTestData = async () => {
         area: 'Health',
         type: 'Boolean',
         frequency: { type: 'Daily' },
-        goal: { type: 'atLeast', value: 1, direction: 'increase' },
+        goal: { type: 'At least', value: 1, direction: 'increase' },
         xpReward: { base: 10 },
         isTemplate: true,
         isPublic: true
@@ -60,7 +60,7 @@ const testCreateCustomHabit = async () => {
         area: 'Fitness',
         type: 'Numeric',
         frequency: { type: 'Weekly', daysOfWeek: [1, 3, 5] },
-        goal: { type: 'atLeast', value: 30, unit: 'minutes', direction: 'increase' },
+        goal: { type: 'At least', value: 30, unit: 'minutes', direction: 'increase' },
         xpReward: { base: 20 },
         isPublic: false
     };
@@ -80,7 +80,7 @@ const testCreateHabitFromTemplate = async () => {
         templateId: templateHabitId,
         customizations: {
             frequency: { type: 'Weekly', daysOfWeek: [2, 4, 6] },
-            goal: { type: 'atLeast', value: 2, direction: 'increase' },
+            goal: { type: 'At least', value: 2, direction: 'increase' },
             isPublic: false
         }
     };
@@ -115,7 +115,7 @@ const testUpdateCustomHabit = async (habitId) => {
         name: 'Updated Custom Habit',
         customizations: {
             frequency: { type: 'Daily' },
-            goal: { type: 'atLeast', value: 1, direction: 'increase' },
+            goal: { type: 'At least', value: 1, direction: 'increase' },
             isPublic: true
         }
     };
