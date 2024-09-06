@@ -9,6 +9,7 @@ import GoalCustomizer from '../components/GoalCustomizer';
 import FrequencyCustomizer from '../components/FrequencyCustomizer';
 import PublicToggle from '../components/PublicToggle';
 import { Habit } from '../@types/habit';
+import '../styles/EditHabit.css';
 
 const EditHabit: React.FC = () => {
   const { habitId } = useParams<{ habitId: string }>();
@@ -47,23 +48,25 @@ const EditHabit: React.FC = () => {
       leftAction={<BackButton onClick={handleBack} />}
       rightAction={<TextButton text="Save" onClick={onSave} />}
     >
-      <h1>{editedHabit.name}</h1>
-      <p>{editedHabit.description}</p>
-      
-      <GoalCustomizer
-        goal={editedHabit.goal}
-        onChange={(goal) => setEditedHabit({ ...editedHabit, goal })}
-      />
-      
-      <FrequencyCustomizer
-        frequency={editedHabit.frequency}
-        onChange={(frequency) => setEditedHabit({ ...editedHabit, frequency })}
-      />
-      
-      <PublicToggle
-        isPublic={editedHabit.isPublic}
-        onChange={(isPublic) => setEditedHabit({ ...editedHabit, isPublic })}
-      />
+      <div className='edit-habit'>
+        <h1>{editedHabit.name}</h1>
+        <p>{editedHabit.description}</p>
+        
+        <GoalCustomizer
+          goal={editedHabit.goal}
+          onChange={(goal) => setEditedHabit({ ...editedHabit, goal })}
+        />
+        
+        <FrequencyCustomizer
+          frequency={editedHabit.frequency}
+          onChange={(frequency) => setEditedHabit({ ...editedHabit, frequency })}
+        />
+        
+        <PublicToggle
+          isPublic={editedHabit.isPublic}
+          onChange={(isPublic) => setEditedHabit({ ...editedHabit, isPublic })}
+        />
+      </div>
     </FullScreenLayout>
   );
 };
