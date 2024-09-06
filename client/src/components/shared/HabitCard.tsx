@@ -1,26 +1,47 @@
 import React from 'react';
 import { Habit } from '../../@types/habit';
 import '../../styles/HabitCard.css';
+import { useNavigate } from 'react-router-dom';
 
 interface HabitCardProps {
   habit: Habit;
   isArchived: boolean;
-  onArchive: (habit: Habit) => void;
-  onReactivate: (habit: Habit) => void;
-  archiving: boolean;
+  onArchive?: (habit: Habit) => void;
+  onReactivate?: (habit: Habit) => void;
+  onDelete?: (habit: Habit) => void;
+  archiving?: boolean;
+  onClick?: () => void;
+  showActions?: boolean;
 }
 
-const HabitCard: React.FC<HabitCardProps> = ({ habit, isArchived, onArchive, onReactivate, archiving }) => {
+const HabitCard: React.FC<HabitCardProps> = ({ 
+  habit, 
+  isArchived, 
+  onArchive, 
+  onReactivate,
+  onDelete,
+  archiving, 
+  onClick,
+  showActions = true
+}) => {
+  const navigate = useNavigate();
+
   const handleTrack = () => {
     console.log(`${habit.name} tracked`);
   };
 
-  const handleEdit = () => {
-    console.log(`Open edit dialog for ${habit.name}`);
+  const handleEdit = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/edit-habit/${habit._id}`);
+  };
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onClick) onClick();
   };
 
   return (
-    <div className="habit-card">
+    <div className="habit-card" onClick={handleCardClick}>
       <h3 className="habit-card__title">{habit.name}</h3>
       <p className="habit-card__description">{habit.description}</p>
       <div className="habit-card__details">
@@ -33,27 +54,39 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, isArchived, onArchive, onR
           <p className="habit-card__streak">Current streak: {habit.streak.current} days</p>
         )}
       </div>
-      <div className="habit-card__actions">
-        <button 
-          className="btn btn-primary"
-          onClick={handleTrack}
-        >
-          Track
-        </button>
-        <button 
-          className="btn btn-secondary"
-          onClick={handleEdit}
-        >
-          Edit
-        </button>
-        <button 
-          className="btn btn-tertiary"
-          onClick={() => isArchived ? onReactivate(habit) : onArchive(habit)} 
-          disabled={archiving}
-        >
-          {isArchived ? 'Reactivate' : 'Archive'}
-        </button>
-      </div>
+      {showActions && (
+        <div className="habit-card__actions">
+          <button 
+            className="btn btn-primary"
+            onClick={handleTrack}
+          >
+            Track
+          </button>
+          <button 
+            className="btn btn-secondary"
+            onClick={handleEdit}
+          >
+            Edit
+          </button>
+          {onArchive && onReactivate && (
+            <button 
+              className="btn btn-tertiary"
+              onClick={() => isArchived ? onReactivate(habit) : onArchive(habit)} 
+              disabled={archiving}
+            >
+              {isArchived ? 'Reactivate' : 'Archive'}
+            </button>
+          )}
+          {onDelete && (
+          <button 
+            className="btn btn-tertiary"
+            onClick={() => onDelete(habit)}
+          >
+          Delete
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

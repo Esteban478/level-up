@@ -7,10 +7,11 @@ interface HabitListProps {
   isArchived: boolean;
   onArchive: (habit: Habit) => void;
   onReactivate: (habit: Habit) => void;
+  onDelete: (habit: Habit) => void;
   archiving: boolean;
 }
 
-const HabitList: React.FC<HabitListProps> = ({ habits, isArchived, onArchive, onReactivate, archiving }) => {
+const HabitList: React.FC<HabitListProps> = ({ habits, isArchived, onArchive, onReactivate, onDelete, archiving }) => {
   return (
     <div className="habit-list">
       {habits.length === 0 ? (
@@ -23,6 +24,7 @@ const HabitList: React.FC<HabitListProps> = ({ habits, isArchived, onArchive, on
             isArchived={isArchived}
             onArchive={onArchive}
             onReactivate={onReactivate}
+            onDelete={onDelete}
             archiving={archiving}
           />
         ))

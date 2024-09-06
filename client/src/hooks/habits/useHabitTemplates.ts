@@ -4,12 +4,11 @@ import { Habit } from '../../@types/habit';
 
 export const useHabitTemplates = () => {
   const [templates, setTemplates] = useState<Habit[]>([]);
-  const [activeHabits, setActiveHabits] = useState<Habit[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { getToken } = useAuth();
 
-  const fetchData = useCallback(async () => {
+  const fetchTemplates = useCallback(async () => {
     if (!loading) return; // Prevent multiple simultaneous fetches
     try {
       const token = getToken();
@@ -17,30 +16,19 @@ export const useHabitTemplates = () => {
         throw new Error('No authentication token found');
       }
 
-      const [templatesResponse, activeHabitsResponse] = await Promise.all([
-        fetch(`${import.meta.env.VITE_BASE_URI}/habits/templates`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }),
-        fetch(`${import.meta.env.VITE_BASE_URI}/users/habits`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        })
-      ]);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URI}/habits/templates`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
-      if (!templatesResponse.ok || !activeHabitsResponse.ok) {
-        throw new Error('Failed to fetch data');
+      if (!response.ok) {
+        throw new Error('Failed to fetch habit templates');
       }
 
-      const templatesData = await templatesResponse.json();
-      const activeHabitsData = await activeHabitsResponse.json();
-
+      const templatesData = await response.json();
       setTemplates(templatesData);
-      setActiveHabits(activeHabitsData.filter((habit: Habit) => !habit.isArchived));
     } catch (err) {
       setError(err instanceof Error ? err : new Error('An unknown error occurred'));
     } finally {
@@ -49,17 +37,13 @@ export const useHabitTemplates = () => {
   }, [getToken]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  const availableTemplates = templates.filter(template => 
-    !activeHabits.some(habit => habit.templateId === template._id)
-  );
+    fetchTemplates();
+  }, [fetchTemplates]);
 
   const refetch = useCallback(() => {
     setLoading(true);
-    fetchData();
-  }, [fetchData]);
+    fetchTemplates();
+  }, [fetchTemplates]);
 
-  return { templates: availableTemplates, loading, error, refetch };
+  return { templates, loading, error, refetch };
 };

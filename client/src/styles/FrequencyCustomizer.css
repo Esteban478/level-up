@@ -1,0 +1,44 @@
+.frequency-customizer {
+    margin-bottom: var(--md);
+}
+
+.frequency-customizer h2 {
+    font: var(--h3);
+    margin-bottom: var(--xs);
+}
+
+.frequency-customizer label {
+    display: block;
+    font: var(--small);
+    margin-bottom: var(--xxs);
+}
+
+.frequency-customizer select {
+    width: 100%;
+    padding: var(--xs);
+    background-color: var(--color-background-200);
+    color: var(--color-text);
+    border: 1px solid var(--color-text-300);
+    border-radius: 4px;
+}
+
+.day-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--xxs);
+    margin-top: var(--xs);
+}
+
+.day-selector button {
+    padding: var(--xs);
+    background-color: var(--color-background-300);
+    color: var(--color-text);
+    border: 1px solid var(--color-text-300);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.day-selector button.selected {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}

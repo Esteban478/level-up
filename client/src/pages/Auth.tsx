@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import Notification from '../components/Notification';
+import Notification from '../components/shared/Notification';
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
 import '../styles/AuthPage.css';
 

@@ -166,6 +166,12 @@ textarea {
   border: 1px solid var(--color-primary);
 }
 
+input:focus,
+select:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
 /* Simple button styles */
 button {
   background-color: var(--color-primary);
@@ -199,10 +205,6 @@ a {
   border: none;
 }
 
-.btn-primary:hover {
-  background-color: #00A8E6;
-  /* Slightly darker shade of primary */
-}
 
 /* Secondary Button */
 .btn-secondary {
@@ -211,10 +213,6 @@ a {
   border: 2px solid var(--color-secondary);
 }
 
-.btn-secondary:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-background);
-}
 
 /* Tertiary Button */
 .btn-tertiary {
@@ -223,9 +221,6 @@ a {
   border: 1px solid var(--color-text-300);
 }
 
-.btn-tertiary:hover {
-  background-color: var(--color-background-300);
-}
 
 /* Link styles */
 .link {
@@ -238,28 +233,18 @@ a {
   color: var(--color-primary);
 }
 
-.link-primary:hover {
-  color: #00A8E6;
-  /* Slightly darker shade of primary */
-}
+
 
 .link-secondary {
   color: var(--color-secondary);
 }
 
-.link-secondary:hover {
-  color: #00E085;
-  /* Slightly darker shade of secondary */
-}
 
 .link-tertiary {
   color: var(--color-text);
   text-decoration: underline;
 }
 
-.link-tertiary:hover {
-  color: var(--color-text-200);
-}
 
 /* Animations */
 
@@ -287,6 +272,36 @@ a {
 
 
 /* Media queries */
+
+@media (hover: hover) {
+  .btn-primary:hover {
+    background-color: #00A8E6;
+    /* Slightly darker shade of primary */
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-background);
+  }
+
+  .btn-tertiary:hover {
+    background-color: var(--color-background-300);
+  }
+
+  .link-primary:hover {
+    color: #00A8E6;
+    /* Slightly darker shade of primary */
+  } 
+
+  .link-secondary:hover {
+    color: #00E085;
+    /* Slightly darker shade of secondary */
+  }
+
+  .link-tertiary:hover {
+    color: var(--color-text-200);
+  }
+}
 
 @media (width <=768px) {
 

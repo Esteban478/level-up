@@ -1,3 +1,21 @@
+export type FrequencyType = 'Daily' | 'Weekly' | 'Monthly';
+
+export interface Frequency {
+  type: FrequencyType;
+  daysOfWeek?: number[];
+  daysOfMonth?: number[];
+}
+
+export type GoalType = 'At least' | 'At most' | 'Exactly';
+export type GoalDirection = 'increase' | 'decrease' | 'maintain';
+
+export interface Goal {
+  type: GoalType;
+  value: number;
+  unit?: string;
+  direction: GoalDirection;
+}
+
 export interface Habit {
   _id: string;
   userId: string;
@@ -6,33 +24,15 @@ export interface Habit {
   description: string;
   area: string;
   type: 'Boolean' | 'Numeric' | 'Duration' | 'Checklist';
-  frequency: {
-    type: 'Daily' | 'Weekly' | 'Monthly';
-    daysOfWeek?: number[];
-    daysOfMonth?: number[];
-  };
+  frequency: Frequency;
   isTemplate: boolean;
   templateId?: string;
   customizations?: {
-    goal?: {
-      type: 'At least' | 'At most' | 'Exactly';
-      value: number;
-      unit?: string;
-      direction: 'increase' | 'decrease' | 'maintain';
-    };
-    frequency?: {
-      type: 'Daily' | 'Weekly' | 'Monthly';
-      daysOfWeek?: number[];
-      daysOfMonth?: number[];
-    };
+    goal?: Goal;
+    frequency?: Frequency;
     isPublic?: boolean;
   };
-  goal: {
-    type: 'At least' | 'At most' | 'Exactly';
-    value: number;
-    unit?: string;
-    direction: 'increase' | 'decrease' | 'maintain';
-  };
+  goal: Goal;
   xpReward: {
     base: number;
     max?: number;

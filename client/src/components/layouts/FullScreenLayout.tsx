@@ -1,3 +1,4 @@
+import React from 'react';
 import TopBar from '../shared/TopBar';
 import '../../styles/FullScreenLayout.css';
 
@@ -6,8 +7,8 @@ interface FullScreenLayoutProps {
   title?: string;
   darkTitle?: boolean;
   fromRight?: boolean;
-  leftAction?: React.ReactNode;
-  rightAction?: React.ReactNode;
+  leftAction?: React.ReactElement;
+  rightAction?: React.ReactElement;
 }
 
 const FullScreenLayout: React.FC<FullScreenLayoutProps> = ({ 
@@ -29,4 +30,4 @@ const FullScreenLayout: React.FC<FullScreenLayoutProps> = ({
   </div>
 );
 
-export default FullScreenLayout
+export default FullScreenLayout;

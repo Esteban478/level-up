@@ -15,7 +15,6 @@ import TopNav from './components/shared/TopNav';
 import EditHabit from './pages/EditHabit';
 import ProfileSettings from './pages/ProfileSettings';
 import BackButton from './components/shared/BackButton';
-import TextButton from './components/shared/TextButton';
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -59,10 +58,8 @@ const App: React.FC = () => {
               <AddHabit />
             </FullScreenLayout>
           } />
-          <Route path="/edit-habit" element={
-            <FullScreenLayout title="Edit Habit" rightAction={<TextButton />}>
-              <EditHabit />
-            </FullScreenLayout>
+          <Route path="/edit-habit/:habitId" element={
+            <EditHabit />
           } />
           <Route path="/archive-habit" element={
             <FullScreenLayout title="Archive Habit" leftAction={<BackButton />}>

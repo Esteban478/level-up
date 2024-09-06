@@ -1,0 +1,20 @@
+.public-toggle {
+    margin-bottom: var(--md);
+}
+
+.public-toggle label {
+    display: flex;
+    align-items: center;
+    font: var(--p);
+    margin-bottom: var(--xxs);
+}
+
+.public-toggle input[type="checkbox"] {
+    margin-right: var(--xs);
+}
+
+.public-toggle .explanation {
+    font: var(--small);
+    color: var(--color-text-200);
+    margin-top: var(--xxs);
+}

@@ -4,14 +4,23 @@ import { useArchiveHabit } from '../hooks/habits/useArchiveHabit';
 import { Habit } from '../@types/habit';
 import HabitList from '../components/shared/HabitList';
 import ConfirmationDialog from '../components/shared/ConfirmationDialog';
+import { useDeleteHabit } from '../hooks/habits/useDeleteHabit';
 
 const Today: React.FC = () => {
   const { habits, loading, error, refetch } = useActiveHabits();
   const { archiveHabit, loading: archiving } = useArchiveHabit();
+  const { deleteHabit } = useDeleteHabit();
   const [habitToArchive, setHabitToArchive] = useState<Habit | null>(null);
+  const [habitToDelete, setHabitToDelete] = useState<Habit | null>(null);
 
   const handleArchive = async (habit: Habit) => {
     setHabitToArchive(habit);
+  };
+
+  const handleDelete = async (habit: Habit) => {
+    setHabitToDelete(habit);
+    console.log(habit);
+    console.log(habitToDelete)
   };
 
   const confirmArchiveHabit = async () => {
@@ -21,6 +30,16 @@ const Today: React.FC = () => {
         await refetch();
       }
       setHabitToArchive(null);
+    }
+  };
+
+  const confirmDeleteHabit = async () => {
+    if (habitToDelete) {
+      const success = await deleteHabit(habitToDelete._id);
+      if (success) {
+        await refetch();
+      }
+      setHabitToDelete(null);
     }
   };
 
@@ -34,6 +53,7 @@ const Today: React.FC = () => {
         habits={habits}
         isArchived={false}
         onArchive={handleArchive}
+        onDelete={handleDelete}
         onReactivate={() => {}}
         archiving={archiving}
       />
@@ -42,6 +62,12 @@ const Today: React.FC = () => {
         message="Are you sure you want to archive this habit?"
         onConfirm={confirmArchiveHabit}
         onCancel={() => setHabitToArchive(null)}
+      />
+      <ConfirmationDialog
+        isOpen={!!habitToDelete}
+        message="Are you sure you want to delete this habit?"
+        onConfirm={confirmDeleteHabit}
+        onCancel={() => setHabitToDelete(null)}
       />
     </div>
   );

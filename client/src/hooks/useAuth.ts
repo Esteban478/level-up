@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { AuthContext } from "../context/Auth";
 
 export const useAuth = () => {
@@ -7,8 +7,11 @@ export const useAuth = () => {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   
-  const getToken = () => localStorage.getItem('token');
-
+  const getToken = useCallback(() => {
+    // Your token retrieval logic here
+    return localStorage.getItem('token');
+  }, []);
+  
   return {
     ...context,
     getToken,

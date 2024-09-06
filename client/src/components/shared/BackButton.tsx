@@ -1,16 +1,20 @@
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
-import '../../styles/BottomNav.css';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useStandardNavigation } from '../../hooks/navigation/useStandardNavigation';
 
-const BackButton: React.FC = () => {
-    const navigate = useNavigate();
-    const goBack = () => {
-        navigate(-1);
-    };
-    return (
-        <FontAwesomeIcon icon={faArrowLeft} onClick={goBack} />
-    )
+interface BackButtonProps {
+  onClick?: () => void;
+}
+
+const BackButton: React.FC<BackButtonProps> = ({ onClick }) => {
+  const { handleBack: standardHandleBack } = useStandardNavigation();
+
+  const handleClick = onClick || standardHandleBack;
+
+  return (
+    <FontAwesomeIcon icon={faArrowLeft} onClick={handleClick} />
+  );
 };
 
-export default BackButton
+export default BackButton;

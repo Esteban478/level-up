@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHabitTemplates } from '../hooks/habits/useHabitTemplates';
+import { useActiveHabits } from '../hooks/habits/useActiveHabits';
+import { useArchivedHabits } from '../hooks/habits/useArchivedHabits';
 import { Habit } from '../@types/habit';
 import { useAuth } from '../hooks/useAuth';
+import HabitCard from '../components/shared/HabitCard';
 
 const AddHabit: React.FC = () => {
-  const { templates, loading, error } = useHabitTemplates();
+  const { templates, loading: templatesLoading, error: templatesError } = useHabitTemplates();
+  const { habits: activeHabits, loading: activeLoading } = useActiveHabits();
+  const { habits: archivedHabits, loading: archivedLoading } = useArchivedHabits();
   const [addingHabit, setAddingHabit] = useState(false);
   const navigate = useNavigate();
   const { getToken } = useAuth();
+
+  const filteredTemplates = useMemo(() => {
+    if (!templates || !activeHabits || !archivedHabits) return [];
+    const userHabitIds = new Set([
+      ...activeHabits.map(h => h.habitId),
+      ...archivedHabits.map(h => h.habitId)
+    ]);
+    return templates.filter(t => !userHabitIds.has(t.habitId));
+  }, [templates, activeHabits, archivedHabits]);
 
   const handleAddHabit = async (template: Habit) => {
     setAddingHabit(true);
@@ -26,7 +40,8 @@ const AddHabit: React.FC = () => {
         },
         body: JSON.stringify({
           templateId: template._id,
-          customizations: {} // You can add customizations here if needed
+          customizations: {},
+          isArchived: false
         }),
       });
 
@@ -34,17 +49,16 @@ const AddHabit: React.FC = () => {
         throw new Error('Failed to add habit');
       }
 
-      // Habit added successfully, navigate to Today page
-      navigate('/today');
+      const newHabit = await response.json();
+      navigate(`/edit-habit/${newHabit._id}`, { state: { isNewHabit: true } });
     } catch (err) {
       console.error('Error adding habit:', err);
-      // You might want to show an error message to the user here
     } finally {
       setAddingHabit(false);
     }
   };
 
-   const groupHabits = (habits: Habit[]) => {
+  const groupHabits = (habits: Habit[]) => {
     const keystoneHabits = habits.filter(habit => habit.area === 'Keystone');
     const otherHabits = habits.filter(habit => habit.area !== 'Keystone').reduce((acc, habit) => {
       if (!acc[habit.area]) {
@@ -57,12 +71,11 @@ const AddHabit: React.FC = () => {
     return { keystoneHabits, otherHabits };
   };
 
-  if (loading) return <div>Loading habits...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (templatesLoading || activeLoading || archivedLoading) return <div>Loading habits...</div>;
+  if (templatesError) return <div>Error: {templatesError.message}</div>;
 
-  const { keystoneHabits, otherHabits } = groupHabits(templates);
+  const { keystoneHabits, otherHabits } = groupHabits(filteredTemplates);
 
-  // Sort areas by number of habits (descending)
   const sortedAreas = Object.keys(otherHabits).sort((a, b) => 
     otherHabits[b].length - otherHabits[a].length
   );
@@ -70,49 +83,37 @@ const AddHabit: React.FC = () => {
   return (
     <div>
       {addingHabit && <div>Adding habit...</div>}
-      <>
-        <h3>Keystone Habits</h3>
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {keystoneHabits.map(template => (
-            <div 
-              key={template._id} 
-              style={{ 
-                border: '1px solid #ccc', 
-                padding: '10px', 
-                margin: '5px', 
-                cursor: 'pointer',
-                width: '200px'
-              }}
-              onClick={() => handleAddHabit(template)}
-            >
-              <h4>{template.name}</h4>
-              <p>{template.description}</p>
-            </div>
-          ))}
-        </div>
-      </>
-      {sortedAreas.map(area => (
+      {keystoneHabits.length > 0 && (
         <>
-          <h3>{area}</h3>
+          <h3>Keystone Habits</h3>
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {otherHabits[area].map(template => (
-              <div 
-                key={template._id} 
-                style={{ 
-                  border: '1px solid #ccc', 
-                  padding: '10px', 
-                  margin: '5px', 
-                  cursor: 'pointer',
-                  width: '200px'
-                }}
+            {keystoneHabits.map(template => (
+              <HabitCard
+                key={template._id}
+                habit={template}
+                isArchived={false}
                 onClick={() => handleAddHabit(template)}
-              >
-                <h4>{template.name}</h4>
-                <p>{template.description}</p>
-              </div>
+                showActions={false}
+              />
             ))}
           </div>
         </>
+      )}
+      {sortedAreas.map(area => (
+        <React.Fragment key={area}>
+          <h3>{area}</h3>
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            {otherHabits[area].map(template => (
+              <HabitCard
+                key={template._id}
+                habit={template}
+                isArchived={false}
+                onClick={() => handleAddHabit(template)}
+                showActions={false}
+              />
+            ))}
+          </div>
+        </React.Fragment>
       ))}
     </div>
   );

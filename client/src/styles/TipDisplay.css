@@ -1,0 +1,17 @@
+.tip-display {
+    background-color: var(--color-background-200);
+    border: 1px solid var(--color-text-300);
+    border-radius: 4px;
+    padding: var(--xs);
+}
+
+.tip-display h3 {
+    font-size: var(--h1);
+    color: var(--color-secondary);
+    margin-bottom: var(--xxs);
+}
+
+.tip-display p {
+    font: var(--p);
+    color: var(--color-text-100);
+}
