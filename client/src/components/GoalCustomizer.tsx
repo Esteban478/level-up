@@ -20,9 +20,7 @@ const GoalCustomizer: React.FC<GoalCustomizerProps> = ({ goal, onChange }) => {
 
   return (
     <div className="goal-customizer">
-      <h2>Goal</h2>
       <div>
-        <label>Type:</label>
         <select
           value={goal.type}
           onChange={(e) => onChange({ ...goal, type: e.target.value as Goal['type'] })}
@@ -43,9 +41,9 @@ const GoalCustomizer: React.FC<GoalCustomizerProps> = ({ goal, onChange }) => {
         />
       </div>
       <div>
-        <span>{goal.unit}</span>
+        <span>{goal.unit} per day</span>
       </div>
-      <div>
+      {/* <div>
         <label>Direction:</label>
         <select
           value={goal.direction}
@@ -55,7 +53,7 @@ const GoalCustomizer: React.FC<GoalCustomizerProps> = ({ goal, onChange }) => {
           <option value="decrease">Decrease</option>
           <option value="maintain">Maintain</option>
         </select>
-      </div>
+      </div> */}
     </div>
   );
 };

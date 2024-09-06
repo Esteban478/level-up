@@ -6,7 +6,7 @@ import FullScreenLayout from '../components/layouts/FullScreenLayout';
 import BackButton from '../components/shared/BackButton';
 import TextButton from '../components/shared/ConfirmButton';
 import GoalCustomizer from '../components/GoalCustomizer';
-import FrequencyCustomizer from '../components/FrequencyCustomizer';
+// import FrequencyCustomizer from '../components/FrequencyCustomizer';
 import PublicToggle from '../components/PublicToggle';
 import { Habit } from '../@types/habit';
 import '../styles/EditHabit.css';
@@ -57,10 +57,10 @@ const EditHabit: React.FC = () => {
           onChange={(goal) => setEditedHabit({ ...editedHabit, goal })}
         />
         
-        <FrequencyCustomizer
+        {/* <FrequencyCustomizer
           frequency={editedHabit.frequency}
           onChange={(frequency) => setEditedHabit({ ...editedHabit, frequency })}
-        />
+        /> */}
         
         <PublicToggle
           isPublic={editedHabit.isPublic}

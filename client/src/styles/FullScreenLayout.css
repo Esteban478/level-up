@@ -3,3 +3,7 @@
     height: calc(100% - 50px);
     overflow-y: auto;
 }
+
+.full-screen-layout main h3 {
+    margin: var(--xs) 0 var(--md);
+}

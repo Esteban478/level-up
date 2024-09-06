@@ -2,7 +2,7 @@ import { HabitLog, Habit } from '../models/index.js';
 
 export const createHabitLog = async (req, res) => {
     try {
-        const { habitId, date, value } = req.body;
+        const { habitId, date, value, notes } = req.body;
         const habit = await Habit.findOne({ _id: habitId, userId: req.user._id });
         if (!habit) {
             return res.status(404).json({ error: 'Habit not found' });
@@ -13,8 +13,9 @@ export const createHabitLog = async (req, res) => {
             return res.status(400).json({ error: 'Invalid date format' });
         }
 
-        const habitLog = await HabitLog.logCompletion(habitId, req.user._id, value, parsedDate);
-        res.status(201).json(habitLog);
+        const habitLog = await HabitLog.logCompletion(habitId, req.user._id, value, parsedDate, notes);
+        const updatedHabit = await Habit.findById(habitId);
+        res.status(201).json({ habitLog, updatedHabit });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

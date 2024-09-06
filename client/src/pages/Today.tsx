@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useActiveHabits } from '../hooks/habits/useActiveHabits';
 import { useArchiveHabit } from '../hooks/habits/useArchiveHabit';
 import { Habit } from '../@types/habit';
@@ -12,6 +12,14 @@ const Today: React.FC = () => {
   const { deleteHabit } = useDeleteHabit();
   const [habitToArchive, setHabitToArchive] = useState<Habit | null>(null);
   const [habitToDelete, setHabitToDelete] = useState<Habit | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [localHabits, setLocalHabits] = useState<Habit[]>([]);
+
+  useEffect(() => {
+    if (habits) {
+      setLocalHabits(habits);
+    }
+  }, [habits]);
 
   const handleArchive = async (habit: Habit) => {
     setHabitToArchive(habit);
@@ -19,8 +27,6 @@ const Today: React.FC = () => {
 
   const handleDelete = async (habit: Habit) => {
     setHabitToDelete(habit);
-    console.log(habit);
-    console.log(habitToDelete)
   };
 
   const confirmArchiveHabit = async () => {
@@ -43,6 +49,14 @@ const Today: React.FC = () => {
     }
   };
 
+const handleHabitUpdate = (updatedHabit: Habit) => {
+  setLocalHabits(prevHabits => 
+    prevHabits.map(habit => 
+      habit._id === updatedHabit._id ? updatedHabit : habit
+    )
+  );
+};
+
   if (loading) return <div>Loading habits...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -56,6 +70,7 @@ const Today: React.FC = () => {
         onDelete={handleDelete}
         onReactivate={() => {}}
         archiving={archiving}
+        onHabitUpdate={handleHabitUpdate}
       />
       <ConfirmationDialog
         isOpen={!!habitToArchive}

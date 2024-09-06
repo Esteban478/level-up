@@ -179,42 +179,42 @@ export const habits = [
         goal: { type: "At least", value: 2, unit: "items", direction: "increase" },
         xpReward: { base: 5, max: 10 }
     },
-    {
-        habitId: 16,
-        name: "Weekly Home Cleaning",
-        description: "Basic home cleaning",
-        isTemplate: true,
-        isPublic: true,
-        area: "Home Management",
-        type: "Checklist",
-        frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "At least", value: 2, unit: "items", direction: "increase" },
-        xpReward: { base: 10, max: 20 }
-    },
-    {
-        habitId: 17,
-        name: "Budget Review",
-        description: "Quick budget check",
-        isTemplate: true,
-        isPublic: true,
-        area: "Finance",
-        type: "Boolean",
-        frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "Exactly", value: true, direction: "maintain" },
-        xpReward: { base: 20, max: 20 }
-    },
-    {
-        habitId: 18,
-        name: "Reach Out to a Friend",
-        description: "Maintain social connections",
-        isTemplate: true,
-        isPublic: true,
-        area: "Social",
-        type: "Numeric",
-        frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "At least", value: 1, unit: "contact", direction: "increase" },
-        xpReward: { base: 15, max: 15 }
-    },
+    // {
+    //     habitId: 16,
+    //     name: "Weekly Home Cleaning",
+    //     description: "Basic home cleaning",
+    //     isTemplate: true,
+    //     isPublic: true,
+    //     area: "Home Management",
+    //     type: "Checklist",
+    //     frequency: { type: "Weekly", daysOfWeek: 1 },
+    //     goal: { type: "At least", value: 2, unit: "items", direction: "increase" },
+    //     xpReward: { base: 10, max: 20 }
+    // },
+    // {
+    //     habitId: 17,
+    //     name: "Budget Review",
+    //     description: "Quick budget check",
+    //     isTemplate: true,
+    //     isPublic: true,
+    //     area: "Finance",
+    //     type: "Boolean",
+    //     frequency: { type: "Weekly", daysOfWeek: 1 },
+    //     goal: { type: "Exactly", value: true, direction: "maintain" },
+    //     xpReward: { base: 20, max: 20 }
+    // },
+    // {
+    //     habitId: 18,
+    //     name: "Reach Out to a Friend",
+    //     description: "Maintain social connections",
+    //     isTemplate: true,
+    //     isPublic: true,
+    //     area: "Social",
+    //     type: "Numeric",
+    //     frequency: { type: "Weekly", daysOfWeek: 1 },
+    //     goal: { type: "At least", value: 1, unit: "contact", direction: "increase" },
+    //     xpReward: { base: 15, max: 15 }
+    // },
     {
         habitId: 19,
         name: "Daily Sketching",
@@ -239,18 +239,18 @@ export const habits = [
         goal: { type: "At most", value: 3, unit: "items", direction: "decrease" },
         xpReward: { base: 5, max: 15 }
     },
-    {
-        habitId: 21,
-        name: "Learn New Skill",
-        description: "Learn something new for your career",
-        isTemplate: true,
-        isPublic: true,
-        area: "Professional Development",
-        type: "Duration",
-        frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "At least", value: 15, unit: "minutes", direction: "increase" },
-        xpReward: { base: 20, max: 40 }
-    },
+    // {
+    //     habitId: 21,
+    //     name: "Learn New Skill",
+    //     description: "Learn something new for your career",
+    //     isTemplate: true,
+    //     isPublic: true,
+    //     area: "Professional Development",
+    //     type: "Duration",
+    //     frequency: { type: "Weekly", daysOfWeek: 1 },
+    //     goal: { type: "At least", value: 15, unit: "minutes", direction: "increase" },
+    //     xpReward: { base: 20, max: 40 }
+    // },
     {
         habitId: 22,
         name: "Journaling",
@@ -395,30 +395,30 @@ export const habits = [
         goal: { type: "At least", value: 5, unit: "minutes", direction: "increase" },
         xpReward: { base: 10, max: 20 }
     },
-    {
-        habitId: 34,
-        name: "Networking",
-        description: "Expand professional network",
-        isTemplate: true,
-        isPublic: true,
-        area: "Career Development",
-        type: "Numeric",
-        frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "At least", value: 1, unit: "connection", direction: "increase" },
-        xpReward: { base: 20, max: 40 }
-    },
-    {
-        habitId: 35,
-        name: "Meal Planning",
-        description: "Plan meals for the week",
-        isTemplate: true,
-        isPublic: true,
-        area: "Health",
-        type: "Boolean",
-        frequency: { type: "Weekly", daysOfWeek: 1 },
-        goal: { type: "Exactly", value: true, direction: "maintain" },
-        xpReward: { base: 25, max: 25 }
-    },
+    // {
+    //     habitId: 34,
+    //     name: "Networking",
+    //     description: "Expand professional network",
+    //     isTemplate: true,
+    //     isPublic: true,
+    //     area: "Career Development",
+    //     type: "Numeric",
+    //     frequency: { type: "Weekly", daysOfWeek: 1 },
+    //     goal: { type: "At least", value: 1, unit: "connection", direction: "increase" },
+    //     xpReward: { base: 20, max: 40 }
+    // },
+    // {
+    //     habitId: 35,
+    //     name: "Meal Planning",
+    //     description: "Plan meals for the week",
+    //     isTemplate: true,
+    //     isPublic: true,
+    //     area: "Health",
+    //     type: "Boolean",
+    //     frequency: { type: "Weekly", daysOfWeek: 1 },
+    //     goal: { type: "Exactly", value: true, direction: "maintain" },
+    //     xpReward: { base: 25, max: 25 }
+    // },
     {
         habitId: 36,
         name: "Daily Prioritization",
