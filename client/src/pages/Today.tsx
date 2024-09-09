@@ -50,7 +50,7 @@ const Today: React.FC = () => {
 
   return (
     <div className="today-container">
-      {(!!habits) && <h2 className="today-title">Start adding habits to track</h2> }
+      { habits.length === 0 && <h2 className="today-title">Start adding habits to track</h2>}
       
       <HabitList
         habits={habits}

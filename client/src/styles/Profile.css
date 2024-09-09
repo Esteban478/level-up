@@ -68,6 +68,9 @@
     width: 48%;
     padding: 0 var(--xxs);
 }
+.user-profile-page .profile-settings > div > h2 {
+    padding: var(--xxs) 0;
+}
 .user-profile-page .settings-item {
     display: flex;
     flex-direction: row;

@@ -122,7 +122,7 @@ const EditProfile: React.FC = () => {
         </div>
 
         <div className="edit-field">
-          <h3>Username</h3>
+          <h2>Username</h2>
           <input 
             type="text" 
             value={editedProfile.username} 
@@ -131,7 +131,7 @@ const EditProfile: React.FC = () => {
         </div>
 
         <div className="edit-field">
-          <h3>Email</h3>
+          <h2>Email</h2>
           <input 
             type="email" 
             value={editedProfile.email} 
@@ -141,7 +141,7 @@ const EditProfile: React.FC = () => {
 
 
         <div className="password-section">
-          <h3>Password</h3>
+          <h2>Password</h2>
           <button 
             onClick={() => setShowPasswordChange(!showPasswordChange)}
             className="toggle-password-btn"
@@ -152,7 +152,7 @@ const EditProfile: React.FC = () => {
           {showPasswordChange && (
             <>
               <div className="edit-field">
-                <h4>Current Password</h4>
+                <h2>Current Password</h2>
                 <div className="password-input-container">
                   <input 
                     type={showCurrentPassword ? "text" : "password"}
@@ -165,7 +165,7 @@ const EditProfile: React.FC = () => {
                 </div>
               </div>
               <div className="edit-field">
-                <h4>New Password</h4>
+                <h2>New Password</h2>
                 <div className="password-input-container">
                   <input 
                     type={showNewPassword ? "text" : "password"}
@@ -179,7 +179,7 @@ const EditProfile: React.FC = () => {
                 <PasswordStrengthMeter password={newPassword} />
               </div>
               <div className="edit-field">
-                <h4>Confirm New Password</h4>
+                <h2>Confirm New Password</h2>
                 <div className="password-input-container">
                   <input 
                     type={showConfirmPassword ? "text" : "password"}
@@ -198,7 +198,7 @@ const EditProfile: React.FC = () => {
 
 
         <div className="settings-section">
-          <h3>Notification Settings</h3>
+          <h2>Notification Settings</h2>
           <div className="toggle-field">
             <label>
               Email Notifications
@@ -222,7 +222,7 @@ const EditProfile: React.FC = () => {
         </div>
 
         <div className="settings-section">
-          <h3>Privacy Settings</h3>
+          <h2>Privacy Settings</h2>
           <div className="select-field">
             <label>
               Profile Visibility
