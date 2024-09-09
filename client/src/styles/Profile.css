@@ -31,6 +31,7 @@
     font: var(--h1);
 }
 .user-profile-page h2 {
+    padding: var(--xxs) 0;
     font: var(--h2);
     line-height: normal;
 }
@@ -46,7 +47,6 @@
     line-height: 1rem;
 }
 .user-profile-page .overview-items {
-    padding: var(--xs) 0;
     display: flex;
     flex-wrap: wrap;
     gap: var(--xs);
@@ -77,4 +77,10 @@
 }
 .user-profile-page .settings-item .settings-value {
     margin-left: var(--sm);
+}
+.user-profile-page .settings-item .settings-value .notification-on {
+    color: var(--color-secondary);
+}
+.user-profile-page .settings-item .settings-value .notification-off {
+    color: var(--color-accent);
 }

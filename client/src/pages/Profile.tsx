@@ -66,11 +66,23 @@ const Profile: React.FC = () => {
             <h2>Notifications</h2>
             <div className="settings-item">
               <p className="settings-heading">Email:</p>
-              <p className="settings-value">{profile.settings.notifications.email ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}</p>
+              <p className="settings-value">
+                {
+                profile.settings.notifications.email ?
+                  <FontAwesomeIcon icon={faCheck} className='notification-on' /> :
+                  <FontAwesomeIcon icon={faX} className='notification-off'/>
+                }
+              </p>
             </div>
             <div className="settings-item">
               <p className="settings-heading">Push:</p>
-              <p className="settings-value">{profile.settings.notifications.push ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}</p>
+              <p className="settings-value">
+                {
+                profile.settings.notifications.push ?
+                  <FontAwesomeIcon icon={faCheck} className='notification-on' /> :
+                  <FontAwesomeIcon icon={faX} className='notification-off'/>
+                }
+              </p>
             </div>
           </div>
           <div className="settings-privacy">
