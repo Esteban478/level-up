@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 import Habit from '../models/Habit.js';
-import Achievement from '../models/Achievement.js';
+import HabitLog from '../models/HabitLog.js';
 
 export const getUserProfile = async (req, res) => {
     try {
@@ -34,7 +34,27 @@ export const updateUserProfile = async (req, res) => {
 export const getUserHabits = async (req, res) => {
     try {
         const habits = await Habit.find({ userId: req.user._id });
-        res.json(habits);
+
+        // Get today's date (start of day)
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Fetch today's logs for the user
+        const todayLogs = await HabitLog.find({
+            userId: req.user._id,
+            date: { $gte: today }
+        });
+
+        // Create a Set of habit IDs that have been logged today
+        const loggedHabitIds = new Set(todayLogs.map(log => log.habitId.toString()));
+
+        // Add isTrackedToday field to each habit
+        const habitsWithTrackingStatus = habits.map(habit => ({
+            ...habit.toObject(),
+            isTrackedToday: loggedHabitIds.has(habit._id.toString())
+        }));
+
+        res.json(habitsWithTrackingStatus);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

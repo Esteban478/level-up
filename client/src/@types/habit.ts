@@ -43,6 +43,7 @@ export interface Habit {
     current: number;
     longest: number;
   };
+  isTrackedToday: boolean;
   totalCompletions: number;
   createdAt: string;
   updatedAt: string;

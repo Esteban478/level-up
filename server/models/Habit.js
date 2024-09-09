@@ -114,6 +114,7 @@ const habitSchema = new mongoose.Schema({
         current: { type: Number, default: 0 },
         longest: { type: Number, default: 0 }
     },
+    isTrackedToday: { type: Boolean, default: false },
     totalCompletions: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

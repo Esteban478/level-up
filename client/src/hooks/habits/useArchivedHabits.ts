@@ -16,7 +16,7 @@ export const useArchivedHabits = () => {
         throw new Error('No authentication token found');
       }
 
-      const response = await fetch(`${import.meta.env.VITE_BASE_URI}/habits/archived`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URI}/users/habits`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -28,7 +28,8 @@ export const useArchivedHabits = () => {
       }
 
       const data = await response.json();
-      setHabits(data);
+      const archivedHabits = data.filter((habit: Habit) => habit.isArchived);
+      setHabits(archivedHabits);
     } catch (err) {
       setError(err instanceof Error ? err : new Error('An unknown error occurred'));
     } finally {

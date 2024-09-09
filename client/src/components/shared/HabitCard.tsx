@@ -29,18 +29,20 @@ const HabitCard: React.FC<HabitCardProps> = ({
 }) => {
   const navigate = useNavigate();
   const { trackHabit, isLoading, error } = useTrackHabit();
-  const [localHabit, setLocalHabit] = useState(habit);
-  const [isTracked, setIsTracked] = useState(false);
+  const [isTracked, setIsTracked] = useState(habit.isTrackedToday);
 
 
   const handleTrack = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const result = await trackHabit(localHabit._id, localHabit.goal.value, "test creating log via habit card");
+    if (isTracked) return; // Prevent tracking if already tracked
+
+    const result = await trackHabit(habit._id, habit.goal.value, "test creating log via habit card");
     if (result) {
-      console.log(`${localHabit.name} tracked successfully`);
+      console.log(`${habit.name} tracked successfully`);
       setIsTracked(true);
-      setLocalHabit(result.updatedHabit);
-      onHabitUpdate(result.updatedHabit);
+      if (onHabitUpdate) {
+        onHabitUpdate({ ...habit, isTrackedToday: true });
+      }
     }
   };
 
@@ -59,13 +61,13 @@ const HabitCard: React.FC<HabitCardProps> = ({
       <h3 className="habit-card__title">{habit.name}</h3>
       <p className="habit-card__description">{habit.description}</p>
       <div className="habit-card__details">
-        {localHabit.goal && (
+        {habit.goal && (
           <p className="habit-card__goal">
-            {localHabit.goal.type} {localHabit.goal.value} {localHabit.goal.unit}
+            {habit.goal.type} {habit.goal.value} {habit.goal.unit}
           </p>
         )}
-        {localHabit.streak && localHabit.streak.current > 0 && (
-          <p className="habit-card__streak">Current streak: {localHabit.streak.current} days</p>
+        {habit.streak && habit.streak.current > 0 && (
+          <p className="habit-card__streak">Current streak: {habit.streak.current} days</p>
         )}
       </div>
       {showActions && (
