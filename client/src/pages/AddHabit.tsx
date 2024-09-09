@@ -4,7 +4,7 @@ import { useHabitTemplates } from '../hooks/habits/useHabitTemplates';
 import { useActiveHabits } from '../hooks/habits/useActiveHabits';
 import { useArchivedHabits } from '../hooks/habits/useArchivedHabits';
 import { Habit } from '../@types/habit';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/auth/useAuth';
 import HabitCard from '../components/shared/HabitCard';
 import FullScreenLayout from '../components/layouts/FullScreenLayout';
 import BackButton from '../components/shared/BackButton';
@@ -76,7 +76,7 @@ const AddHabit: React.FC = () => {
   const handleBack = () => {
     navigate('/today');
   };
-
+  // TODO: Move to content area
   if (templatesLoading || activeLoading || archivedLoading) return <div>Loading habits...</div>;
   if (templatesError) return <div>Error: {templatesError.message}</div>;
 

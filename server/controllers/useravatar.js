@@ -18,15 +18,23 @@ const hasUnlockedAvatarCustomization = async (userId) => {
 
 export const generateAvatar = async (req, res) => {
     try {
-        const { userId, type } = req.body;
+        const { userId, type, isInitialCreation } = req.body;
 
-        if (!await hasUnlockedAvatarCustomization(userId)) {
-            return res.status(403).json({ message: "Avatar customization not unlocked yet" });
-        }
+        let user;
+        if (!isInitialCreation) {
+            if (!await hasUnlockedAvatarCustomization(userId)) {
+                return res.status(403).json({ message: "Avatar customization not unlocked yet" });
+            }
 
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+        } else {
+            user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
         }
 
         const collection = type === 'initials' ? initials : adventurer;
@@ -55,10 +63,18 @@ export const generateAvatar = async (req, res) => {
         user.avatar = userAvatar._id;
         await user.save();
 
-        res.status(200).json({ avatar: userAvatar });
+        if (res) {
+            res.status(200).json({ avatar: userAvatar });
+        } else {
+            return userAvatar;
+        }
     } catch (error) {
         console.error('Error generating avatar:', error);
-        res.status(500).json({ message: "Error generating avatar" });
+        if (res) {
+            res.status(500).json({ message: "Error generating avatar" });
+        } else {
+            throw error;
+        }
     }
 };
 

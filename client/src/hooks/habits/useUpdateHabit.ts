@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Habit } from '../../@types/habit';
-import { useAuth } from '../useAuth';
+import { useAuth } from '../auth/useAuth';
 
 export const useUpdateHabit = () => {
   const [loading, setLoading] = useState<boolean>(false);

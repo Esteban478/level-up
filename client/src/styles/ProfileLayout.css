@@ -1,0 +1,10 @@
+.profile-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-layout main {
+    height: calc(100% - 70px);
+    overflow-y: scroll;
+}

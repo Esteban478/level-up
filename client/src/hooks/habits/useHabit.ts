@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Habit } from '../../@types/habit';
-import { useAuth } from '../useAuth';
+import { useAuth } from '../auth/useAuth';
 
 export const useHabit = (habitId: string | undefined) => {
   const [habit, setHabit] = useState<Habit | null>(null);

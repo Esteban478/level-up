@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useAuth } from '../useAuth';
+import { useAuth } from '../auth/useAuth';
 
 export const useArchiveHabit = () => {
   const [loading, setLoading] = useState(false);

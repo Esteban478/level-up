@@ -1,10 +1,11 @@
 import User from '../models/User.js';
 import Habit from '../models/Habit.js';
 import HabitLog from '../models/HabitLog.js';
+import mongoose from 'mongoose';
 
 export const getUserProfile = async (req, res) => {
     try {
-        const user = await User.findById(req.user._id).select('-password');
+        const user = await User.findById(req.user._id).select('-password').populate('avatar');
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -15,19 +16,59 @@ export const getUserProfile = async (req, res) => {
 };
 
 export const updateUserProfile = async (req, res) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
     try {
-        const { username, email } = req.body;
-        const user = await User.findByIdAndUpdate(
-            req.user._id,
-            { username, email },
-            { new: true, runValidators: true }
-        ).select('-password');
+        const { username, email, bio, settings, currentPassword, newPassword } = req.body;
+
+        const user = await User.findById(req.user._id).select('+password').session(session);
         if (!user) {
+            await session.abortTransaction();
             return res.status(404).json({ error: 'User not found' });
         }
-        res.json(user);
+
+        // Handle password change if provided
+        if (currentPassword && newPassword) {
+            const isMatch = await user.comparePassword(currentPassword);
+            if (!isMatch) {
+                await session.abortTransaction();
+                return res.status(400).json({ error: 'Current password is incorrect' });
+            }
+            user.password = newPassword
+        }
+
+        // Update other fields
+        if (username) user.username = username;
+        if (email) user.email = email;
+        if (bio) user.bio = bio;
+        if (settings) {
+            user.settings = {
+                ...user.settings,
+                notifications: {
+                    ...user.settings.notifications,
+                    ...settings.notifications
+                },
+                privacy: {
+                    ...user.settings.privacy,
+                    ...settings.privacy
+                }
+            };
+        }
+
+        await user.save({ session });
+        await session.commitTransaction();
+
+        // Remove password from response
+        const userResponse = user.toObject();
+        delete userResponse.password;
+
+        res.json(userResponse);
     } catch (error) {
+        await session.abortTransaction();
         res.status(400).json({ error: error.message });
+    } finally {
+        session.endSession();
     }
 };
 

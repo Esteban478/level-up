@@ -5,7 +5,7 @@ import {
     achievements, badgeTiers, habits, tips, userProfiles, generateHabitLogs, generateXPTransactions,
     generateUserAchievements, generateLevelThresholds
 } from '../seeddata/index.js';
-import { cleanupDatabase } from '../utils/testUtils.js';
+import { cleanupDatabase, generateAvatarForSeed } from '../utils/testUtils.js';
 
 const seedDatabase = async () => {
     try {
@@ -15,9 +15,20 @@ const seedDatabase = async () => {
         // Clear existing data
         await cleanupDatabase();
 
-        // Seed users
-        const createdUsers = await User.create(userProfiles);
-        console.log('Users seeded successfully');
+        // Seed users with avatars
+        const createdUsers = await Promise.all(userProfiles.map(async (profile) => {
+            const user = new User(profile);
+            await user.save();
+            const avatarId = await generateAvatarForSeed(user._id, user.username);
+            user.avatar = avatarId;
+            await user.save();
+            return user;
+        }));
+        console.log('Users seeded successfully with avatars');
+
+        // // Seed users
+        // const createdUsers = await User.create(userProfiles);
+        // console.log('Users seeded successfully');
 
         // Generate and seed habits
         const createdHabits = await Habit.create(habits);

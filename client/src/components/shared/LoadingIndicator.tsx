@@ -1,6 +1,5 @@
-import React from 'react';
-import './LoadingIndicator.css';
-import logo from '/logos/icon_144.png';
+import '../..styles/LoadingIndicator.css';
+import logo from 'logos/icon_144.png';
 
 const LoadingIndicator: React.FC = () => {
   return (

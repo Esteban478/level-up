@@ -8,6 +8,15 @@
     border-bottom: var(--color-text-400) 2px solid;
 }
 
+.top-bar h1 {
+    font-size: var(--lg);
+    line-height: normal;
+}
+
+.top-bar h2 {
+    line-height: 1.6rem;
+}
+
 .top-bar .left-action {
     cursor: pointer;
     min-width: 30px;

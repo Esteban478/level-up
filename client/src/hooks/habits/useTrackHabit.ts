@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { HabitLog } from '../../@types/habitLog';
-import { useAuth } from '../useAuth';
+import { useAuth } from '../auth/useAuth';
 import { Habit } from '../../@types/habit';
 
 export const useTrackHabit = () => {

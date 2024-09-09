@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import rateLimit from 'express-rate-limit';
 import User from '../models/User.js';
+import { generateAvatar } from '../controllers/useravatar.js';
 
 // Rate limiter for login attempts
 export const loginLimiter = rateLimit({
@@ -68,6 +69,14 @@ export const register = async (req, res) => {
         const user = new User({ username, email, password });
         await user.save();
 
+        // Generate avatar
+        try {
+            await generateAvatar({ body: { userId: user._id, type: 'initials', isInitialCreation: true } });
+        } catch (avatarError) {
+            console.error('Error generating avatar:', avatarError);
+            // We don't want to fail registration if avatar generation fails
+        }
+
         // Generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
         res.status(201).json({ user: { id: user._id, username, email }, token });
@@ -84,11 +93,9 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { usernameOrEmail, password } = req.body;
-        let user = await User.findOne({ email: usernameOrEmail });
-
-        if (!user) {
-            user = await User.findOne({ username: usernameOrEmail });
-        }
+        let user = await User.findOne({
+            $or: [{ email: usernameOrEmail }, { username: usernameOrEmail }]
+        }).select('+password');
 
         if (!user || !(await user.comparePassword(password))) {
             return res.status(401).json({ error: 'Invalid credentials' });
@@ -96,7 +103,12 @@ export const login = async (req, res) => {
 
         // Generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-        res.json({ user: { id: user._id, username: user.username, email: user.email }, token });
+
+        // Remove password from response
+        user = user.toObject();
+        delete user.password;
+
+        res.json({ user, token });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

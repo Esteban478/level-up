@@ -50,7 +50,8 @@ const Today: React.FC = () => {
 
   return (
     <div className="today-container">
-      <h2 className="today-title">Today's Habits</h2>
+      {(!!habits) && <h2 className="today-title">Start adding habits to track</h2> }
+      
       <HabitList
         habits={habits}
         isArchived={false}

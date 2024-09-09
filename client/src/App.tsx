@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './hooks/useAuth';
+import { useAuth } from './hooks/auth/useAuth';
 import ProtectedRoute from './components/shared/ProtectedRoute';
 import MainLayout from './components/layouts/MainLayout';
 import FullScreenLayout from './components/layouts/FullScreenLayout';
@@ -13,8 +13,8 @@ import Archive from './pages/Archive';
 import Achievements from './pages/Achievements';
 import TopNav from './components/shared/TopNav';
 import EditHabit from './pages/EditHabit';
-import ProfileSettings from './pages/ProfileSettings';
 import BackButton from './components/shared/BackButton';
+import EditProfile from './pages/EditProfile';
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -42,9 +42,7 @@ const App: React.FC = () => {
             </MainLayout>
           } />
           <Route path="/profile" element={
-            <MainLayout title="Profile">
-              <Profile />
-            </MainLayout>
+            <Profile />
           } />
           <Route path="/feed" element={
             <MainLayout title="Feed">
@@ -70,9 +68,7 @@ const App: React.FC = () => {
             </FullScreenLayout>
           } />
           <Route path="/profile-settings" element={
-            <FullScreenLayout title="Edit Profile" leftAction={<BackButton />}>
-              <ProfileSettings />
-            </FullScreenLayout>
+            <EditProfile />
           } />
         </Route>
 

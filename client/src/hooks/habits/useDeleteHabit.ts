@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../useAuth';
+import { useAuth } from '../auth/useAuth';
 
 export const useDeleteHabit = () => {
   const [loading, setLoading] = useState<boolean>(false);

@@ -35,33 +35,38 @@
 
 /* Font variables */
   --fss: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  --h1: bold 3rem/1.8em var(--fss);
-  --h2: bold 2.25rem/1.6em var(--fss);
-  --h3: bold 1.5rem/1.2em var(--fss);
-  --h4: bold 1.12rem/1.6em var(--fss);
+  --h1: bold 1.5rem/.9em var(--fss);
+  --h2: bold 1rem/.8em var(--fss);
+  --h3: bold .75rem/.7em var(--fss);
+  --h4: bold .5rem/.6em var(--fss);
   --big: 1rem/1.6em var(--fss);
-  --p: .8rem/0.9em var(--fss);
+  --p: .75rem/.9em var(--fss);
   --small: .75rem/1.8em var(--fss);
 }
 
 h1 {
-  font-size: var(--h1);
+  font: var(--h1);
+  line-height: calc(1.5rem * 1.2);
 }
 
 h2 {
-  font-size: var(--h2);
+  font: var(--h2);
+  line-height: calc(1rem * 1.4);
 }
 
 h3 {
-  font-size: var(--h3);
+  font: var(--h3);
+  line-height: calc(.75rem * 1.6);
 }
 
 h4 {
-  font-size: var(--h4);
+  font: var(--h4);
+  line-height: calc(.5rem * 1.8);
 }
 
 p {
-  font-size: var(--p);
+  font: var(--p);
+  line-height: calc(.75rem * 1.6);
 }
 
 /* Reset box-sizing */

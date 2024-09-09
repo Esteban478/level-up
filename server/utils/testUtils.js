@@ -5,6 +5,9 @@ import mongoose from 'mongoose';
 import { User, Habit, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, HabitLog, AuditLog, UserAchievement } from '../models/index.js';
 import dotenv from 'dotenv';
 dotenv.config();
+import { createAvatar } from '@dicebear/core';
+import * as initials from '@dicebear/initials';
+import UserAvatar from '../models/UserAvatar.js';
 
 // Connect to database
 export const connectDB = async () => {
@@ -88,4 +91,23 @@ export const cleanupDatabase = async () => {
     } catch (error) {
         console.error('Error cleaning database:', error);
     }
+};
+
+export const generateAvatarForSeed = async (userId, username) => {
+    const avatar = createAvatar(initials, {
+        seed: username,
+        // Add more options as needed
+    });
+
+    const dataUri = avatar.toDataUri();
+
+    const userAvatar = new UserAvatar({
+        userId,
+        imageUrl: dataUri,
+        avatarType: 'placeholder'
+    });
+
+    await userAvatar.save();
+
+    return userAvatar._id;
 };

@@ -1,0 +1,7 @@
+
+.profile-picture-container img {
+    width: 80%;
+    margin: 0 auto;
+    padding: var(--lg);
+    border-radius: 50%;
+}
