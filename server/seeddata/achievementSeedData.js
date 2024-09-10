@@ -1,4 +1,27 @@
 export const achievements = [
+    // Test Achievements
+    {
+        name: "Getting it done!",
+        description: "Complete a habit",
+        type: "Habit_milestone",
+        category: "General",
+        icon: "complete_icon",
+        condition: { totalCount: 1 },
+        reward: { xp: 50 },
+        tier: "bronze",
+        isRepeatable: true
+    },
+    {
+        name: "Making progress!",
+        description: "First levelup",
+        type: "Level",
+        category: "General",
+        icon: "complete_icon",
+        condition: { level: 2 },
+        reward: { xp: 50 },
+        tier: "bronze",
+        isRepeatable: true
+    },
     // General Achievements
     {
         name: "Novice Achiever",

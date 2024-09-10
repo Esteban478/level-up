@@ -1,4 +1,5 @@
 import { Achievement, User } from '../models/index.js';
+import { checkLevelAchievement } from '../services/achievementService.js';
 
 export const createAchievement = async (req, res) => {
     try {
@@ -55,18 +56,6 @@ export const deleteAchievement = async (req, res) => {
     }
 };
 
-// export const getAchievementsForUser = async (req, res) => {
-//     try {
-//         const user = await User.findById(req.user.userId).populate('achievements');
-//         if (!user) {
-//             return res.status(404).json({ error: 'User not found' });
-//         }
-//         res.json(user.achievements);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
 export const getAchievementsForUser = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).populate('achievements');
@@ -74,6 +63,19 @@ export const getAchievementsForUser = async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
         res.json(user.achievements);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const checkLevelAchievements = async (req, res) => {
+    try {
+        const { level } = req.body;
+        const userId = req.user._id;
+
+        const newAchievements = await checkLevelAchievement(userId, level);
+
+        res.json(newAchievements);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

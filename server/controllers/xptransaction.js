@@ -1,6 +1,7 @@
 
 import { XPTransaction, User, Habit, LevelThreshold } from '../models/index.js';
 import mongoose from 'mongoose';
+import { checkAchievements } from '../services/achievementService.js';
 
 export const createXPTransaction = async (req, res) => {
     const session = await mongoose.startSession();
@@ -18,7 +19,6 @@ export const createXPTransaction = async (req, res) => {
             }
             xpGained = habit.xpReward.base;
         } else {
-            // For other sources, xpGained should be provided in the request
             xpGained = req.body.xpGained;
         }
 
@@ -34,33 +34,58 @@ export const createXPTransaction = async (req, res) => {
         // Update user's XP and level
         const user = await User.findById(userId);
         user.totalXp += xpGained;
+        user.xp += xpGained;
 
         // Check for level up
-        const currentLevelThreshold = await LevelThreshold.findOne({ level: user.level });
-        const nextLevelThreshold = await LevelThreshold.findOne({ level: user.level + 1 });
+        const nextLevelThreshold = await LevelThreshold.findOne({ totalXpRequired: { $gt: user.totalXp } }).sort('totalXpRequired');
 
         let levelUp = false;
-        let xpForNextLevel = 0;
 
-        if (nextLevelThreshold && user.totalXp >= nextLevelThreshold.totalXpRequired) {
-            user.level += 1;
+        if (nextLevelThreshold && user.level < nextLevelThreshold.level - 1) {
+            user.level = nextLevelThreshold.level - 1;
             levelUp = true;
-            xpForNextLevel = user.totalXp - nextLevelThreshold.totalXpRequired;
-        } else if (currentLevelThreshold) {
-            xpForNextLevel = user.totalXp - currentLevelThreshold.totalXpRequired;
+            user.xp = user.totalXp - (await LevelThreshold.findOne({ level: user.level })).totalXpRequired;
         }
 
-        user.xp = xpForNextLevel;
         await user.save({ session });
+
+        // Check for achievements
+        const earnedAchievements = await checkAchievements(userId, habitId);
+
+        // Award XP for achievements
+        let achievementXP = 0;
+        for (const achievement of earnedAchievements) {
+            achievementXP += achievement.reward.xp;
+
+            const achievementXpTransaction = new XPTransaction({
+                userId,
+                amount: achievement.reward.xp,
+                source: 'Achievement',
+                sourceId: achievement._id
+            });
+            await achievementXpTransaction.save({ session });
+        }
+
+        // Update user's XP again if achievements were earned
+        if (achievementXP > 0) {
+            user.totalXp += achievementXP;
+            user.xp += achievementXP;
+            await user.save({ session });
+        }
 
         await session.commitTransaction();
         session.endSession();
 
         res.status(201).json({
-            xpGained,
+            xpGained: xpGained + achievementXP,
             totalXp: user.totalXp,
             currentXp: user.xp,
-            newLevel: levelUp ? user.level : undefined
+            newLevel: levelUp ? user.level : undefined,
+            earnedAchievements: earnedAchievements.map(a => ({
+                name: a.name,
+                description: a.description,
+                xpReward: a.reward.xp
+            }))
         });
     } catch (error) {
         await session.abortTransaction();

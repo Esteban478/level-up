@@ -6,7 +6,8 @@ import {
     getAchievementById,
     updateAchievement,
     deleteAchievement,
-    getAchievementsForUser
+    getAchievementsForUser,
+    checkLevelAchievements
 } from '../controllers/index.js';
 
 const achievementRouter = express.Router();
@@ -28,5 +29,8 @@ achievementRouter.delete('/:id', authMiddleware, deleteAchievement);
 
 // Get achievements for the authenticated user
 achievementRouter.get('/user/achievements', authMiddleware, getAchievementsForUser);
+
+achievementRouter.post('/check-level', authMiddleware, checkLevelAchievements);
+
 
 export default achievementRouter;
