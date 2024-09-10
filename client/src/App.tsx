@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './hooks/auth/useAuth';
 import ProtectedRoute from './components/shared/ProtectedRoute';
@@ -15,6 +14,8 @@ import TopNav from './components/shared/TopNav';
 import EditHabit from './pages/EditHabit';
 import BackButton from './components/shared/BackButton';
 import EditProfile from './pages/EditProfile';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -24,6 +25,7 @@ const App: React.FC = () => {
   }
 
   return (
+    <>
     <Router>
       <Routes>
         {/* Public routes */}
@@ -76,6 +78,8 @@ const App: React.FC = () => {
         <Route path="/" element={<Navigate to={user ? "/today" : "/auth"} replace />} />
       </Routes>
     </Router>
+    <ToastContainer position="bottom-center" autoClose={3000} />
+    </>
   );
 };
 

@@ -3,7 +3,10 @@
     height: calc(100% - 50px);
     overflow-y: auto;
 }
+.full-screen-layout main h2 {
+    padding: 0 0 var(--sm);
+}
 
 .full-screen-layout main h3 {
-    margin: var(--xs) 0 var(--md);
+    padding: var(--xxs) 0;
 }

@@ -1,11 +1,10 @@
-import LevelThreshold from '../models/LevelThreshold.js';
 import Achievement from '../models/Achievement.js';
 
 const generateLevelThresholds = async (maxLevel) => {
     const levelThresholds = [];
     let totalXp = 0;
 
-    for (let i = 1; i <= maxLevel; i++) {
+    for (let i = 2; i <= maxLevel; i++) {
         const xpRequired = Math.floor(100 * (1.1 ** (i - 1)));
         totalXp += xpRequired;
 

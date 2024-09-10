@@ -33,7 +33,15 @@ export const userProfiles = [
         password: "password123",
         totalXp: 500,
         level: 2
+    },
+    {
+        username: "test",
+        email: "test@test.com",
+        password: "testtest",
+        totalXp: 0,
+        level: 1
     }
+
 ];
 
 export default userProfiles;

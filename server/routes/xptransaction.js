@@ -21,4 +21,8 @@ xpTransactionRouter.get('/total', authMiddleware, getUserTotalXP);
 // Get a specific XP transaction by ID
 xpTransactionRouter.get('/:id', authMiddleware, getXPTransactionById);
 
+// Create a new XP transaction
+xpTransactionRouter.post('/record', authMiddleware, createXPTransaction);
+
+
 export default xpTransactionRouter;

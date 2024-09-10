@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Habit } from '../../@types/habit';
 import { useNavigate } from 'react-router-dom';
 import { useTrackHabit } from '../../hooks/habits/useTrackHabit';
@@ -31,14 +31,12 @@ const HabitCard: React.FC<HabitCardProps> = ({
   const { trackHabit, isLoading, error } = useTrackHabit();
   const [isTracked, setIsTracked] = useState(habit.isTrackedToday);
 
-
   const handleTrack = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (isTracked) return; // Prevent tracking if already tracked
 
-    const result = await trackHabit(habit._id, habit.goal.value, "test creating log via habit card");
+    const result = await trackHabit(habit._id, habit.goal.value, "Habit tracked via habit card");
     if (result) {
-      console.log(`${habit.name} tracked successfully`);
       setIsTracked(true);
       if (onHabitUpdate) {
         onHabitUpdate({ ...habit, isTrackedToday: true });

@@ -94,7 +94,7 @@ const AddHabit: React.FC = () => {
       {addingHabit && <div>Adding habit...</div>}
       {keystoneHabits.length > 0 && (
         <>
-          <h3>Keystone Habits</h3>
+          <h2>Keystone Habits</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
             {keystoneHabits.map(template => (
               <HabitCard
@@ -110,7 +110,7 @@ const AddHabit: React.FC = () => {
       )}
       {sortedAreas.map(area => (
         <React.Fragment key={area}>
-          <h3>{area}</h3>
+          <h2>{area}</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
             {otherHabits[area].map(template => (
               <HabitCard
