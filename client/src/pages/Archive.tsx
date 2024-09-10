@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useArchivedHabits } from '../hooks/habits/useArchivedHabits';
 import { useArchiveHabit } from '../hooks/habits/useArchiveHabit';
 import { Habit } from '../@types/habit';

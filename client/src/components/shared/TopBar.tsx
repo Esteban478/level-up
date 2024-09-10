@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../styles/TopBar.css';
 
 interface TopBarProps {

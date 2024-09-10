@@ -1,5 +1,9 @@
 export interface Achievement {
-  name: string;
-  description: string;
-  xpReward: number;
+    id: string;
+    name: string;
+    description: string;
+    xpReward: number;
+    dateEarned: string;
+    icon?: string;
+    type: string;
 }

@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../auth/useAuth';
 import { Achievement } from '../../@types/achievement';
 
 export const useAchievements = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { getToken } = useAuth();
 
-  const fetchUserAchievements = async (): Promise<Achievement[]> => {
+  const fetchAchievements = useCallback(async () => {
     setIsLoading(true);
+    setError(null);
     try {
       const token = getToken();
       if (!token) {
@@ -25,14 +28,17 @@ export const useAchievements = () => {
       }
 
       const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching user achievements:', error);
-      return [];
+      setAchievements(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [getToken]);
 
-  return { fetchUserAchievements, isLoading };
+  useEffect(() => {
+    fetchAchievements();
+  }, [fetchAchievements]);
+
+  return { achievements, isLoading, error, refetch: fetchAchievements };
 };

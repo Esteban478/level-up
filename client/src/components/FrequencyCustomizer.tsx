@@ -1,4 +1,3 @@
-import React from 'react';
 import { Frequency } from '../@types/habit';
 import '../styles/FrequencyCustomizer.css';
 

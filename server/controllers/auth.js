@@ -93,22 +93,31 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { usernameOrEmail, password } = req.body;
-        let user = await User.findOne({
-            $or: [{ email: usernameOrEmail }, { username: usernameOrEmail }]
-        }).select('+password');
+        let user = await User.findOne({ email: usernameOrEmail });
+
+        if (!user) {
+            user = await User.findOne({ username: usernameOrEmail });
+        }
 
         if (!user || !(await user.comparePassword(password))) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
+        // Use the test streak function
+        await user.updateStreak();
+
         // Generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-        // Remove password from response
-        user = user.toObject();
-        delete user.password;
-
-        res.json({ user, token });
+        res.json({
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                streakDays: user.streakDays  // Include streak information in the response
+            },
+            token
+        });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

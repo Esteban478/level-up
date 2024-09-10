@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHabit } from '../hooks/habits/useHabit';
 import { useEditHabitNavigation } from '../hooks/navigation/useEditHabitNavigation';

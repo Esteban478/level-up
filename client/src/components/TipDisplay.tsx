@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles/TipDisplay.css';
 
 const TipDisplay: React.FC = () => {

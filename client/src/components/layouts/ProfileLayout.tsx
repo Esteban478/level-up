@@ -1,4 +1,3 @@
-import React from 'react';
 import BottomNav from '../shared/BottomNav';
 import '../../styles/ProfileLayout.css';
 

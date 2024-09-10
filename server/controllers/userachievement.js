@@ -2,9 +2,21 @@ import UserAchievement from '../models/UserAchievement.js';
 
 export const getUserAchievements = async (req, res) => {
     try {
-        const userId = req.user._id;
-        const userAchievements = await UserAchievement.find({ userId }).populate('achievementId');
-        res.status(200).json(userAchievements);
+        const userAchievements = await UserAchievement.find({ userId: req.user._id })
+            .populate('achievementId')
+            .sort('-dateEarned');
+
+        const formattedAchievements = userAchievements.map(ua => ({
+            id: ua._id,
+            name: ua.achievementId.name,
+            description: ua.achievementId.description,
+            xpReward: ua.achievementId.reward.xp,
+            dateEarned: ua.dateEarned,
+            icon: ua.achievementId.icon,
+            type: ua.achievementId.type  // Add this line
+        }));
+
+        res.status(200).json(formattedAchievements);
     } catch (error) {
         res.status(500).json({ message: "Error fetching user achievements", error: error.message });
     }

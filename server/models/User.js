@@ -134,9 +134,6 @@ userSchema.methods.addXP = async function (amount, source, metadata = {}) {
     }
 };
 
-// Example usage:
-// await user.addXP(50, 'Habit_completion', { habitId: habit._id });
-
 // Method to update streak
 userSchema.methods.updateStreak = async function () {
     const today = new Date().setHours(0, 0, 0, 0);
@@ -145,6 +142,12 @@ userSchema.methods.updateStreak = async function () {
     } else if (!this.lastLoginDate || this.lastLoginDate.setHours(0, 0, 0, 0) < today - 86400000) {
         this.streakDays = 1;
     }
+    this.lastLoginDate = new Date();
+    await this.save();
+};
+
+userSchema.methods.updateTestStreak = async function () {
+    this.streakDays += 1;
     this.lastLoginDate = new Date();
     await this.save();
 };

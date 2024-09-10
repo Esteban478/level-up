@@ -39,7 +39,7 @@ const App: React.FC = () => {
             </MainLayout>
           } />
           <Route path="/achievements" element={
-            <MainLayout title="Achievements">
+            <MainLayout title="Achievements" leftAction={<BackButton />}>
               <Achievements />
             </MainLayout>
           } />

@@ -1,4 +1,3 @@
-import React from 'react';
 import TopBar from '../shared/TopBar';
 import BottomNav from '../shared/BottomNav';
 import '../../styles/MainLayout.css';
