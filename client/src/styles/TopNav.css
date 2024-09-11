@@ -19,3 +19,8 @@
 .top-nav a:focus {
     outline: none;
 }
+
+.top-nav svg {
+    color: var(--color-secondary);
+    cursor: pointer;
+}

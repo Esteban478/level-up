@@ -5,6 +5,11 @@
     border-radius: 0.5rem;
     padding: 1rem;
     margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.habit-card.tracked {
+    cursor: default;
 }
 
 .habit-card__title {
@@ -42,4 +47,23 @@
 .habit-card__button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+.habit-card__tracked,
+.habit-card__reactivate {
+    display: flex;
+    align-items: center;
+}
+.habit-card__tracked p,
+.habit-card__reactivate p {
+    font-size: var(--md);
+}
+.habit-card__tracked svg,
+.habit-card__reactivate svg {
+    padding-right: var(--xs);
+}
+.habit-card__tracked svg {
+    color: var(--color-secondary);
+}
+.habit-card__reactivate svg {
+    color: var(--color-primary);
 }

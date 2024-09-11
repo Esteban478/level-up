@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Habit } from '../../@types/habit';
 import { useNavigate } from 'react-router-dom';
 import { useTrackHabit } from '../../hooks/habits/useTrackHabit';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/HabitCard.css';
 
 interface HabitCardProps {
@@ -9,11 +11,9 @@ interface HabitCardProps {
   isArchived: boolean;
   onArchive?: (habit: Habit) => void;
   onReactivate?: (habit: Habit) => void;
-  onDelete?: (habit: Habit) => void;
-  archiving?: boolean;
-  onClick?: () => void;
-  showActions?: boolean;
   onHabitUpdate?: (updatedHabit: Habit) => void;
+  isEditMode?: boolean;
+  isArchiveMode?: boolean;
 }
 
 const HabitCard: React.FC<HabitCardProps> = ({
@@ -21,41 +21,37 @@ const HabitCard: React.FC<HabitCardProps> = ({
   isArchived,
   onArchive,
   onReactivate,
-  onDelete,
-  archiving,
-  onClick,
-  showActions = true,
-  onHabitUpdate
+  onHabitUpdate,
+  isEditMode,
+  isArchiveMode
 }) => {
   const navigate = useNavigate();
   const { trackHabit, isLoading, error } = useTrackHabit();
   const [isTracked, setIsTracked] = useState(habit.isTrackedToday);
 
-  const handleTrack = async (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (isTracked) return; // Prevent tracking if already tracked
-
-    const updatedHabit = await trackHabit(habit._id, habit.goal.value, "Habit tracked via habit card");
-    if (updatedHabit) {
-      setIsTracked(updatedHabit.isTrackedToday);
-      if (onHabitUpdate) {
-        onHabitUpdate(updatedHabit);
+  const handleClick = async () => {
+    if (isArchived && onReactivate) {
+      onReactivate(habit);
+    } else if (isEditMode) {
+      navigate(`/edit-habit/${habit._id}`);
+    } else if (isArchiveMode && onArchive) {
+      onArchive(habit);
+    } else if (!isTracked && !isArchived) {
+      const updatedHabit = await trackHabit(habit._id, habit.goal.value, "Habit tracked via habit card");
+      if (updatedHabit) {
+        setIsTracked(updatedHabit.isTrackedToday);
+        if (onHabitUpdate) {
+          onHabitUpdate(updatedHabit);
+        }
       }
     }
   };
 
-  const handleEdit = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigate(`/edit-habit/${habit._id}`);
-  };
-
-  const handleCardClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (onClick) onClick();
-  };
-
   return (
-    <div className="habit-card" onClick={handleCardClick}>
+    <div 
+      className={`habit-card ${isTracked ? 'tracked' : ''} ${isEditMode ? 'edit-mode' : ''} ${isArchiveMode ? 'archive-mode' : ''} ${isArchived ? 'archived' : ''}`} 
+      onClick={handleClick}
+    >
       <h3 className="habit-card__title">{habit.name}</h3>
       <p className="habit-card__description">{habit.description}</p>
       <div className="habit-card__details">
@@ -68,40 +64,19 @@ const HabitCard: React.FC<HabitCardProps> = ({
           <p className="habit-card__streak">Current streak: {habit.streak.current} days</p>
         )}
       </div>
-      {showActions && (
-        <div className="habit-card__actions">
-          <button
-            className={`btn ${isTracked ? 'btn-success' : 'btn-primary'}`}
-            onClick={handleTrack}
-            disabled={isLoading || isTracked}
-          >
-            {isLoading ? 'Tracking...' : isTracked ? 'Tracked' : 'Track'}
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={handleEdit}
-          >
-            Edit
-          </button>
-          {onArchive && onReactivate && (
-            <button
-              className="btn btn-tertiary"
-              onClick={() => isArchived ? onReactivate(habit) : onArchive(habit)}
-              disabled={archiving}
-            >
-              {isArchived ? 'Reactivate' : 'Archive'}
-            </button>
-          )}
-          {onDelete && (
-            <button
-              className="btn btn-tertiary"
-              onClick={() => onDelete(habit)}
-            >
-              Delete
-            </button>
-          )}
+      {isTracked && !isArchived && (
+        <div className="habit-card__tracked">
+          <FontAwesomeIcon icon={faCheck} className="habit-card__check-icon" />
+          <p>Tracked</p>
         </div>
       )}
+      {isArchived && (
+        <div className="habit-card__reactivate">
+          <FontAwesomeIcon icon={faUndo} className="habit-card__undo-icon" />
+          <p>Reactivate</p>
+        </div>
+      )}
+      {isLoading && <p className="habit-card__loading">Tracking...</p>}
       {error && <p className="habit-card__error">Error: {error}</p>}
     </div>
   );

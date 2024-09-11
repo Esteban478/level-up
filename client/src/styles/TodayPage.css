@@ -1,0 +1,20 @@
+.main-layout main {
+    border: 1px solid transparent;
+}
+
+.main-layout main:has(.today-container[data-edit-mode="true"]) {
+    border-color: var(--color-secondary);
+}
+
+.main-layout main:has(.today-container[data-archive-mode="true"]) {
+    border-color: var(--color-accent);
+}
+
+/* For browsers that don't support :has(), we'll use the custom properties */
+@supports not (selector(:has(*))) {
+    .main-layout main {
+        border-color: transparent;
+        border-color: calc(var(--is-edit-mode, 0) * var(--color-secondary));
+        border-color: calc(var(--is-archive-mode, 0) * var(--color-accent));
+    }
+}

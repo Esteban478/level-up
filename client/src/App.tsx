@@ -14,6 +14,7 @@ import TopNav from './components/shared/TopNav';
 import EditHabit from './pages/EditHabit';
 import BackButton from './components/shared/BackButton';
 import EditProfile from './pages/EditProfile';
+import { TodayProvider } from './context/Today';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -33,13 +34,15 @@ const App: React.FC = () => {
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/today" element={
-            <MainLayout topNav={<TopNav />}>
-              <Today />
-            </MainLayout>
+            <Route path="/today" element={
+              <TodayProvider>
+                <MainLayout topNav={<TopNav />}>
+                  <Today />
+                </MainLayout>
+              </TodayProvider>
           } />
           <Route path="/achievements" element={
-            <MainLayout title="Achievements" leftAction={<BackButton />}>
+            <MainLayout title="Achievements">
               <Achievements />
             </MainLayout>
           } />
@@ -58,11 +61,6 @@ const App: React.FC = () => {
           } />
           <Route path="/edit-habit/:habitId" element={
             <EditHabit />
-          } />
-          <Route path="/archive-habit" element={
-            <FullScreenLayout title="Archive Habit" leftAction={<BackButton />}>
-              <Archive />
-            </FullScreenLayout>
           } />
           <Route path="/archive" element={
             <FullScreenLayout title="Habit Archive" leftAction={<BackButton />}>

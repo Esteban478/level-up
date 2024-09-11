@@ -102,7 +102,7 @@ const AddHabit: React.FC = () => {
                 habit={template}
                 isArchived={false}
                 onClick={() => handleAddHabit(template)}
-                showActions={false}
+                isTemplate={true}
               />
             ))}
           </div>
@@ -118,7 +118,7 @@ const AddHabit: React.FC = () => {
                 habit={template}
                 isArchived={false}
                 onClick={() => handleAddHabit(template)}
-                showActions={false}
+                isTemplate={true}
               />
             ))}
           </div>

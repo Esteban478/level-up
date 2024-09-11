@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useFeed } from '../hooks/feed/useFeed';
 import FeedItem from '../components/FeedItem';
 import { toast } from 'react-toastify';
+import '../styles/Feed.css';
 
 const Feed: React.FC = () => {
   const { feedItems, isLoading, error, hasMore, loadMore } = useFeed();

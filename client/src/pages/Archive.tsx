@@ -4,13 +4,10 @@ import { useArchiveHabit } from '../hooks/habits/useArchiveHabit';
 import { Habit } from '../@types/habit';
 import HabitList from '../components/shared/HabitList';
 import ConfirmationDialog from '../components/shared/ConfirmationDialog';
-import { useDeleteHabit } from '../hooks/habits/useDeleteHabit';
 
 const Archive: React.FC = () => {
   const { habits, loading, error, refetch } = useArchivedHabits();
-  const { archiveHabit, loading: archiving } = useArchiveHabit();
-  const { deleteHabit } = useDeleteHabit();
-  const [habitToDelete, setHabitToDelete] = useState<Habit | null>(null);
+  const { archiveHabit } = useArchiveHabit();
   const [habitToReactivate, setHabitToReactivate] = useState<Habit | null>(null);
 
   const handleReactivate = async (habit: Habit) => {
@@ -27,20 +24,6 @@ const Archive: React.FC = () => {
     }
   };
 
-  const confirmDeleteHabit = async () => {
-    if (habitToDelete) {
-      const success = await deleteHabit(habitToDelete._id);
-      if (success) {
-        await refetch();
-      }
-      setHabitToDelete(null);
-    }
-  };
-
-  const handleDelete = async (habit: Habit) => {
-    setHabitToDelete(habit);
-  };
-  
   const handleHabitUpdate = () => {
     refetch();
   };
@@ -50,26 +33,29 @@ const Archive: React.FC = () => {
 
   return (
     <div className="archive-container">
-      <HabitList
-        habits={habits}
-        isArchived={true}
-        onArchive={() => {}}
-        onReactivate={handleReactivate}
-        onDelete={handleDelete}
-        archiving={archiving}
-        onHabitUpdate={handleHabitUpdate}
-      />
+      {habits.length === 0 ? (
+        <div className="archive-empty">
+          <p>Your habit archive is currently empty.</p>
+          <p>You can archive habits to pause tracking and reactivate them later with a single click.</p>
+          <p>Use the archive feature to manage seasonal habits or take breaks without losing your progress.</p>
+        </div>
+      ) : (
+        <HabitList
+          habits={habits}
+          isArchived={true}
+          isEditMode={false}
+          isArchiveMode={false}
+          onArchive={() => {}}
+          onReactivate={handleReactivate}
+          onDelete={() => {}}
+          onHabitUpdate={handleHabitUpdate}
+        />
+      )}
       <ConfirmationDialog
         isOpen={!!habitToReactivate}
-        message="Are you sure you want to reactivate this habit?"
+        message="Want to jump back on the habit train? All aboard!"
         onConfirm={confirmReactivateHabit}
         onCancel={() => setHabitToReactivate(null)}
-      />
-      <ConfirmationDialog
-        isOpen={!!habitToDelete}
-        message="Are you sure you want to delete this habit?"
-        onConfirm={confirmDeleteHabit}
-        onCancel={() => setHabitToDelete(null)}
       />
     </div>
   );
