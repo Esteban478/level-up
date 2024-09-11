@@ -1,10 +1,11 @@
 import { useUserProfile } from '../hooks/profile/useUserProfile';
 import ProfileLayout from '../components/layouts/ProfileLayout';
 import { formatDatelongMonthYear } from '../utils/formatDate';
+import UserCard from '../components/shared/UserCard';
 import '../styles/Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Profile: React.FC = () => {
   const { profile, loading, error } = useUserProfile();
@@ -30,6 +31,27 @@ const Profile: React.FC = () => {
             <h1 className="profile-username">{profile.username}</h1>
             <p className="profile-email">{profile.email} - Joined {formatDatelongMonthYear(new Date(profile.createdAt))}</p>
           </div>
+        </div>
+
+        <div className="profile-friends">
+          <h2>Friends</h2>
+          <Link to="/add-friend" className="add-friend-link">Add Friends</Link>
+          {profile.friends && profile.friends.length > 0 ? (
+            <>
+              <div className="friends-list">
+                {profile.friends.map(friend => (
+                  <UserCard
+                    key={friend._id}
+                    user={friend}
+                    isFriend={true}
+                    isHorizontal={false}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <p>No friends added yet.</p>
+          )}
         </div>
 
         {profile.bio && (
@@ -97,14 +119,6 @@ const Profile: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {profile.friends && profile.friends.length > 0 && (
-          <div className="profile-friends">
-            <h2>Friends</h2>
-            <p className="friends-count">{profile.friends.length} friends</p>
-            {/* You can add a list or grid of friend avatars here if you have that data */}
-          </div>
-        )}
 
         {profile.achievements && profile.achievements.length > 0 && (
           <div className="profile-achievements">

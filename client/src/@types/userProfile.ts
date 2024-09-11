@@ -1,9 +1,10 @@
+import { User } from './user';
 import { UserAvatar } from './userAvatar';
 
 export interface UserProfile {
+  _id: string;
   username: string;
   email: string;
-  password?: string;
   avatar: UserAvatar;
   bio?: string;
   level: number;
@@ -11,8 +12,8 @@ export interface UserProfile {
   totalXp: number;
   streakDays: number;
   lastLoginDate?: Date;
-  friends?: string[];
-  achievements?: string[];
+  friends: User[];
+  achievements: string[];
   settings: {
     notifications: {
       email: boolean;
@@ -24,5 +25,5 @@ export interface UserProfile {
     };
   };
   createdAt: string;
-  updatedAt?: string;
+  updatedAt: string;
 }

@@ -84,3 +84,31 @@
 .user-profile-page .settings-item .settings-value .notification-off {
     color: var(--color-accent);
 }
+.profile-friends {
+    margin-bottom: var(--md);
+}
+
+.friends-list {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: var(--sm);
+    gap: var(--sm);
+}
+
+.friends-list .user-card {
+    flex-shrink: 0;
+}
+
+.add-friend-link {
+    display: inline-block;
+    margin-bottom: var(--xs);
+    color: var(--color-secondary);
+    font: var(--small);
+    text-decoration: none;
+}
+
+@media (hover: hover) {
+    .add-friend-link:hover {
+        text-decoration: underline;
+    }
+}

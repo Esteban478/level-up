@@ -1,0 +1,65 @@
+.add-friend-container {
+    padding: var(--md);
+}
+
+.add-friend-description {
+    margin-bottom: var(--md);
+}
+
+.search-container {
+    margin-bottom: var(--md);
+}
+
+.search-input {
+    width: 100%;
+    padding: var(--sm);
+    font: var(--p);
+    background-color: var(--color-background-200);
+    color: var(--color-text);
+    border: 1px solid var(--color-background-300);
+    border-radius: 4px;
+}
+
+.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sm);
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    padding: var(--sm);
+    background-color: var(--color-background-200);
+    border: 1px solid var(--color-background-300);
+    border-radius: 4px;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: var(--sm);
+}
+
+.user-name {
+    flex-grow: 1;
+    font: var(--p);
+}
+
+.add-friend-button {
+    padding: var(--xxs) var(--xs);
+    font: var(--small);
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-friend-button.already-friend {
+    background-color: var(--color-background-300);
+    color: var(--color-text-300);
+    cursor: not-allowed;
+}

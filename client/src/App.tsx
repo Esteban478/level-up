@@ -17,6 +17,7 @@ import EditProfile from './pages/EditProfile';
 import { TodayProvider } from './context/Today';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AddFriend from './pages/AddFriend';
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -58,6 +59,9 @@ const App: React.FC = () => {
           {/* Full-screen overlays */}
           <Route path="/add-habit" element={
             <AddHabit />
+          } />
+          <Route path="/add-friend" element={
+            <AddFriend />
           } />
           <Route path="/edit-habit/:habitId" element={
             <EditHabit />

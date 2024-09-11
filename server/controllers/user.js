@@ -5,7 +5,18 @@ import mongoose from 'mongoose';
 
 export const getUserProfile = async (req, res) => {
     try {
-        const user = await User.findById(req.user._id).select('-password').populate('avatar');
+        const user = await User.findById(req.user._id)
+            .select('-password')
+            .populate('avatar')
+            .populate({
+                path: 'friends',
+                select: 'username avatar',
+                populate: {
+                    path: 'avatar',
+                    model: 'UserAvatar'
+                }
+            });
+
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -101,18 +112,6 @@ export const getUserHabits = async (req, res) => {
     }
 };
 
-// export const getUserAchievements = async (req, res) => {
-//     try {
-//         const user = await User.findById(req.user._id).populate('achievements');
-//         if (!user) {
-//             return res.status(404).json({ error: 'User not found' });
-//         }
-//         res.json(user.achievements);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
 export const getUserXPAndLevel = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select('xp level');
@@ -120,6 +119,60 @@ export const getUserXPAndLevel = async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
         res.json({ xp: user.xp, level: user.level });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const searchUsers = async (req, res) => {
+    try {
+        const { term } = req.query;
+        const users = await User.find({
+            $or: [
+                { username: { $regex: term, $options: 'i' } },
+                { email: { $regex: term, $options: 'i' } }
+            ]
+        })
+            .select('username avatar')
+            .populate('avatar')
+            .limit(10);
+
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const addFriend = async (req, res) => {
+    try {
+        const { friendId } = req.body;
+        const user = await User.findById(req.user._id);
+        if (!user.friends.includes(friendId)) {
+            user.friends.push(friendId);
+            await user.save();
+        }
+        res.json({ message: 'Friend added successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const getUserFriends = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).populate({
+            path: 'friends',
+            select: 'username avatar',
+            populate: {
+                path: 'avatar',
+                model: 'UserAvatar'
+            }
+        });
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.json(user.friends);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
