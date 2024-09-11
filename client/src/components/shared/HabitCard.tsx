@@ -14,6 +14,8 @@ interface HabitCardProps {
   onHabitUpdate?: (updatedHabit: Habit) => void;
   isEditMode?: boolean;
   isArchiveMode?: boolean;
+  isTemplate?: boolean;
+  onClick?: () => void;
 }
 
 const HabitCard: React.FC<HabitCardProps> = ({
@@ -23,20 +25,25 @@ const HabitCard: React.FC<HabitCardProps> = ({
   onReactivate,
   onHabitUpdate,
   isEditMode,
-  isArchiveMode
+  isArchiveMode,
+  isTemplate = false,
+  onClick
 }) => {
   const navigate = useNavigate();
   const { trackHabit, isLoading, error } = useTrackHabit();
   const [isTracked, setIsTracked] = useState(habit.isTrackedToday);
 
   const handleClick = async () => {
-    if (isArchived && onReactivate) {
+    if (onClick) {
+      // This is for the Add Habit page
+      onClick();
+    } else if (isArchived && onReactivate) {
       onReactivate(habit);
     } else if (isEditMode) {
       navigate(`/edit-habit/${habit._id}`);
     } else if (isArchiveMode && onArchive) {
       onArchive(habit);
-    } else if (!isTracked && !isArchived) {
+    } else if (!isTracked && !isArchived && !isTemplate) {
       const updatedHabit = await trackHabit(habit._id, habit.goal.value, "Habit tracked via habit card");
       if (updatedHabit) {
         setIsTracked(updatedHabit.isTrackedToday);
@@ -49,7 +56,7 @@ const HabitCard: React.FC<HabitCardProps> = ({
 
   return (
     <div 
-      className={`habit-card ${isTracked ? 'tracked' : ''} ${isEditMode ? 'edit-mode' : ''} ${isArchiveMode ? 'archive-mode' : ''} ${isArchived ? 'archived' : ''}`} 
+      className={`habit-card ${isTracked ? 'tracked' : ''} ${isEditMode ? 'edit-mode' : ''} ${isArchiveMode ? 'archive-mode' : ''} ${isArchived ? 'archived' : ''} ${isTemplate ? 'template' : ''}`} 
       onClick={handleClick}
     >
       <h3 className="habit-card__title">{habit.name}</h3>
@@ -64,16 +71,16 @@ const HabitCard: React.FC<HabitCardProps> = ({
           <p className="habit-card__streak">Current streak: {habit.streak.current} days</p>
         )}
       </div>
-      {isTracked && !isArchived && (
+      {isTracked && !isArchived && !isTemplate && (
         <div className="habit-card__tracked">
           <FontAwesomeIcon icon={faCheck} className="habit-card__check-icon" />
-          <p>Tracked</p>
+          <span>Tracked</span>
         </div>
       )}
       {isArchived && (
         <div className="habit-card__reactivate">
           <FontAwesomeIcon icon={faUndo} className="habit-card__undo-icon" />
-          <p>Reactivate</p>
+          <span>Reactivate</span>
         </div>
       )}
       {isLoading && <p className="habit-card__loading">Tracking...</p>}

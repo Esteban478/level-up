@@ -4,24 +4,17 @@ import { useArchiveHabit } from '../hooks/habits/useArchiveHabit';
 import { Habit } from '../@types/habit';
 import HabitList from '../components/shared/HabitList';
 import ConfirmationDialog from '../components/shared/ConfirmationDialog';
-import { useDeleteHabit } from '../hooks/habits/useDeleteHabit';
 import { useTodayContext } from '../hooks/today/useToday';
 import '../styles/TodayPage.css';
 
 const TodayContent: React.FC = () => {
   const { habits, loading, error, refetch } = useActiveHabits();
   const { archiveHabit } = useArchiveHabit();
-  const { deleteHabit } = useDeleteHabit();
   const [habitToArchive, setHabitToArchive] = useState<Habit | null>(null);
-  const [habitToDelete, setHabitToDelete] = useState<Habit | null>(null);
   const { isEditMode, isArchiveMode, setIsArchiveMode } = useTodayContext();
 
   const handleArchive = async (habit: Habit) => {
     setHabitToArchive(habit);
-  };
-
-  const handleDelete = async (habit: Habit) => {
-    setHabitToDelete(habit);
   };
 
 const confirmArchiveHabit = async () => {
@@ -37,16 +30,6 @@ const confirmArchiveHabit = async () => {
     setHabitToArchive(null);
   }
 };
-
-  const confirmDeleteHabit = async () => {
-    if (habitToDelete) {
-      const success = await deleteHabit(habitToDelete._id);
-      if (success) {
-        await refetch();
-      }
-      setHabitToDelete(null);
-    }
-  };
 
   const handleHabitUpdate = () => {
     refetch();
@@ -67,12 +50,17 @@ const confirmArchiveHabit = async () => {
 
   return (
     <div className="today-container" data-edit-mode={isEditMode} data-archive-mode={isArchiveMode}>
-      {habits.length === 0 && <h2 className="today-title">Start adding habits to track</h2>}   
+      {habits.length === 0 &&
+        <>
+          <h2 className="today-title">Welcome aboard!</h2>
+          <p>Use the top navigation to add or edit your habits. You can also archive them when you need a break.</p>
+          <p>Let’s get started on your habit journey!</p>
+        </>
+      }   
       <HabitList
         habits={habits}
         isArchived={false}
         onArchive={handleArchive}
-        onDelete={handleDelete}
         onReactivate={() => {}}
         onHabitUpdate={handleHabitUpdate}
         isEditMode={isEditMode}
@@ -80,15 +68,9 @@ const confirmArchiveHabit = async () => {
       />
       <ConfirmationDialog
         isOpen={!!habitToArchive}
-        message="Are you sure you want to archive this habit?"
+        message="Do you want to give this habit a break and archive it?"
         onConfirm={confirmArchiveHabit}
         onCancel={() => setHabitToArchive(null)}
-      />
-      <ConfirmationDialog
-        isOpen={!!habitToDelete}
-        message="Are you sure you want to delete this habit?"
-        onConfirm={confirmDeleteHabit}
-        onCancel={() => setHabitToDelete(null)}
       />
     </div>
   );

@@ -76,7 +76,7 @@ const AddHabit: React.FC = () => {
   const handleBack = () => {
     navigate('/today');
   };
-  // TODO: Move to content area
+
   if (templatesLoading || activeLoading || archivedLoading) return <div>Loading habits...</div>;
   if (templatesError) return <div>Error: {templatesError.message}</div>;
 
@@ -101,8 +101,8 @@ const AddHabit: React.FC = () => {
                 key={template._id}
                 habit={template}
                 isArchived={false}
-                onClick={() => handleAddHabit(template)}
                 isTemplate={true}
+                onClick={() => handleAddHabit(template)}
               />
             ))}
           </div>
@@ -117,8 +117,8 @@ const AddHabit: React.FC = () => {
                 key={template._id}
                 habit={template}
                 isArchived={false}
-                onClick={() => handleAddHabit(template)}
                 isTemplate={true}
+                onClick={() => handleAddHabit(template)}
               />
             ))}
           </div>

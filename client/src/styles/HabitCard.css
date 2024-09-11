@@ -28,13 +28,6 @@
     margin-bottom: 0.5rem;
 }
 
-.habit-card__actions {
-    display: flex;
-    justify-content: space-between;
-    /* only for the delete button in dev */
-    flex-wrap: wrap;
-}
-
 .habit-card__button {
     background-color: var(--color-primary);
     color: var(--color-text-light);

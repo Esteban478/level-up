@@ -47,7 +47,6 @@ const Archive: React.FC = () => {
           isArchiveMode={false}
           onArchive={() => {}}
           onReactivate={handleReactivate}
-          onDelete={() => {}}
           onHabitUpdate={handleHabitUpdate}
         />
       )}
