@@ -1,4 +1,4 @@
-import { Achievement, UserAchievement, HabitLog, User } from '../models/index.js';
+import { Achievement, UserAchievement, HabitLog, User, FeedItem } from '../models/index.js';
 
 const checkHabitMilestoneAchievement = async (userId, habitId) => {
     const achievements = await Achievement.find({ type: 'Habit_milestone' });
@@ -27,6 +27,18 @@ const checkHabitMilestoneAchievement = async (userId, habitId) => {
                         count: habitLogs
                     });
                 }
+
+                // Create a feed item for the new achievement
+                await FeedItem.create({
+                    userId,
+                    type: 'achievement',
+                    content: {
+                        achievementId: achievement._id,
+                        name: achievement.name,
+                        description: achievement.description,
+                        xpReward: achievement.reward.xp
+                    }
+                });
             }
         }
     }
@@ -58,10 +70,22 @@ export const checkLevelAchievement = async (userId, level) => {
             // Award XP for the achievement
             await User.findByIdAndUpdate(userId, { $inc: { xp: achievement.reward.xp, totalXp: achievement.reward.xp } });
 
+            // Create a feed item for the new achievement
+            await FeedItem.create({
+                userId,
+                type: 'achievement',
+                content: {
+                    achievementId: achievement._id,
+                    name: achievement.name,
+                    description: achievement.description,
+                    xpReward: achievement.reward.xp
+                }
+            });
+
             awardedAchievements.push({
                 name: achievement.name,
                 description: achievement.description,
-                xpReward: achievement.reward.xp  // Ensure we're including the XP reward
+                xpReward: achievement.reward.xp
             });
         }
 

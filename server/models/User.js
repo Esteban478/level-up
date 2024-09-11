@@ -56,6 +56,14 @@ const userSchema = new mongoose.Schema({
             activityVisibility: { type: String, enum: ['public', 'friends', 'private'], default: 'friends' }
         }
     },
+    viewedTips: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tip'
+    }],
+    lastTipDate: {
+        type: Date,
+        default: null
+    },
     createdAt: {
         type: Date,
         default: Date.now

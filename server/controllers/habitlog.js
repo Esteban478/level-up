@@ -14,6 +14,10 @@ export const createHabitLog = async (req, res) => {
         }
 
         const habitLog = await HabitLog.logCompletion(habitId, req.user._id, value, parsedDate, notes);
+
+        habit.isTrackedToday = true;
+        await habit.save();
+
         const updatedHabit = await Habit.findById(habitId);
         res.status(201).json({ habitLog, updatedHabit });
     } catch (error) {

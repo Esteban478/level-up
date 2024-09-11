@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import rateLimit from 'express-rate-limit';
 import User from '../models/User.js';
 import { generateAvatar } from '../controllers/useravatar.js';
+import { selectTipForUser } from '../services/tipService.js';
 
 // Rate limiter for login attempts
 export const loginLimiter = rateLimit({
@@ -103,11 +104,19 @@ export const login = async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Use the test streak function
+        // Update user streak
         await user.updateStreak();
 
         // Generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+        // Select a tip for the user (this will create a feed item if a new tip is generated)
+        try {
+            await selectTipForUser(user._id);
+        } catch (tipError) {
+            console.error('Error generating tip:', tipError);
+            // We don't want to fail the login if tip generation fails, so we just log the error
+        }
 
         res.json({
             user: {
@@ -119,6 +128,7 @@ export const login = async (req, res) => {
             token
         });
     } catch (error) {
+        console.error('Login error:', error);
         res.status(400).json({ error: error.message });
     }
 };

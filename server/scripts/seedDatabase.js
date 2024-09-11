@@ -59,8 +59,8 @@ const seedDatabase = async () => {
         console.log('Level thresholds seeded successfully');
 
         // Seed tips
-        // await Tip.create(tips);
-        // console.log('Tips seeded successfully');
+        await Tip.create(tips);
+        console.log('Tips seeded successfully');
 
         // Seed badge tiers
         await BadgeTier.create(badgeTiers);

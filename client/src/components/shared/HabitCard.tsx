@@ -35,11 +35,11 @@ const HabitCard: React.FC<HabitCardProps> = ({
     e.stopPropagation();
     if (isTracked) return; // Prevent tracking if already tracked
 
-    const result = await trackHabit(habit._id, habit.goal.value, "Habit tracked via habit card");
-    if (result) {
-      setIsTracked(true);
+    const updatedHabit = await trackHabit(habit._id, habit.goal.value, "Habit tracked via habit card");
+    if (updatedHabit) {
+      setIsTracked(updatedHabit.isTrackedToday);
       if (onHabitUpdate) {
-        onHabitUpdate({ ...habit, isTrackedToday: true });
+        onHabitUpdate(updatedHabit);
       }
     }
   };
