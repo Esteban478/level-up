@@ -1,5 +1,4 @@
 import { Achievement } from '../../@types/achievement';
-import '../../styles/AchievementCard.css';
 
 interface AchievementCardProps {
   achievement: Achievement;

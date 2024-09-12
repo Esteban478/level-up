@@ -1,5 +1,5 @@
 .add-friend-container {
-    padding: var(--md);
+    padding: var(--xxs);
 }
 
 .add-friend-description {
@@ -46,6 +46,7 @@
 .user-name {
     flex-grow: 1;
     font: var(--p);
+    margin: 0;
 }
 
 .add-friend-button {

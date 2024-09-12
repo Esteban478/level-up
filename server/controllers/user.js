@@ -124,6 +124,20 @@ export const getUserXPAndLevel = async (req, res) => {
     }
 };
 
+export const getPublicActiveHabits = async (req, res) => {
+    try {
+        const userId = req.params.userId || req.user._id;
+        const habits = await Habit.find({
+            userId: userId,
+            isPublic: true,
+            isArchived: false
+        }).select('name streak');
+        res.json(habits);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 export const searchUsers = async (req, res) => {
     try {
         const { term } = req.query;

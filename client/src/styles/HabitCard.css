@@ -1,10 +1,11 @@
 .habit-card {
     width: 100%;
-    background-color: var(--color-background-100);
+    background-color: var(--color-background-300);
     border: 1px solid var(--color-background-400);
-    border-radius: 0.5rem;
+    border-radius: var(--xs);
     padding: 1rem;
     margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
@@ -48,11 +49,11 @@
 }
 .habit-card__tracked p,
 .habit-card__reactivate p {
-    font-size: var(--md);
+    font-size: var(--sm);
 }
 .habit-card__tracked svg,
 .habit-card__reactivate svg {
-    padding-right: var(--xs);
+    padding-left: var(--xs);
 }
 .habit-card__tracked svg {
     color: var(--color-secondary);

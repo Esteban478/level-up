@@ -12,13 +12,16 @@
 }
 
 .confirmation-dialog {
-    background-color: var(--color-background);
-    padding: 1rem;
+    background-color: var(--color-background-300);
+    padding: var(--lg);
     border-radius: 0.5rem;
     max-width: 80%;
     text-align: center;
 }
-
+.confirmation-dialog p {
+    font-size: var(--md);
+    line-height: var(--lg) !important;
+}
 .confirmation-dialog-buttons {
     display: flex;
     justify-content: center;

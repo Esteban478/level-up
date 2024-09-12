@@ -1,14 +1,12 @@
 .feed-container {
     display: flex;
     flex-direction: column;
-    padding: var(--md);
-    max-width: 600px;
-    margin: 0 auto;
+    padding: var(--xxs);
 }
 
 .feed-item {
-    background-color: var(--color-background-200);
-    border-radius: var(--sm);
+    background-color: var(--color-background-300);
+    border-radius: var(--xs);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: var(--md);
     margin-bottom: var(--md);

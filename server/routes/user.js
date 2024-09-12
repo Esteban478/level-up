@@ -9,7 +9,8 @@ import {
     searchUsers,
     addFriend,
     getUserFriends,
-    getFriendProfile
+    getFriendProfile,
+    getPublicActiveHabits
 } from '../controllers/index.js';
 
 const userRouter = express.Router();
@@ -28,6 +29,9 @@ userRouter.get("/achievements", authMiddleware, getUserAchievements);
 
 // Get user's XP and level
 userRouter.get("/xp", authMiddleware, getUserXPAndLevel);
+
+// Get user's public active habits
+userRouter.get("/public-habits/:userId?", authMiddleware, getPublicActiveHabits);
 
 // Search for users
 userRouter.get("/search", authMiddleware, searchUsers);

@@ -51,11 +51,12 @@ const confirmArchiveHabit = async () => {
   return (
     <div className="today-container" data-edit-mode={isEditMode} data-archive-mode={isArchiveMode}>
       {habits.length === 0 &&
-        <>
+        <div className="intro-container">
           <h2 className="today-title">Welcome aboard!</h2>
-          <p>Use the top navigation to add or edit your habits. You can also archive them when you need a break.</p>
+          <p>Use the top navigation to add or edit your habits.</p>
+          <p>You can also archive them when you need a break.</p>
           <p>Let’s get started on your habit journey!</p>
-        </>
+        </div>
       }   
       <HabitList
         habits={habits}

@@ -64,7 +64,7 @@ const HabitCard: React.FC<HabitCardProps> = ({
       <div className="habit-card__details">
         {habit.goal && (
           <p className="habit-card__goal">
-            {habit.goal.type} {habit.goal.value} {habit.goal.unit}
+            Goal: {habit.goal.type} {habit.goal.value} {habit.goal.unit}
           </p>
         )}
         {habit.streak && habit.streak.current > 0 && (
@@ -73,14 +73,14 @@ const HabitCard: React.FC<HabitCardProps> = ({
       </div>
       {isTracked && !isArchived && !isTemplate && (
         <div className="habit-card__tracked">
+          <p>Tracked</p>
           <FontAwesomeIcon icon={faCheck} className="habit-card__check-icon" />
-          <span>Tracked</span>
         </div>
       )}
       {isArchived && (
         <div className="habit-card__reactivate">
+          <p>Reactivate</p>
           <FontAwesomeIcon icon={faUndo} className="habit-card__undo-icon" />
-          <span>Reactivate</span>
         </div>
       )}
       {isLoading && <p className="habit-card__loading">Tracking...</p>}

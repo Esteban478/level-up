@@ -21,7 +21,6 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           <div className="tip-feed-item">
             <h3>Daily Tip</h3>
             <p>{tipContent.content}</p>
-            <p>Category: {tipContent.category}</p>
           </div>
         ); }
       default:

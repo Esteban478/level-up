@@ -6,12 +6,14 @@ import BackButton from '../components/shared/BackButton';
 import { formatDatelongMonthYear } from '../utils/formatDate';
 import { toast } from 'react-toastify';
 import '../styles/Profile.css';
+import { usePublicHabits } from '../hooks/habits/usePublicHabits';
 
 const FriendProfile: React.FC = () => {
   const [friendProfile, setFriendProfile] = useState<UserProfile | null>(null);
+  const { friendId } = useParams<{ friendId: string }>();
+  const { habits, loading: habitsLoading, error: habitsError } = usePublicHabits(friendId);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { friendId } = useParams<{ friendId: string }>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -79,6 +81,28 @@ const FriendProfile: React.FC = () => {
                 <h2>Bio</h2>
                 <p>{friendProfile.bio}</p>
               </div>
+            )}
+
+            {habits && habits.length > 0 && (
+              <div className="profile-public-habits">
+                <h2>Habits</h2>
+                {habitsLoading ? (
+                  <p>Loading habits...</p>
+                ) : habitsError ? (
+                  <p>Error loading habits: {habitsError.message}</p>
+                ) : habits.length > 0 ? (
+                  <ul className="habits-list">
+                    {habits.map((habit) => (
+                      <li key={habit._id} className="habit-item">
+                        <h3 className="habit-name">{habit.name}</h3>
+                        <p className="habit-streak">Streak: {habit.streak.current} days</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No public habits to display.</p>
+                )}
+              </div> 
             )}
 
             <div className="profile-overview">

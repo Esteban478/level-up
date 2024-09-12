@@ -2,6 +2,12 @@
     border: 1px solid transparent;
 }
 
+.today-container .intro-container p {
+    font-size: medium;
+    color: var(--color-text);
+    margin-bottom: var(--sm);
+}
+
 .main-layout main:has(.today-container[data-edit-mode="true"]) {
     border-color: var(--color-secondary);
 }

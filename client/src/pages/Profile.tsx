@@ -6,9 +6,11 @@ import '../styles/Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, Link } from 'react-router-dom';
+import { usePublicHabits } from '../hooks/habits/usePublicHabits';
 
 const Profile: React.FC = () => {
   const { profile, loading, error } = useUserProfile();
+  const { habits, loading: habitsLoading, error: habitsError } = usePublicHabits();
   const navigate = useNavigate();
 
   if (loading) return <div>loading...</div>;
@@ -32,6 +34,28 @@ const Profile: React.FC = () => {
             <p className="profile-email">{profile.email} - Joined {formatDatelongMonthYear(new Date(profile.createdAt))}</p>
           </div>
         </div>
+
+        {habits && habits.length > 0 && (
+          <div className="profile-public-habits">
+            <h2>Habits</h2>
+            {habitsLoading ? (
+              <p>Loading habits...</p>
+            ) : habitsError ? (
+              <p>Error loading habits: {habitsError.message}</p>
+            ) : habits.length > 0 ? (
+              <ul className="habits-list">
+                {habits.map((habit) => (
+                  <li key={habit._id} className="habit-item">
+                    <h3 className="habit-name">{habit.name}</h3>
+                    <p className="habit-streak">Streak: {habit.streak.current} days</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No public habits to display.</p>
+            )}
+          </div> 
+        )}
 
         <div className="profile-friends">
           <div className="profile-friends-header">

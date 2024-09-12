@@ -2,7 +2,7 @@
     padding: 0 var(--sm);
 }
 .user-profile-page > div {
-    padding: var(--xs) 0;
+    padding: var(--xxs) 0 var(--md);
 }
 .profile-avatar-container {
     position: relative;
@@ -50,6 +50,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--xs);
+    margin: var(--xxs) 0 0;
 }
 .user-profile-page .overview-item {
     display: flex;
@@ -74,6 +75,7 @@
 .user-profile-page .settings-item {
     display: flex;
     flex-direction: row;
+    margin: var(--xxs) 0 0;
 }
 .user-profile-page .settings-item .settings-value {
     margin-left: var(--sm);
@@ -114,4 +116,27 @@
     .add-friend-link:hover {
         text-decoration: underline;
     }
+}
+
+.habits-list {
+    list-style-type: none;
+    padding: var(--md);
+    margin: 0;
+}
+
+.habit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--xs) 0;
+    border-bottom: 1px solid var(--color-background-400);
+}
+
+.habit-name {
+    font-weight: bold;
+}
+
+.habit-streak {
+    font-size: var(--small);
+    color: var(--color-text-secondary);
 }
