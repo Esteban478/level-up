@@ -27,7 +27,7 @@
     font-size: var(--lg);
 }
 .user-profile-page h1 {
-    margin: 0 0 var(--xxs);
+    padding: var(--xxs) 0;
     font: var(--h1);
 }
 .user-profile-page h2 {
@@ -84,8 +84,12 @@
 .user-profile-page .settings-item .settings-value .notification-off {
     color: var(--color-accent);
 }
-.profile-friends {
-    margin-bottom: var(--md);
+
+.profile-friends .profile-friends-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--xxs);
 }
 
 .friends-list {
@@ -101,7 +105,6 @@
 
 .add-friend-link {
     display: inline-block;
-    margin-bottom: var(--xs);
     color: var(--color-secondary);
     font: var(--small);
     text-decoration: none;

@@ -9,7 +9,7 @@ export const habits = [
         type: "Duration",
         frequency: { type: "Daily" },
         goal: { type: "At least", value: 10, unit: "minutes", direction: "increase" },
-        xpReward: { base: 110, max: 110 }
+        xpReward: { base: 121, max: 121 }
     },
     {
         habitId: 2,
@@ -33,7 +33,7 @@ export const habits = [
         type: "Duration",
         frequency: { type: "Daily" },
         goal: { type: "At least", value: 15, unit: "minutes", direction: "increase" },
-        xpReward: { base: 121, max: 121 }
+        xpReward: { base: 50, max: 50 }
     },
     {
         habitId: 4,
@@ -45,7 +45,7 @@ export const habits = [
         type: "Boolean",
         frequency: { type: "Daily" },
         goal: { type: "Exactly", value: true, direction: "maintain" },
-        xpReward: { base: 121, max: 121 }
+        xpReward: { base: 50, max: 50 }
     },
     {
         habitId: 5,
@@ -57,7 +57,7 @@ export const habits = [
         type: "Numeric",
         frequency: { type: "Daily" },
         goal: { type: "At least", value: 1, unit: "meal", direction: "increase" },
-        xpReward: { base: 110, max: 110 }
+        xpReward: { base: 50, max: 50 }
     },
     {
         habitId: 6,

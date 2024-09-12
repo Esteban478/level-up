@@ -8,3 +8,19 @@
     height: calc(100% - 70px);
     overflow-y: scroll;
 }
+.profile-layout.friend-profile main {
+    height: calc(100% - 50px);
+}
+
+.profile-layout.friend-profile .top-bar .title {
+    font-size: var(--md);
+    line-height: var(--lg);
+}
+
+.profile-layout.friend-profile .profile-avatar-container {
+    padding-top: 66.67%;
+}
+
+.profile-layout.friend-profile .private-profile-message {
+    padding: var(--lg) 0
+}

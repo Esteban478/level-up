@@ -1,17 +1,31 @@
+import React from 'react';
 import BottomNav from '../shared/BottomNav';
+import TopBar from '../shared/TopBar';
 import '../../styles/ProfileLayout.css';
 
-interface MainLayoutProps {
+interface ProfileLayoutProps {
   children: React.ReactNode;
+  isFriendProfile?: boolean;
+  title?: string;
+  leftAction?: React.ReactElement;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ 
-  children
+const ProfileLayout: React.FC<ProfileLayoutProps> = ({ 
+  children,
+  isFriendProfile = false,
+  title,
+  leftAction
 }) => (
-  <div className="profile-layout">
+  <div className={`profile-layout ${isFriendProfile ? 'friend-profile' : ''}`}>
+    {isFriendProfile && (
+      <TopBar 
+        title={title}
+        leftAction={leftAction}
+      />
+    )}
     <main>{children}</main>
-    <BottomNav />
+    {!isFriendProfile && <BottomNav />}
   </div>
 );
 
-export default MainLayout
+export default ProfileLayout;

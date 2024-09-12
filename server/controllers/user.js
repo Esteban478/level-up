@@ -177,3 +177,48 @@ export const getUserFriends = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+export const getFriendProfile = async (req, res) => {
+    try {
+        const { friendId } = req.params;
+        const currentUser = await User.findById(req.user._id);
+
+        if (!currentUser.friends.includes(friendId)) {
+            return res.status(403).json({ error: 'You are not friends with this user' });
+        }
+
+        const friendProfile = await User.findById(friendId)
+            .select('-password -email')
+            .populate('avatar')
+            .populate({
+                path: 'friends',
+                select: 'username avatar',
+                populate: {
+                    path: 'avatar',
+                    model: 'UserAvatar'
+                }
+            });
+
+        if (!friendProfile) {
+            return res.status(404).json({ error: 'Friend not found' });
+        }
+
+        // Check privacy settings
+        if (friendProfile.settings.privacy.profileVisibility === 'private') {
+            return res.json({
+                _id: friendProfile._id,
+                username: friendProfile.username,
+                avatar: friendProfile.avatar,
+                settings: {
+                    privacy: {
+                        profileVisibility: 'private'
+                    }
+                }
+            });
+        }
+
+        res.json(friendProfile);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

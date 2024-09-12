@@ -8,7 +8,8 @@ import {
     getUserXPAndLevel,
     searchUsers,
     addFriend,
-    getUserFriends
+    getUserFriends,
+    getFriendProfile
 } from '../controllers/index.js';
 
 const userRouter = express.Router();
@@ -36,5 +37,8 @@ userRouter.post("/friends", authMiddleware, addFriend);
 
 // Get user's friends
 userRouter.get("/friends", authMiddleware, getUserFriends);
+
+// Get a friends profile
+userRouter.get("/friends/:friendId/profile", authMiddleware, getFriendProfile);
 
 export default userRouter;

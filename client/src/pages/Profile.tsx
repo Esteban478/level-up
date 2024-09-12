@@ -34,8 +34,9 @@ const Profile: React.FC = () => {
         </div>
 
         <div className="profile-friends">
-          <h2>Friends</h2>
-          <Link to="/add-friend" className="add-friend-link">Add Friends</Link>
+          <div className="profile-friends-header">
+            <h2>Friends</h2> <Link to="/add-friend" className="add-friend-link">Add Friends</Link>
+          </div>
           {profile.friends && profile.friends.length > 0 ? (
             <>
               <div className="friends-list">
@@ -124,7 +125,6 @@ const Profile: React.FC = () => {
           <div className="profile-achievements">
             <h2>Achievements</h2>
             <p className="achievements-count">{profile.achievements.length} achievements</p>
-            {/* You can add a list or grid of achievement icons here if you have that data */}
           </div>
         )}
       </div>

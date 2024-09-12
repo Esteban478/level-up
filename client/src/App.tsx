@@ -18,6 +18,7 @@ import { TodayProvider } from './context/Today';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddFriend from './pages/AddFriend';
+import FriendProfile from './pages/FriendProfile';
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -49,6 +50,9 @@ const App: React.FC = () => {
           } />
           <Route path="/profile" element={
             <Profile />
+          } />   
+          <Route path="/friend/:friendId" element={
+            <FriendProfile />
           } />
           <Route path="/feed" element={
             <MainLayout title="Feed">

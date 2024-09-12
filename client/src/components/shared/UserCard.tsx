@@ -1,4 +1,4 @@
-import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { User } from '../../@types/user';
 import '../../styles/UserCard.css';
 
@@ -11,14 +11,32 @@ interface UserCardProps {
 
 const UserCard: React.FC<UserCardProps> = ({ user, isFriend, isHorizontal = false, onAddFriend }) => {
   const avatarUrl = user.avatar?.imageUrl || '/default-avatar.jpg';
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClick = () => {
+    if (isFriend && location.pathname === '/profile') {
+      navigate(`/friend/${user._id}`);
+    }
+  };
+
+  const handleAddFriend = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onAddFriend) {
+      onAddFriend(user._id);
+    }
+  };
 
   return (
-    <div className={`user-card ${isHorizontal ? 'horizontal' : 'vertical'}`}>
+    <div 
+      className={`user-card ${isHorizontal ? 'horizontal' : 'vertical'}`} 
+      onClick={handleClick}
+    >
       <img src={avatarUrl} alt={`${user.username}'s avatar`} className="user-avatar" />
-      <span className="user-name">{user.username}</span>
+      <p className="user-name">{user.username}</p>
       {onAddFriend && (
         <button 
-          onClick={() => onAddFriend(user._id)} 
+          onClick={handleAddFriend} 
           className={`add-friend-button ${isFriend ? 'already-friend' : ''}`}
           disabled={isFriend}
         >
