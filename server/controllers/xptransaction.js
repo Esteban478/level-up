@@ -1,9 +1,9 @@
 
-import { XPTransaction, User, Habit, LevelThreshold } from '../models/index.js';
+import { XpTransaction, User, Habit, LevelThreshold } from '../models/index.js';
 import mongoose from 'mongoose';
 import { checkAchievements } from '../services/achievementService.js';
 
-export const createXPTransaction = async (req, res) => {
+export const createXpTransaction = async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -23,7 +23,7 @@ export const createXPTransaction = async (req, res) => {
         }
 
         // Create XP transaction
-        const xpTransaction = new XPTransaction({
+        const xpTransaction = new XpTransaction({
             userId,
             amount: xpGained,
             source,
@@ -57,7 +57,7 @@ export const createXPTransaction = async (req, res) => {
         for (const achievement of earnedAchievements) {
             achievementXP += achievement.reward.xp;
 
-            const achievementXpTransaction = new XPTransaction({
+            const achievementXpTransaction = new XpTransaction({
                 userId,
                 amount: achievement.reward.xp,
                 source: 'Achievement',
@@ -94,18 +94,18 @@ export const createXPTransaction = async (req, res) => {
     }
 };
 
-export const getXPTransactions = async (req, res) => {
+export const getXpTransactions = async (req, res) => {
     try {
-        const xpTransactions = await XPTransaction.find({ userId: req.user._id });
+        const xpTransactions = await XpTransaction.find({ userId: req.user._id });
         res.json(xpTransactions);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-export const getXPTransactionById = async (req, res) => {
+export const getXpTransactionById = async (req, res) => {
     try {
-        const xpTransaction = await XPTransaction.findOne({ _id: req.params.id, userId: req.user._id });
+        const xpTransaction = await XpTransaction.findOne({ _id: req.params.id, userId: req.user._id });
         if (!xpTransaction) {
             return res.status(404).json({ error: 'XP transaction not found' });
         }
