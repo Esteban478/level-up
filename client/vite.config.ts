@@ -54,7 +54,6 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
   ],
   theme_color:'#282828',
   background_color: '#00C2FF',
-  categories: ['education', 'fitness', 'health', 'social', 'productivity'],
   display: 'standalone',
   scope:'/',
   start_url:'/',
