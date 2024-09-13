@@ -9,9 +9,9 @@
 
 .user-card.vertical {
     flex-direction: column;
-    width: 100px;
+    width: 120px;
     text-align: center;
-    padding: var(--xxs) var(--sm) var(--sm);
+    padding: var(--xs) var(--md);
 }
 
 .user-card.horizontal {
@@ -27,9 +27,9 @@
 }
 
 .user-card.vertical .user-avatar {
-    width: 90%;
-    height: 90%;
-    margin: var(--xs);
+    width: 100%;
+    height: 50%;
+    margin: var(--xs);  
 }
 
 .user-card.horizontal .user-avatar {

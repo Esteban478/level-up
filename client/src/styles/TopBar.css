@@ -1,7 +1,8 @@
 .top-bar {
     display: grid;
-    grid-template-columns: 40px 1fr 40px;
+    grid-template-columns: 48px 1fr 48px;
     justify-items: center;
+    align-items: center;
     height: 8%;
     padding: var(--xs) var(--sm);
     border-bottom: var(--color-text-400) 2px solid;
@@ -9,8 +10,7 @@
 
 .top-bar svg {
     position: relative;
-    top: 3px;
-    left: -6px;
+    left: -0.5rem;
     font-size: var(--lg);
 }
 

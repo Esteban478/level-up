@@ -14,7 +14,7 @@
 
 .achievement-list {
     display: flex;
-    overflow-x: auto;
+    overflow-x: scroll;
     padding-bottom: var(--sm);
     scroll-snap-type: x mandatory;
     gap: var(--sm);
@@ -58,15 +58,4 @@
     height: 48px;
     float: right;
     margin-left: var(--xs);
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.achievement-list::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.achievement-list {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }

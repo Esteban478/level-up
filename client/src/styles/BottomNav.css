@@ -1,9 +1,9 @@
 .bottom-nav {
-    height: 10%;
+    height: 12%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--sm) var(--xs);
+    padding: var(--sm) var(--xs) var(--md);
     border-top: var(--color-text-400) 2px solid;
 }
 .bottom-nav a {
@@ -16,7 +16,7 @@
     border: 1px solid transparent;
 }
 .bottom-nav a svg {
-    font-size: var(--xl);
+    font-size: var(--lg);
 }
 .bottom-nav a.active {
     border: var(--color-primary) 1px solid;

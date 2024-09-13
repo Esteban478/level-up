@@ -43,7 +43,8 @@
 }
 .user-profile-page p {
     font: var(--p);
-    line-height: 1rem;
+    height: 50%;
+    align-content: center;
 }
 .user-profile-page .overview-items {
     display: flex;
