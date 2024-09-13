@@ -1,6 +1,6 @@
 .full-screen-layout main {
     padding: var(--sm);
-    height: calc(100% - 50px);
+    height: calc(100% - 8%);
     overflow-y: auto;
 }
 .full-screen-layout main h2 {

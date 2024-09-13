@@ -12,13 +12,13 @@ import Archive from './pages/Archive';
 import Achievements from './pages/Achievements';
 import TopNav from './components/shared/TopNav';
 import EditHabit from './pages/EditHabit';
-import BackButton from './components/shared/BackButton';
 import EditProfile from './pages/EditProfile';
 import { TodayProvider } from './context/Today';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddFriend from './pages/AddFriend';
 import FriendProfile from './pages/FriendProfile';
+import ProfileLayout from './components/layouts/ProfileLayout';
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -48,8 +48,10 @@ const App: React.FC = () => {
               <Achievements />
             </MainLayout>
           } />
-          <Route path="/profile" element={
-            <Profile />
+            <Route path="/profile" element={
+              <ProfileLayout title="Profile">
+                <Profile />
+              </ProfileLayout>
           } />   
           <Route path="/friend/:friendId" element={
             <FriendProfile />
@@ -62,7 +64,9 @@ const App: React.FC = () => {
 
           {/* Full-screen overlays */}
           <Route path="/add-habit" element={
-            <AddHabit />
+              <FullScreenLayout title="Add Archive">
+              <AddHabit />
+            </FullScreenLayout>
           } />
           <Route path="/add-friend" element={
             <AddFriend />
@@ -71,7 +75,7 @@ const App: React.FC = () => {
             <EditHabit />
           } />
           <Route path="/archive" element={
-            <FullScreenLayout title="Habit Archive" leftAction={<BackButton />}>
+            <FullScreenLayout title="Habit Archive">
               <Archive />
             </FullScreenLayout>
           } />

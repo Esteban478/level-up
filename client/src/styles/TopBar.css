@@ -1,11 +1,14 @@
 .top-bar {
     display: grid;
-    grid-template-columns: 40px 1fr 40px;
-    align-content: center;
+    grid-template-columns: 1.5rem 1fr 1.5rem;
     justify-items: center;
-    height: 50px;
-    padding: var(--sm);
+    height: 8%;
+    padding: var(--xs) var(--sm);
     border-bottom: var(--color-text-400) 2px solid;
+}
+
+.top-bar svg {
+    font-size: var(--lg);
 }
 
 .top-bar h1 {

@@ -35,7 +35,7 @@ const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     return () => mql.removeEventListener('change', handleDisplayModeChange);
   }, []);
 
-  const isFullScreen = displayMode === 'standalone' || deviceType === 'mobile';
+  const isFullScreen = displayMode === 'standalone' && deviceType === 'mobile';
 
   const wrapperStyle: React.CSSProperties = {
     top: isFullScreen ? 0 : '40px',

@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import '../../styles/TopBar.css';
+import BackButton from './BackButton';
 
 interface TopBarProps {
   title?: string;
@@ -8,7 +10,8 @@ interface TopBarProps {
   topNav?: React.ReactNode;
 }
 
-const TopBar: React.FC<TopBarProps> = ({ title, darkTitle, leftAction, rightAction, topNav }) => {
+const TopBar: React.FC<TopBarProps> = ({ title, darkTitle, rightAction, topNav }) => {
+  const navigate = useNavigate();
   const renderContent = () => {
     if (topNav) {
       return <header className="top-nav">
@@ -18,7 +21,7 @@ const TopBar: React.FC<TopBarProps> = ({ title, darkTitle, leftAction, rightActi
 
     return (
       <header className="top-bar">
-        <div className="left-action">{leftAction}</div>
+        <BackButton onClick={() => navigate(-1)}/>
         <h1 className={`title ${darkTitle ? 'dark-title' : ''}`}>
           {title}
         </h1>

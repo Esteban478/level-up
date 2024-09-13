@@ -6,8 +6,6 @@ import { useArchivedHabits } from '../hooks/habits/useArchivedHabits';
 import { Habit } from '../@types/habit';
 import { useAuth } from '../hooks/auth/useAuth';
 import HabitCard from '../components/shared/HabitCard';
-import FullScreenLayout from '../components/layouts/FullScreenLayout';
-import BackButton from '../components/shared/BackButton';
 
 const AddHabit: React.FC = () => {
   const { templates, loading: templatesLoading, error: templatesError } = useHabitTemplates();
@@ -73,10 +71,6 @@ const AddHabit: React.FC = () => {
     return { keystoneHabits, otherHabits };
   };
 
-  const handleBack = () => {
-    navigate('/today');
-  };
-
   if (templatesLoading || activeLoading || archivedLoading) return <div>Loading habits...</div>;
   if (templatesError) return <div>Error: {templatesError.message}</div>;
 
@@ -87,10 +81,7 @@ const AddHabit: React.FC = () => {
   );
 
   return (
-    <FullScreenLayout
-      title={"Add Habit"}
-      leftAction={<BackButton onClick={handleBack} />}
-    >
+    <>
       {addingHabit && <div>Adding habit...</div>}
       {keystoneHabits.length > 0 && (
         <>
@@ -124,7 +115,7 @@ const AddHabit: React.FC = () => {
           </div>
         </React.Fragment>
       ))}
-    </FullScreenLayout>
+    </>
   );
 };
 

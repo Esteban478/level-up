@@ -1,20 +1,22 @@
 .bottom-nav {
-    height: 70px;
+    height: 12%;
     display: flex;
     justify-content: space-between;
-    padding: var(--xs);
+    align-items: center;
+    padding: var(--sm) var(--xs);
     border-top: var(--color-text-400) 2px solid;
 }
 .bottom-nav a {
-    width: 52px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     padding: var(--xs);
     border-radius: var(--xs);
     border: 1px solid transparent;
 }
 .bottom-nav a svg {
-    font-size: var(--lg);
+    font-size: var(--xl);
 }
 .bottom-nav a.active {
     border: var(--color-primary) 1px solid;

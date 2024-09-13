@@ -1,5 +1,4 @@
 import { useUserProfile } from '../hooks/profile/useUserProfile';
-import ProfileLayout from '../components/layouts/ProfileLayout';
 import { formatDatelongMonthYear } from '../utils/formatDate';
 import UserCard from '../components/shared/UserCard';
 import '../styles/Profile.css';
@@ -29,7 +28,7 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <ProfileLayout>
+    <>
       <div className="profile-avatar-container">
         <img src={profile.avatar.imageUrl} alt="User Avatar" className="profile-avatar-image" />
         <FontAwesomeIcon icon={faGear} className='profile-settings-icon' onClick={handleOpenSettings} />
@@ -169,7 +168,7 @@ const Profile: React.FC = () => {
           </p>
         </div>
       </div>
-    </ProfileLayout>
+    </>
   );
 };
 

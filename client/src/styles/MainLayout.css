@@ -6,7 +6,7 @@
 
 .main-layout main {
     padding: var(--sm);
-    height: calc(100% - 50px - 70px);
+    height: calc(100% - 20%);
     overflow-y: scroll;
 }
 

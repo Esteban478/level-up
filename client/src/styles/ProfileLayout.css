@@ -5,11 +5,11 @@
 }
 
 .profile-layout main {
-    height: calc(100% - 70px);
+    height: calc(100% - 12%);
     overflow-y: scroll;
 }
 .profile-layout.friend-profile main {
-    height: calc(100% - 50px);
+    height: calc(100% - 8%);
 }
 
 .profile-layout.friend-profile .top-bar .title {
