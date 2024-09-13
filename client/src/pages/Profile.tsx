@@ -4,11 +4,13 @@ import { formatDatelongMonthYear } from '../utils/formatDate';
 import UserCard from '../components/shared/UserCard';
 import '../styles/Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faCheck, faX, faRightFromBracket, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, Link } from 'react-router-dom';
 import { usePublicHabits } from '../hooks/habits/usePublicHabits';
+import { useAuth } from '../hooks/auth/useAuth';
 
 const Profile: React.FC = () => {
+  const { logout } = useAuth();
   const { profile, loading, error } = useUserProfile();
   const { habits, loading: habitsLoading, error: habitsError } = usePublicHabits();
   const navigate = useNavigate();
@@ -19,6 +21,11 @@ const Profile: React.FC = () => {
 
   const handleOpenSettings = async () => {
     navigate('/profile-settings');
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
   };
 
   return (
@@ -59,7 +66,11 @@ const Profile: React.FC = () => {
 
         <div className="profile-friends">
           <div className="profile-friends-header">
-            <h2>Friends</h2> <Link to="/add-friend" className="add-friend-link">Add Friends</Link>
+            <h2>Friends</h2>
+            <Link to="/add-friend" className="add-friend-link">              
+              <FontAwesomeIcon icon={faUserGroup} className='add-friend-icon' />
+              Add Friends
+            </Link>
           </div>
           {profile.friends && profile.friends.length > 0 ? (
             <>
@@ -151,6 +162,12 @@ const Profile: React.FC = () => {
             <p className="achievements-count">{profile.achievements.length} achievements</p>
           </div>
         )}
+        <div className='profile-logout' onClick={handleLogout}>
+          <p className='logout-link'>
+            <FontAwesomeIcon icon={faRightFromBracket} className='logout-icon' />
+            Logout
+          </p>
+        </div>
       </div>
     </ProfileLayout>
   );

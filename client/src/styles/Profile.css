@@ -32,8 +32,7 @@
 }
 .user-profile-page h2 {
     padding: var(--xxs) 0;
-    font: var(--h2);
-    line-height: normal;
+
 }
 .user-profile-page h3 {
     font: var(--h3);
@@ -104,18 +103,13 @@
 .friends-list .user-card {
     flex-shrink: 0;
 }
-
+.add-friend-link svg {
+    margin-right: var(--xxs);
+}
 .add-friend-link {
-    display: inline-block;
     color: var(--color-secondary);
     font: var(--small);
     text-decoration: none;
-}
-
-@media (hover: hover) {
-    .add-friend-link:hover {
-        text-decoration: underline;
-    }
 }
 
 .habits-list {
@@ -139,4 +133,29 @@
 .habit-streak {
     font-size: var(--small);
     color: var(--color-text-secondary);
+}
+
+.user-profile-page .profile-logout {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: var(--xxs) 0;
+    color: var(--color-accent);
+    cursor: pointer;
+}
+
+.profile-logout svg {
+    margin-right: var(--xxs);
+}
+
+.profile-logout .logout-link {
+    font: var(--small);
+    line-height: 1rem;
+}
+
+@media (hover: hover) {
+    .add-friend-link:hover,
+    .logout-link:hover {
+        text-decoration: underline;
+    }
 }
