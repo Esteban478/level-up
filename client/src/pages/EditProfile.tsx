@@ -3,7 +3,6 @@ import { useUserProfile } from '../hooks/profile/useUserProfile';
 import { useEditProfileNavigation } from '../hooks/navigation/useEditProfileNavigation';
 import { useUpdateProfile } from '../hooks/profile/useUpdateProfile';
 import FullScreenLayout from '../components/layouts/FullScreenLayout';
-import BackButton from '../components/shared/BackButton';
 import TextButton from '../components/shared/ConfirmButton';
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
 import { UserProfile } from '../@types/userProfile';
@@ -23,7 +22,7 @@ const EditProfile: React.FC = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState('');
-  const { handleBack, handleSave } = useEditProfileNavigation();
+  const { handleSave } = useEditProfileNavigation();
   const { updateProfile } = useUpdateProfile();
 
   useEffect(() => {
@@ -105,7 +104,7 @@ const EditProfile: React.FC = () => {
   return (
     <FullScreenLayout
       title="Settings"
-      leftAction={<BackButton onClick={handleBack} />}
+      backButton
       rightAction={<TextButton text="Save" onClick={onSave} />}
     >
       <div className='profile-settings-container'>

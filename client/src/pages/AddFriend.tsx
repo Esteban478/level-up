@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FullScreenLayout from '../components/layouts/FullScreenLayout';
-import BackButton from '../components/shared/BackButton';
 import { useAuth } from '../hooks/auth/useAuth';
 import { User } from '../@types/user';
 import { debounce } from '../utils/debounce';
@@ -14,7 +12,6 @@ const AddFriend: React.FC = () => {
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUserFriends, setCurrentUserFriends] = useState<string[]>([]);
-  const navigate = useNavigate();
   const { getToken } = useAuth();
 
   const handleSearch = useCallback(async (term: string) => {
@@ -112,14 +109,10 @@ const AddFriend: React.FC = () => {
     }
   };
 
-  const handleBack = () => {
-    navigate('/profile');
-  };
-
   return (
     <FullScreenLayout
       title="Add Friend"
-      leftAction={<BackButton onClick={handleBack} />}
+      backButton
     >
       <div className="add-friend-container">
         <p className="add-friend-description">
