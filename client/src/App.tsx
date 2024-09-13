@@ -64,18 +64,18 @@ const App: React.FC = () => {
 
           {/* Full-screen overlays */}
           <Route path="/add-habit" element={
-              <FullScreenLayout title="Add Archive">
+            <FullScreenLayout title="Add Habit" backButton>
               <AddHabit />
             </FullScreenLayout>
           } />
           <Route path="/add-friend" element={
             <AddFriend />
           } />
-          <Route path="/edit-habit/:habitId" element={
+          <Route path="/edit-habit/:habitId" element={    
             <EditHabit />
           } />
           <Route path="/archive" element={
-            <FullScreenLayout title="Habit Archive">
+            <FullScreenLayout title="Habit Archive" backButton>
               <Archive />
             </FullScreenLayout>
           } />

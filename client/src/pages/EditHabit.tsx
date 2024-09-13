@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useHabit } from '../hooks/habits/useHabit';
 import { useEditHabitNavigation } from '../hooks/navigation/useEditHabitNavigation';
 import FullScreenLayout from '../components/layouts/FullScreenLayout';
-import BackButton from '../components/shared/BackButton';
 import TextButton from '../components/shared/ConfirmButton';
 import GoalCustomizer from '../components/GoalCustomizer';
 import PublicToggle from '../components/PublicToggle';
@@ -15,7 +14,7 @@ const EditHabit: React.FC = () => {
   const { habitId } = useParams<{ habitId: string }>();
   const { habit, loading, error } = useHabit(habitId);
   const [editedHabit, setEditedHabit] = useState<Habit | null>(null);
-  const { handleBack, handleSave, isNewHabit } = useEditHabitNavigation(habitId!);
+  const { handleSave, isNewHabit } = useEditHabitNavigation(habitId!);
 
   useEffect(() => {
     if (habit) {
@@ -45,7 +44,7 @@ const EditHabit: React.FC = () => {
   return (
     <FullScreenLayout
       title={isNewHabit ? "Add Habit" : "Edit Habit"}
-      leftAction={<BackButton onClick={handleBack} />}
+      backButton
       rightAction={<TextButton text="Save" onClick={onSave} />}
     >
       <div className='edit-habit'>

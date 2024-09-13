@@ -5,12 +5,13 @@ import BackButton from './BackButton';
 interface TopBarProps {
   title?: string;
   darkTitle?: boolean;
+  backButton?: boolean;
   leftAction?: React.ReactNode;
   rightAction?: React.ReactNode;
   topNav?: React.ReactNode;
 }
 
-const TopBar: React.FC<TopBarProps> = ({ title, darkTitle, rightAction, topNav }) => {
+const TopBar: React.FC<TopBarProps> = ({ title, darkTitle, backButton = false, leftAction, rightAction, topNav }) => {
   const navigate = useNavigate();
   const renderContent = () => {
     if (topNav) {
@@ -21,7 +22,10 @@ const TopBar: React.FC<TopBarProps> = ({ title, darkTitle, rightAction, topNav }
 
     return (
       <header className="top-bar">
-        <BackButton onClick={() => navigate(-1)}/>
+        { backButton
+          ? <BackButton onClick={() => navigate(-1)} />
+          :<div className='left-action'>{leftAction}</div>
+        }
         <h1 className={`title ${darkTitle ? 'dark-title' : ''}`}>
           {title}
         </h1>

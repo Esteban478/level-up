@@ -6,7 +6,7 @@ interface MainLayoutProps {
   children: React.ReactNode;
   title?: string;
   darkTitle?: boolean;
-  leftAction?: React.ReactNode;
+  backButton?: boolean;
   rightAction?: React.ReactNode;
   topNav?: React.ReactNode;
 }
@@ -15,7 +15,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   children, 
   title, 
   darkTitle, 
-  leftAction, 
+  backButton = false, 
   rightAction, 
   topNav 
 }) => (
@@ -23,7 +23,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     <TopBar 
       title={title} 
       darkTitle={darkTitle}
-      leftAction={leftAction} 
+      backButton={backButton} 
       rightAction={rightAction} 
       topNav={topNav}
     />

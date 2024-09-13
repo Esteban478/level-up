@@ -24,13 +24,13 @@
   --color-text-400: #616161;
 
 /* Size variables */
-  font-size: 24px;
+  font-size: 22px;
   --xxs: .25rem;
   --xs: .5rem;
   --sm: .75rem;
   --md: 1rem;
   --lg: 1.25rem;
-  --xl: 1.75rem;
+  --xl: 1.5rem;
   --xxl: 2.5rem;
 
 /* Font variables */

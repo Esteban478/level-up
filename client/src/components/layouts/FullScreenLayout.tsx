@@ -6,7 +6,7 @@ interface FullScreenLayoutProps {
   title?: string;
   darkTitle?: boolean;
   fromRight?: boolean;
-  leftAction?: React.ReactElement;
+  backButton?: boolean;
   rightAction?: React.ReactElement;
 }
 
@@ -15,14 +15,14 @@ const FullScreenLayout: React.FC<FullScreenLayoutProps> = ({
   title, 
   darkTitle,
   fromRight,
-  leftAction, 
+  backButton, 
   rightAction 
 }) => (
   <div className={`full-screen-layout ${fromRight ? 'from-right' : ''}`}>
     <TopBar 
       title={title} 
       darkTitle={darkTitle}
-      leftAction={leftAction} 
+      backButton={backButton} 
       rightAction={rightAction} 
     />
     <main>{children}</main>
