@@ -42,9 +42,9 @@ export const habits = [
         isTemplate: true,
         isPublic: true,
         area: "Keystone",
-        type: "Boolean",
+        type: "Duration",
         frequency: { type: "Daily" },
-        goal: { type: "Exactly", value: true, direction: "maintain" },
+        goal: { type: "At least", value: 7, unit: "hours", direction: "maintain" },
         xpReward: { base: 50, max: 50 }
     },
     {
@@ -92,7 +92,7 @@ export const habits = [
         area: "Keystone",
         type: "Numeric",
         frequency: { type: "Daily" },
-        goal: { type: "At least", value: 4, unit: "glasses", direction: "increase" },
+        goal: { type: "At least", value: 8, unit: "glasses", direction: "increase" },
         xpReward: { base: 5, max: 20 }
     },
     {

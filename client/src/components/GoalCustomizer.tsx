@@ -43,17 +43,6 @@ const GoalCustomizer: React.FC<GoalCustomizerProps> = ({ goal, onChange }) => {
       <div>
         <span>{goal.unit} per day</span>
       </div>
-      {/* <div>
-        <label>Direction:</label>
-        <select
-          value={goal.direction}
-          onChange={(e) => onChange({ ...goal, direction: e.target.value as Goal['direction'] })}
-        >
-          <option value="increase">Increase</option>
-          <option value="decrease">Decrease</option>
-          <option value="maintain">Maintain</option>
-        </select>
-      </div> */}
     </div>
   );
 };

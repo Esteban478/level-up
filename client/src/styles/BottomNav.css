@@ -1,9 +1,10 @@
 .bottom-nav {
-    height: 12%;
+    height: 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--sm) var(--xs) var(--md);
+    padding: var(--xs);
+    padding: var(--sm) var(--sm) calc(var(--sm) + env(safe-area-inset-bottom));
     border-top: var(--color-text-400) 2px solid;
 }
 .bottom-nav a {
