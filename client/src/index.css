@@ -107,7 +107,6 @@ dd {
 /* Set core body defaults */
 body {
   min-height: 100vh;
-  min-height: 100svh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -125,7 +124,6 @@ body {
 
 .full-screen > div {
   min-height: 100vh;
-  min-height: 100svh;
 }
 
 /* Make images easier to work with */

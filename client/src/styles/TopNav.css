@@ -5,7 +5,7 @@
     align-items: center;
     height: 8%;
     padding: var(--xs);
-    border-bottom: var(--color-text-400) 2px solid;
+    border-bottom: var(--color-text-400) 1px solid;
 }
 
 .top-nav a {

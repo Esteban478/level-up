@@ -4,8 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--xs) var(--xs) calc(var(--xs) + env(safe-area-inset-bottom));
-    padding: var(--xs);
-    border-top: var(--color-text-400) 2px solid;
+    border-top: var(--color-text-400) 1px solid;
 }
 .bottom-nav a {
     display: flex;
