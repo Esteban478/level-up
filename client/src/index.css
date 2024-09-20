@@ -110,8 +110,6 @@ body {
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  font-family: var(--fss);
   background-color: var(--color-background);
   color: var(--color-text);
 }
@@ -124,8 +122,8 @@ body {
 }
 
 .full-screen > div {
-  min-height: 100dvh;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Make images easier to work with */

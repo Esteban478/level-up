@@ -39,8 +39,9 @@ const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
 
   const wrapperStyle: React.CSSProperties = {
     top: isFullScreen ? 0 : '40px',
-    width: isFullScreen ? '100%' : '414px',
-    height: isFullScreen ? '100%' : '736px',
+    width: isFullScreen ? '100dvw' : '414px',
+    minHeight: isFullScreen ? '100dvh' : '736px',
+    height: 'auto',
     margin: '0 auto',
     overflow: 'hidden',
     position: isFullScreen ? 'absolute' : 'relative',
