@@ -28,9 +28,3 @@
 .bottom-nav a:focus {
     outline: none;
 }
-
-@supports(padding:max(0px)) {
-    .bottom-nav {
-        padding-bottom: min(0vmin, env(safe-area-inset-bottom));
-    }
-}

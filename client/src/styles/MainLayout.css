@@ -13,9 +13,3 @@
 .main-layout main h2 {
     margin: var(--xs) 0 var(--md);
 }
-
-@supports(padding:max(0px)) {
-    .main-layout main {
-        height: calc(100% - 18% - env(safe-area-inset-bottom));
-    }
-}
