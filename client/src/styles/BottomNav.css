@@ -32,6 +32,5 @@
 @supports(padding:max(0px)) {
     .bottom-nav {
         padding-bottom: min(0vmin, env(safe-area-inset-bottom));
-        height: calc(10% + env(safe-area-inset-bottom));
     }
 }
