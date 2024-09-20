@@ -308,6 +308,12 @@ a {
   }
 }
 
+@supports(padding:max(0px)) {
+  nav {
+    padding-bottom: min(0vmin, env(safe-area-inset-bottom));
+  }
+}
+
 @media (width <=768px) {
 
 }
