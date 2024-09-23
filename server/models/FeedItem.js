@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
 const feedItemSchema = new mongoose.Schema({
-    userId: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
     type: {
         type: String,
-        enum: ['achievement', 'tip'],
+        enum: ['achievement', 'friendAchievement', 'tip'],
         required: true
     },
     content: {
@@ -19,7 +19,7 @@ const feedItemSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-}, { timestamps: true });
+});
 
 const FeedItem = mongoose.model('FeedItem', feedItemSchema);
 

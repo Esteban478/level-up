@@ -1,4 +1,4 @@
-import FeedItem from '../models/FeedItem.js';
+import { User, FeedItem } from '../models/index.js';
 
 export const createFeedItem = async (req, res) => {
     try {
@@ -17,21 +17,38 @@ export const createFeedItem = async (req, res) => {
 
 export const getFeedItems = async (req, res) => {
     try {
+        const userId = req.user._id;
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 20;
-        const skip = (page - 1) * limit;
+        const limit = parseInt(req.query.limit) || 10;
 
-        const feedItems = await FeedItem.find({ userId: req.user._id })
+        const feedItems = await FeedItem.find({
+            $or: [
+                { user: userId, type: { $in: ['achievement', 'tip'] } },
+                { user: userId, type: 'friendAchievement', 'content.friendId': { $ne: userId } }
+            ]
+        })
             .sort({ timestamp: -1 })
-            .skip(skip)
-            .limit(limit);
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .populate({
+                path: 'user',
+                select: 'username avatar',
+                populate: {
+                    path: 'avatar',
+                    select: 'imageUrl'
+                }
+            });
 
-        const totalItems = await FeedItem.countDocuments({ userId: req.user._id });
-        const hasMore = totalItems > page * limit;
+        const totalItems = await FeedItem.countDocuments({
+            $or: [
+                { user: userId, type: { $in: ['achievement', 'tip'] } },
+                { user: userId, type: 'friendAchievement', 'content.friendId': { $ne: userId } }
+            ]
+        });
 
         res.json({
             feedItems,
-            hasMore,
+            hasMore: totalItems > page * limit,
             totalItems
         });
     } catch (error) {

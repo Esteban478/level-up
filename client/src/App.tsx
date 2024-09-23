@@ -88,7 +88,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Navigate to={user ? "/today" : "/auth"} replace />} />
       </Routes>
     </Router>
-    <ToastContainer position="bottom-center" autoClose={3000} />
+    <ToastContainer position="bottom-center" autoClose={2000} />
     </>
   );
 };

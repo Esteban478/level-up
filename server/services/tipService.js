@@ -48,7 +48,7 @@ export const selectTipForUser = async (userId, forceGeneration = true, recursion
         await user.save();
 
         await FeedItem.create({
-            userId,
+            user: userId,
             type: 'tip',
             content: {
                 tipId: selectedTip._id,

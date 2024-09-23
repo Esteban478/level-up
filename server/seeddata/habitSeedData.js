@@ -430,6 +430,30 @@ export const habits = [
         frequency: { type: "Daily" },
         goal: { type: "At least", value: 1, unit: "prioritization", direction: "increase" },
         xpReward: { base: 20, max: 25 }
+    },
+    {
+        habitId: 37,
+        name: "Weed Sobriety",
+        description: "Do not consume any canabis products.",
+        isTemplate: true,
+        isPublic: true,
+        area: "Productivity",
+        type: "Boolean",
+        frequency: { type: "Daily" },
+        goal: { type: "Exactly", value: 0, unit: "times", direction: "maintain" },
+        xpReward: { base: 20, max: 25 }
+    },
+    {
+        habitId: 38,
+        name: "Lower body stretches",
+        description: "Stretch your lower body for improved mobility and flexibility.",
+        isTemplate: true,
+        isPublic: true,
+        area: "Health",
+        type: "Boolean",
+        frequency: { type: "Daily" },
+        goal: { type: "At least", value: 5, unit: "minutes", direction: "increase" },
+        xpReward: { base: 20, max: 25 }
     }
 ];
 

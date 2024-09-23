@@ -1,25 +1,30 @@
-
-import { XpTransaction, User, Habit, LevelThreshold } from '../models/index.js';
+import { XpTransaction, User, Habit, LevelThreshold, FeedItem } from '../models/index.js';
+import { checkAchievements, createFeedItemForAchievement } from '../services/achievementService.js';
 import mongoose from 'mongoose';
-import { checkAchievements } from '../services/achievementService.js';
 
 export const createXpTransaction = async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
     try {
+        console.log('Starting XP transaction', req.body);
         const { habitId, source } = req.body;
         const userId = req.user._id;
+
+        console.log('User ID:', userId, 'Habit ID:', habitId, 'Source:', source);
 
         let xpGained;
         if (source === 'Habit_completion') {
             const habit = await Habit.findById(habitId);
+            console.log('Habit found:', habit);
             if (!habit) {
-                throw new Error('Habit not found');
+                throw new Error(`Habit not found for ID: ${habitId}`);
             }
             xpGained = habit.xpReward.base;
+            console.log('XP gained from habit:', xpGained);
         } else {
             xpGained = req.body.xpGained;
+            console.log('XP gained from other source:', xpGained);
         }
 
         // Create XP transaction
@@ -32,25 +37,29 @@ export const createXpTransaction = async (req, res) => {
         await xpTransaction.save({ session });
 
         // Update user's XP and level
-        const user = await User.findById(userId);
+        const user = await User.findById(userId).session(session);
         user.totalXp += xpGained;
         user.xp += xpGained;
 
         // Check for level up
-        const nextLevelThreshold = await LevelThreshold.findOne({ totalXpRequired: { $gt: user.totalXp } }).sort('totalXpRequired');
+        const nextLevelThreshold = await LevelThreshold.findOne({ totalXpRequired: { $gt: user.totalXp } }).sort('totalXpRequired').session(session);
 
         let levelUp = false;
 
         if (nextLevelThreshold && user.level < nextLevelThreshold.level - 1) {
             user.level = nextLevelThreshold.level - 1;
             levelUp = true;
-            user.xp = user.totalXp - (await LevelThreshold.findOne({ level: user.level })).totalXpRequired;
+            user.xp = user.totalXp - (await LevelThreshold.findOne({ level: user.level }).session(session)).totalXpRequired;
         }
 
         await user.save({ session });
 
         // Check for achievements
         const earnedAchievements = await checkAchievements(userId, habitId);
+
+        console.log('Earned achievements:', earnedAchievements);
+        console.log('New user level:', user.level);
+        console.log('New user XP:', user.xp);
 
         // Award XP for achievements
         let achievementXP = 0;
@@ -64,6 +73,9 @@ export const createXpTransaction = async (req, res) => {
                 sourceId: achievement._id
             });
             await achievementXpTransaction.save({ session });
+
+            // Create feed item for the achievement
+            await createFeedItemForAchievement(userId, achievement);
         }
 
         // Update user's XP again if achievements were earned
@@ -88,9 +100,10 @@ export const createXpTransaction = async (req, res) => {
             }))
         });
     } catch (error) {
+        console.error('Error in createXpTransaction:', error);
         await session.abortTransaction();
         session.endSession();
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ error: error.message, stack: error.stack });
     }
 };
 

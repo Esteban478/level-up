@@ -2,7 +2,7 @@ import http from 'http';
 import https from 'https';
 import { URL } from 'url';
 import mongoose from 'mongoose';
-import { User, Habit, Achievement, Tip, LevelThreshold, BadgeTier, XPTransaction, HabitLog, AuditLog, UserAchievement } from '../models/index.js';
+import { User, Habit, Achievement, Tip, LevelThreshold, BadgeTier, XpTransaction, HabitLog, AuditLog, UserAchievement } from '../models/index.js';
 import dotenv from 'dotenv';
 dotenv.config();
 import { createAvatar } from '@dicebear/core';
@@ -78,7 +78,7 @@ export const cleanupDatabase = async () => {
             Tip.deleteMany({}),
             LevelThreshold.deleteMany({}),
             BadgeTier.deleteMany({}),
-            XPTransaction.deleteMany({}),
+            XpTransaction.deleteMany({}),
             UserAchievement.deleteMany({})
         ]);
 
