@@ -2,30 +2,37 @@
     display: flex;
     flex-direction: column;
     padding: var(--xxs);
+    margin: 0 auto;
 }
 
 .feed-item {
     background-color: var(--color-background-300);
     border-radius: var(--xs);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: var(--md);
     margin-bottom: var(--md);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 
 .feed-item-header {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: var(--sm);
 }
 
-.user-avatar {
-    width: 40px;
-    height: 40px;
+.user-avatar,
+.tip-icon {
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    margin-right: 12px;
+    margin-right: var(--sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-background-200);
+    color: var(--color-text-300);
+    font-size: 1.2rem;
 }
 
 .user-info {
@@ -35,67 +42,119 @@
 
 .username {
     font-weight: bold;
+    font-size: var(--sm);
 }
 
 .timestamp {
-    font-size: 0.8em;
-    color: #a0a0a0;
+    font-size: var(--sm);
+    color: var(--color-text-200);
 }
 
 .feed-item-content {
-    margin-bottom: 12px;
+    margin-bottom: var(--sm);
 }
 
-.feed-item-content h3 {
-    margin-bottom: 8px;
+.achievement-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-info h3 {
+    font-size: var(--h3);
+    margin-top: var(--xxs);
+}
+
+.achievement-info p {
+    font: var(--p);
+    font-size: 0.9rem;
+    margin: var(--xxs) 0;
+}
+
+.achievement-image-placeholder {
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-background-200);
+    border-radius: var(--xs);
+}
+
+.tip-content {
+    border-radius: var(--xs);
+    padding: var(--xs);
+}
+
+.tip-content p {
+    font-size: 0.9rem;
+    margin-bottom: var(--xxs);
+}
+
+.tip-category {
+    font-size: 0.9rem;
+    color: var(--color-text-200);
 }
 
 .feed-item-footer {
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: var(--sm);
 }
 
 .congratulate-button {
-    background-color: #1cb0f6;
-    color: #ffffff;
+    background-color: var(--color-primary);
+    color: var(--color-text-100);
     border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
+    border-radius: var(--xxs);
+    padding: var(--xs) var(--sm);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--xxs);
+    font: var(--h3)
 }
 
-.congratulate-button.celebrated {
-    background-color: #78c800;
+.congratulate-button.congratulated {
+    background-color: var(--color-text-400);
 }
 
 .congratulate-button:disabled {
-    background-color: #a0a0a0;
+    background-color: var(--color-text-400);
     cursor: not-allowed;
 }
 
-.reactions {
+.congratulations-count {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--xxs);
+    color: var(--color-text-200);
+    transition: transform 0.3s ease;
 }
 
-.reaction-icon {
-    font-size: 1.2em;
-    color: #a0a0a0;
+.congratulations-count.animate {
+    animation: jumpAnimation 0.3s ease;
 }
 
-.congratulations-count {
-    color: #a0a0a0;
+.congratulations-count svg {
+    font-size: 1rem;
+}
+.congratulations-count span {
+    font: var(--p);
 }
 
-.achievement-image {
-    max-width: 100%;
-    height: auto;
-    margin-top: 12px;
-    border-radius: 8px;
+@keyframes jumpAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }

@@ -3,13 +3,14 @@ import { FeedItemProps } from "../@types/feedItem";
 import { formatDistanceToNow } from "../utils/formatDate";
 import { useAuth } from '../hooks/auth/useAuth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
   const { user: currentUser } = useAuth();
   const { type, content, timestamp, user, congratulations } = item;
   const [isCongratulated, setIsCongratulated] = useState(false);
   const [congratsCount, setCongratsCount] = useState(congratulations.length);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     setIsCongratulated(currentUser ? congratulations.includes(currentUser.id) : false);
@@ -19,41 +20,22 @@ const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
   const renderContent = () => {
     switch (type) {
       case 'achievement':
-        return (
-          <div className="achievement-feed-item">
-            <p>You achieved:</p>
-            <h3>{content.name}</h3>
-            <p>{content.description}</p>
-            <p>XP Earned: {content.xpReward}</p>
-            <p>Congratulations: {congratsCount}</p>
-          </div>
-        );
       case 'friendAchievement':
         return (
-          <div className="friend-achievement-feed-item">
-            <p><strong>{content.friend?.username}</strong> achieved:</p>
-            <h3>{content.name}</h3>
-            <p>{content.description}</p>
-            <p>XP Earned: {content.xpReward}</p>
-
-            <button 
-              onClick={handleCongratulate} 
-              disabled={isCongratulated || !currentUser}
-              className={`congratulate-button ${isCongratulated ? 'congratulated' : ''}`}
-            >
-              <FontAwesomeIcon icon={faThumbsUp} />
-              {isCongratulated ? 'Congratulated' : 'Congratulate'}
-            </button>
-            <p>Congratulations: {congratsCount}</p>
+          <div className="achievement-content">
+            <div className="achievement-info">
+              <h3>{content.name}</h3>
+              <p>{content.description}</p>
+            </div>
+            <div className="achievement-image-placeholder"></div>
           </div>
         );
       case 'tip':
         return (
-        <div className="tip-feed-item">
-          <h3>Daily Tip</h3>
-          <p>{content.tip?.content || 'No tip content available'}</p>
-          <p>Category: {content.tip?.category || 'Uncategorized'}</p>
-        </div>
+          <div className="tip-content">
+            <p>{content.tip?.content || 'No tip content available'}</p>
+            <p className="tip-category">Category: {content.tip?.category || 'Uncategorized'}</p>
+          </div>
         );
       default:
         return <p>Unknown feed item type</p>;
@@ -61,10 +43,10 @@ const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
   };
 
   const getAvatarUrl = () => {
-    if (type === 'friendAchievement' && content.friend) {
-      return content.friend.avatar?.imageUrl || "/default-avatar.jpg";
-    }
-    return user.avatar?.imageUrl || "/default-avatar.jpg";
+      if (type === 'friendAchievement' && content.friend) {
+          return content.friend.avatar?.imageUrl || "/default-avatar.jpg";
+      }
+      return user.avatar?.imageUrl || "/default-avatar.jpg";
   };
 
   const getUsername = () => {
@@ -80,6 +62,8 @@ const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
         const newCongratsCount = await onCongratulate(content.achievementId, content.friend._id);
         setIsCongratulated(true);
         setCongratsCount(newCongratsCount);
+        setIsAnimating(true);
+        setTimeout(() => setIsAnimating(false), 300);
       } catch (error) {
         console.error('Failed to congratulate:', error);
       }
@@ -88,16 +72,42 @@ const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
 
   return (
     <div className={`feed-item ${type}-item`}>
-      <img 
-        src={getAvatarUrl()} 
-        alt={`${getUsername() || 'User'}'s avatar`} 
-        className="user-avatar" 
-      />
-      <div className="feed-item-content">
-        <p className="username">{getUsername() || 'Unknown User'}</p>
-        {renderContent()}
-        <p className="timestamp">{formatDistanceToNow(new Date(timestamp))}</p>
+      <div className="feed-item-header">
+        {type !== 'tip' ? (
+          <img 
+            src={getAvatarUrl()} 
+            alt={`${getUsername() || 'User'}'s avatar`} 
+            className="user-avatar" 
+          />
+        ) : (
+          <div className="tip-icon">
+            <FontAwesomeIcon icon={faLightbulb} />
+          </div>
+        )}
+        <div className="user-info">
+          <p className="username">{type === 'tip' ? 'Daily Tip' : getUsername() || 'Unknown User'}</p>
+          <p className="timestamp">{formatDistanceToNow(new Date(timestamp))}</p>
+        </div>
       </div>
+      <div className="feed-item-content">
+        {renderContent()}
+      </div>
+      {type === 'friendAchievement' && (
+        <div className="feed-item-footer">
+          <button 
+            onClick={handleCongratulate} 
+            disabled={isCongratulated || !currentUser}
+            className={`congratulate-button ${isCongratulated ? 'congratulated' : ''}`}
+          >
+            {isCongratulated && <FontAwesomeIcon icon={faThumbsUp} />}
+            {isCongratulated ? 'CELEBRATED' : 'CELEBRATE'}
+          </button>
+          <div className={`congratulations-count ${isAnimating ? 'animate' : ''}`}>
+            <FontAwesomeIcon icon={faThumbsUp} />
+            <span>{congratsCount}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

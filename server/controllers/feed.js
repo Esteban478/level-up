@@ -72,17 +72,26 @@ export const congratulateAchievement = async (req, res) => {
 export const refreshCongratulations = async (req, res) => {
     try {
         const userId = req.user._id;
-        const feedItems = await FeedItem.find({ user: userId });
+        const feedItems = await FeedItem.find({ user: userId })
+            .populate({
+                path: 'user',
+                select: 'username avatar',
+                populate: { path: 'avatar', select: 'imageUrl' }
+            })
+            .populate({
+                path: 'content.friend',
+                select: 'username avatar',
+                populate: { path: 'avatar', select: 'imageUrl' }
+            });
 
         const updatedFeedItems = await Promise.all(feedItems.map(async (item) => {
             if (item.type === 'achievement' || item.type === 'friendAchievement') {
                 const userAchievement = await UserAchievement.findOne({
-                    userId: item.type === 'achievement' ? userId : item.content.friendId,
+                    userId: item.type === 'achievement' ? userId : item.content.friend._id,
                     achievementId: item.content.achievementId
                 });
 
                 if (userAchievement) {
-                    // Set the congratulations to the actual array, not just the length
                     item.congratulations = userAchievement.congratulations;
                     await item.save();
                 }

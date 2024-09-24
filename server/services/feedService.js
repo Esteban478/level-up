@@ -10,15 +10,25 @@ export const generateFeed = async (userId, page = 1, limit = 10) => {
         .limit(limit)
         .skip((page - 1) * limit)
         .populate('content.tip')
-        .populate('user', 'username avatar')
-        .populate('content.friend', 'username avatar')
+        .populate({
+            path: 'user',
+            select: 'username avatar',
+            populate: { path: 'avatar', select: 'imageUrl' }
+        })
         .lean();
 
     // Get friend achievements
     const friendAchievements = await UserAchievement.find({
         userId: { $in: friendIds },
         dateEarned: { $gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) } // Last 30 days
-    }).populate('userId').populate('achievementId').lean();
+    })
+        .populate({
+            path: 'userId',
+            select: 'username avatar',
+            populate: { path: 'avatar', select: 'imageUrl' }
+        })
+        .populate('achievementId')
+        .lean();
 
     // Convert friend achievements to feed items
     const friendFeedItems = friendAchievements.map(ua => ({

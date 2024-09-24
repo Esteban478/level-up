@@ -122,7 +122,24 @@ export const useFeed = (initialPageSize = 10) => {
       setFeedItems(prevItems => 
         prevItems.map(item => {
           const updatedItem = updatedFeedItems.find((updated: { _id: string; }) => updated._id === item._id);
-          return updatedItem ? { ...item, congratulations: updatedItem.congratulations } : item;
+          if (updatedItem) {
+            return {
+              ...item,
+              congratulations: updatedItem.congratulations,
+              user: {
+                ...item.user,
+                avatar: updatedItem.user.avatar
+              },
+              content: {
+                ...item.content,
+                friend: updatedItem.content.friend ? {
+                  ...item.content.friend,
+                  avatar: updatedItem.content.friend.avatar
+                } : item.content.friend
+              }
+            };
+          }
+          return item;
         })
       );
     } catch (err) {
