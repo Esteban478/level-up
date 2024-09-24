@@ -51,9 +51,7 @@ export const selectTipForUser = async (userId, forceGeneration = true, recursion
             user: userId,
             type: 'tip',
             content: {
-                tipId: selectedTip._id,
-                content: selectedTip.content,
-                category: selectedTip.category
+                tip: selectedTip._id
             }
         });
 

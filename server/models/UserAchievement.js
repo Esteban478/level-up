@@ -14,7 +14,11 @@ const userAchievementSchema = new mongoose.Schema({
     dateEarned: {
         type: Date,
         default: Date.now
-    }
+    },
+    congratulations: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 }, { timestamps: true });
 
 const UserAchievement = mongoose.model('UserAchievement', userAchievementSchema);

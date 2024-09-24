@@ -5,7 +5,7 @@ export const createFeedItemForAchievement = async (userId, achievement) => {
     console.log(`Creating feed item for achievement: ${achievement.name}, User: ${userId}`);
     const user = await User.findById(userId).populate('avatar');
 
-    // Create feed item for the user
+    // Create feed item only for the user
     const userFeedItem = await FeedItem.findOne({
         user: userId,
         type: 'achievement',
@@ -22,39 +22,9 @@ export const createFeedItemForAchievement = async (userId, achievement) => {
                 description: achievement.description,
                 xpReward: achievement.reward.xp,
                 isOwnAchievement: true
-            }
+            },
+            congratulations: []
         });
-    }
-
-    // Create feed items for friends
-    const friends = await User.find({ _id: { $in: user.friends } });
-    console.log(`Friends found: ${friends.length}`);
-    for (const friend of friends) {
-        console.log(`Creating feed item for friend: ${friend._id}`);
-        if (friend.settings.privacy.activityVisibility === 'friends' || friend.settings.privacy.activityVisibility === 'public') {
-            const friendFeedItem = await FeedItem.findOne({
-                user: friend._id,
-                type: 'friendAchievement',
-                'content.achievementId': achievement._id,
-                'content.friendId': userId
-            });
-
-            if (!friendFeedItem) {
-                await FeedItem.create({
-                    user: friend._id,
-                    type: 'friendAchievement',
-                    content: {
-                        achievementId: achievement._id,
-                        name: achievement.name,
-                        description: achievement.description,
-                        xpReward: achievement.reward.xp,
-                        friendId: userId,
-                        friendUsername: user.username,
-                        friendAvatar: user.avatar ? user.avatar.imageUrl : null
-                    }
-                });
-            }
-        }
     }
 };
 const checkHabitMilestoneAchievement = async (userId, habitId) => {

@@ -62,7 +62,7 @@ export const useXPTransaction = () => {
         setTimeout(() => {
           toast.success(
             `Achievement Unlocked: ${achievement.name} (${achievement.xpReward} XP)`,
-            { autoClose: 6000 }
+            { autoClose: 2500 }
           );
         }, index * 1000); // Delay each achievement toast by 1 second
       });
@@ -82,7 +82,7 @@ export const useXPTransaction = () => {
               if (data.newLevel) {
                 const token = getToken();
                 setTimeout(() => {
-                  toast.info(`Congratulations! You've reached level ${data.newLevel}!`, { autoClose: 5000 });
+                  toast.info(`Congratulations! You've reached level ${data.newLevel}!`, { autoClose: 2500 });
                   
                   // Check for additional achievements triggered by level up
                   fetch(`${import.meta.env.VITE_BASE_URI}/achievements/check-level`, {

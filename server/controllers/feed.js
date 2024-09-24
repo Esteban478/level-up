@@ -1,12 +1,14 @@
-import { User, FeedItem } from '../models/index.js';
+import { FeedItem, UserAchievement } from '../models/index.js';
+import { generateFeed } from '../services/feedService.js';
 
 export const createFeedItem = async (req, res) => {
     try {
         const { type, content } = req.body;
         const feedItem = new FeedItem({
-            userId: req.user._id,
+            user: req.user._id,
             type,
-            content
+            content,
+            congratulations: []
         });
         await feedItem.save();
         res.status(201).json(feedItem);
@@ -17,41 +19,80 @@ export const createFeedItem = async (req, res) => {
 
 export const getFeedItems = async (req, res) => {
     try {
-        const userId = req.user._id;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
 
-        const feedItems = await FeedItem.find({
-            $or: [
-                { user: userId, type: { $in: ['achievement', 'tip'] } },
-                { user: userId, type: 'friendAchievement', 'content.friendId': { $ne: userId } }
-            ]
-        })
-            .sort({ timestamp: -1 })
-            .skip((page - 1) * limit)
-            .limit(limit)
-            .populate({
-                path: 'user',
-                select: 'username avatar',
-                populate: {
-                    path: 'avatar',
-                    select: 'imageUrl'
-                }
-            });
+        const feedData = await generateFeed(req.user._id, page, limit);
 
-        const totalItems = await FeedItem.countDocuments({
-            $or: [
-                { user: userId, type: { $in: ['achievement', 'tip'] } },
-                { user: userId, type: 'friendAchievement', 'content.friendId': { $ne: userId } }
-            ]
-        });
-
-        res.json({
-            feedItems,
-            hasMore: totalItems > page * limit,
-            totalItems
-        });
+        res.json(feedData);
     } catch (error) {
+        console.error('Error fetching feed items:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const congratulateAchievement = async (req, res) => {
+    try {
+        const { achievementId, friendId } = req.body;
+        const userId = req.user._id;
+
+        const userAchievement = await UserAchievement.findOne({
+            userId: friendId,
+            achievementId: achievementId
+        });
+
+        if (!userAchievement) {
+            return res.status(404).json({ error: 'Achievement not found' });
+        }
+
+        if (userAchievement.congratulations.includes(userId)) {
+            return res.status(400).json({ error: 'You have already congratulated this achievement' });
+        }
+
+        userAchievement.congratulations.push(userId);
+        await userAchievement.save();
+
+        // Update feed items for both the congratulating user and the achievement owner
+        await FeedItem.updateMany(
+            {
+                $or: [
+                    { user: userId, type: 'friendAchievement', 'content.achievementId': achievementId },
+                    { user: friendId, type: 'achievement', 'content.achievementId': achievementId }
+                ]
+            },
+            { $set: { congratulations: userAchievement.congratulations } }
+        );
+
+        res.json({ success: true, congratulationsCount: userAchievement.congratulations.length });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const refreshCongratulations = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const feedItems = await FeedItem.find({ user: userId });
+
+        const updatedFeedItems = await Promise.all(feedItems.map(async (item) => {
+            if (item.type === 'achievement' || item.type === 'friendAchievement') {
+                const userAchievement = await UserAchievement.findOne({
+                    userId: item.type === 'achievement' ? userId : item.content.friendId,
+                    achievementId: item.content.achievementId
+                });
+
+                if (userAchievement) {
+                    // Set the congratulations to the actual array, not just the length
+                    item.congratulations = userAchievement.congratulations;
+                    await item.save();
+                }
+            }
+            return item;
+        }));
+
+        res.json(updatedFeedItems);
+    } catch (error) {
+        console.error('Error in refreshCongratulations:', error);
         res.status(500).json({ error: error.message });
     }
 };

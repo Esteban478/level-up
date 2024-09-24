@@ -10,48 +10,92 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: var(--md);
     margin-bottom: var(--md);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.achievement-feed-item h3,
-.tip-feed-item h3 {
-    font: var(--h2);
-    color: var(--color-text);
-    margin-bottom: var(--xs);
+.feed-item-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
-.achievement-feed-item p,
-.tip-feed-item p {
-    font: var(--p);
-    color: var(--color-text-100);
-    margin-bottom: var(--xxs);
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: bold;
 }
 
 .timestamp {
-    font: var(--small);
-    color: var(--color-text-300);
-    margin-top: var(--xs);
+    font-size: 0.8em;
+    color: #a0a0a0;
 }
 
-.load-more-button {
-    background-color: var(--color-primary);
-    color: var(--color-background);
+.feed-item-content {
+    margin-bottom: 12px;
+}
+
+.feed-item-content h3 {
+    margin-bottom: 8px;
+}
+
+.feed-item-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.congratulate-button {
+    background-color: #1cb0f6;
+    color: #ffffff;
     border: none;
-    padding: var(--xs) var(--sm);
-    border-radius: var(--xxs);
-    font: var(--p);
-    font-weight: bold;
+    border-radius: 8px;
+    padding: 8px 16px;
     cursor: pointer;
-    margin-top: var(--md);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.load-more-button:hover {
-    background-color: #00A8E6;
+.congratulate-button.celebrated {
+    background-color: #78c800;
 }
 
-.end-of-feed,
-.empty-feed {
-    text-align: center;
-    color: var(--color-text-200);
-    margin-top: var(--md);
-    font: var(--p);
+.congratulate-button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.reactions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reaction-icon {
+    font-size: 1.2em;
+    color: #a0a0a0;
+}
+
+.congratulations-count {
+    color: #a0a0a0;
+}
+
+.achievement-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 12px;
+    border-radius: 8px;
 }

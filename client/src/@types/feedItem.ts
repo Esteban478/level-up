@@ -1,30 +1,25 @@
 import { User } from "./user";
-
-export interface TipContent {
-  content: string;
-  category: string;
-}
+import { Tip } from "./tip";
 
 export interface FeedItem {
   _id: string;
   type: 'achievement' | 'friendAchievement' | 'tip';
-  content: AchievementContent | TipContent;
+  content: {
+    achievementId?: string;
+    name?: string;
+    description?: string;
+    xpReward?: number;
+    friend: User;
+    tip?: Tip;
+  };
   timestamp: string;
   user: User;
-}
-
-export interface AchievementContent {
-  name: string;
-  description: string;
-  xpReward: number;
-  isOwnAchievement?: boolean;
-  friendId?: string;
-  friendUsername?: string;
-  friendAvatar?: string;
+  congratulations: string[];
 }
 
 export interface FeedItemProps {
   item: FeedItem;
+  onCongratulate: (achievementId: string, friendId: string) => Promise<number>;
 }
 
 export interface FeedResponse {

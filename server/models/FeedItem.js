@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const feedItemSchema = new mongoose.Schema({
     user: {
@@ -12,14 +12,22 @@ const feedItemSchema = new mongoose.Schema({
         required: true
     },
     content: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true
+        achievementId: { type: mongoose.Schema.Types.ObjectId, ref: 'Achievement' },
+        name: String,
+        description: String,
+        xpReward: Number,
+        friend: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        tip: { type: mongoose.Schema.Types.ObjectId, ref: 'Tip' }
     },
     timestamp: {
         type: Date,
         default: Date.now
-    }
-});
+    },
+    congratulations: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
+}, { timestamps: true });
 
 const FeedItem = mongoose.model('FeedItem', feedItemSchema);
 
