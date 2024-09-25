@@ -1,6 +1,4 @@
-import User from '../models/User.js';
-import Habit from '../models/Habit.js';
-import HabitLog from '../models/HabitLog.js';
+import { FeedItem, User, Habit, HabitLog } from '../models/index.js';
 import mongoose from 'mongoose';
 
 export const getUserProfile = async (req, res) => {
@@ -141,10 +139,17 @@ export const getPublicActiveHabits = async (req, res) => {
 export const searchUsers = async (req, res) => {
     try {
         const { term } = req.query;
+        const currentUserId = req.user._id; // Assuming the auth middleware adds the user to the request
+
         const users = await User.find({
-            $or: [
-                { username: { $regex: term, $options: 'i' } },
-                { email: { $regex: term, $options: 'i' } }
+            $and: [
+                {
+                    $or: [
+                        { username: { $regex: term, $options: 'i' } },
+                        { email: { $regex: term, $options: 'i' } }
+                    ]
+                },
+                { _id: { $ne: currentUserId } } // Exclude the current user
             ]
         })
             .select('username avatar')
@@ -159,15 +164,51 @@ export const searchUsers = async (req, res) => {
 
 export const addFriend = async (req, res) => {
     try {
-        const { friendId } = req.body;
-        const user = await User.findById(req.user._id);
-        if (!user.friends.includes(friendId)) {
-            user.friends.push(friendId);
-            await user.save();
+        const { friendId, currentUserId } = req.body;
+
+        const [currentUser, friend] = await Promise.all([
+            User.findById(currentUserId).select('username avatar friends').populate('avatar'),
+            User.findById(friendId).select('username avatar friends').populate('avatar')
+        ]);
+
+        if (!currentUser || !friend) {
+            return res.status(404).json({ error: 'User or friend not found' });
         }
-        res.json({ message: 'Friend added successfully' });
+
+        let isNewFriendship = false;
+
+        if (!currentUser.friends.includes(friendId)) {
+            currentUser.friends.push(friendId);
+            await currentUser.save();
+            isNewFriendship = true;
+        }
+
+        // Check if it's a mutual friendship
+        const isFollowingBack = friend.friends.includes(currentUser._id);
+
+        if (isNewFriendship) {
+            // Create a new feed item for the friend
+            const newFeedItem = new FeedItem({
+                type: 'newFriend',
+                user: friendId, // This is the friend's ID, as the feed item is for them
+                content: {
+                    friend: {
+                        _id: currentUser._id,
+                        username: currentUser.username,
+                        avatar: currentUser.avatar
+                    },
+                    isFollowingBack
+                },
+                timestamp: new Date()
+            });
+
+            await newFeedItem.save();
+        }
+
+        res.json({ message: 'Friend added successfully', isFollowingBack });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error adding friend:', error);
+        res.status(500).json({ error: 'An error occurred while adding friend' });
     }
 };
 

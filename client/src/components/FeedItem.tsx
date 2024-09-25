@@ -3,18 +3,20 @@ import { FeedItemProps } from "../@types/feedItem";
 import { formatDistanceToNow } from "../utils/formatDate";
 import { useAuth } from '../hooks/auth/useAuth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faLightbulb, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
   const { user: currentUser } = useAuth();
   const { type, content, timestamp, user, congratulations } = item;
   const [isCongratulated, setIsCongratulated] = useState(false);
-  const [congratsCount, setCongratsCount] = useState(congratulations.length);
+  const [congratsCount, setCongratsCount] = useState(congratulations?.length || 0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setIsCongratulated(currentUser ? congratulations.includes(currentUser.id) : false);
-    setCongratsCount(congratulations.length);
+    setIsCongratulated(currentUser ? congratulations?.includes(currentUser.id) : false);
+    setCongratsCount(congratulations?.length || 0);
   }, [currentUser, congratulations]);
 
   const renderContent = () => {
@@ -37,20 +39,30 @@ const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
             <p className="tip-category">Category: {content.tip?.category || 'Uncategorized'}</p>
           </div>
         );
+      case 'newFriend':
+        return (
+          <div className="new-friend-content">
+            <p>
+              {content.isFollowingBack
+                ? `${getUsername()} is following you back!`
+                : `${getUsername()} is now following you!`}
+            </p>
+          </div>
+        );
       default:
         return <p>Unknown feed item type</p>;
     }
   };
 
   const getAvatarUrl = () => {
-      if (type === 'friendAchievement' && content.friend) {
-          return content.friend.avatar?.imageUrl || "/default-avatar.jpg";
-      }
-      return user.avatar?.imageUrl || "/default-avatar.jpg";
+    if ((type === 'friendAchievement' || type === 'newFriend') && content.friend) {
+      return content.friend.avatar?.imageUrl || "/default-avatar.jpg";
+    }
+    return user.avatar?.imageUrl || "/default-avatar.jpg";
   };
 
   const getUsername = () => {
-    if (type === 'friendAchievement' && content.friend) {
+    if ((type === 'friendAchievement' || type === 'newFriend') && content.friend) {
       return content.friend.username;
     }
     return user.username;
@@ -67,6 +79,12 @@ const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
       } catch (error) {
         console.error('Failed to congratulate:', error);
       }
+    }
+  };
+
+  const handleShowProfile = () => {
+    if ((type === 'newFriend') && content.friend._id) {
+      navigate(`/friend/${content.friend._id}`);
     }
   };
 
@@ -92,6 +110,14 @@ const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
       <div className="feed-item-content">
         {renderContent()}
       </div>
+      {type === 'achievement' && (
+        <div className="feed-item-footer end">
+          <div className={`congratulations-count ${isAnimating ? 'animate' : ''}`}>
+            <FontAwesomeIcon icon={faThumbsUp} />
+            <span>{congratsCount}</span>
+          </div>
+        </div>
+      )}
       {type === 'friendAchievement' && (
         <div className="feed-item-footer">
           <button 
@@ -100,12 +126,23 @@ const FeedItem: React.FC<FeedItemProps> = ({ item, onCongratulate }) => {
             className={`congratulate-button ${isCongratulated ? 'congratulated' : ''}`}
           >
             {isCongratulated && <FontAwesomeIcon icon={faThumbsUp} />}
-            {isCongratulated ? 'CELEBRATED' : 'CELEBRATE'}
+            {isCongratulated ? 'Celebrated' : 'Celebrate'}
           </button>
           <div className={`congratulations-count ${isAnimating ? 'animate' : ''}`}>
             <FontAwesomeIcon icon={faThumbsUp} />
             <span>{congratsCount}</span>
           </div>
+        </div>
+      )}
+      {type === 'newFriend' && content.isFollowingBack && (
+        <div className="feed-item-footer">
+          <button 
+            onClick={handleShowProfile}
+            className="show-profile-button"
+          >
+            <FontAwesomeIcon icon={faUser} />
+            Show profile
+          </button>
         </div>
       )}
     </div>

@@ -15,6 +15,11 @@ export const generateFeed = async (userId, page = 1, limit = 10) => {
             select: 'username avatar',
             populate: { path: 'avatar', select: 'imageUrl' }
         })
+        .populate({
+            path: 'content.friend',
+            select: 'username avatar',
+            populate: { path: 'avatar', select: 'imageUrl' }
+        })
         .lean();
 
     // Get friend achievements

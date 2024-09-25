@@ -12,7 +12,7 @@ const AddFriend: React.FC = () => {
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUserFriends, setCurrentUserFriends] = useState<string[]>([]);
-  const { getToken } = useAuth();
+  const { user: authUser, getToken } = useAuth();
 
   const handleSearch = useCallback(async (term: string) => {
     if (!term.trim()) {
@@ -88,13 +88,17 @@ const AddFriend: React.FC = () => {
         throw new Error('No authentication token found');
       }
 
+      const currentUserId = authUser?.id;
       const response = await fetch(`${import.meta.env.VITE_BASE_URI}/users/friends`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ friendId: userId }),
+        body: JSON.stringify({ 
+          friendId: userId,
+          currentUserId: currentUserId
+        }),
       });
 
       if (!response.ok) {
@@ -129,7 +133,9 @@ const AddFriend: React.FC = () => {
         </div>
         <div className="search-results">
           {isLoading ? (
-            <p>Searching...</p>
+            <p className="searching">Searching...</p>
+          ) : searchTerm && searchResults.length === 0 ? (
+            <p className="no-results">No users found matching your search.</p>
           ) : (
             searchResults.map(user => (
               <UserCard

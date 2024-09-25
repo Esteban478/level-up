@@ -103,6 +103,9 @@
     align-items: center;
     margin-top: var(--sm);
 }
+.feed-item-footer.end {
+    justify-content: flex-end;
+}
 
 .congratulate-button {
     background-color: var(--color-primary);

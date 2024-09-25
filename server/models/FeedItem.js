@@ -8,7 +8,7 @@ const feedItemSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['achievement', 'friendAchievement', 'tip'],
+        enum: ['achievement', 'friendAchievement', 'tip', 'newFriend'],
         required: true
     },
     content: {
@@ -17,7 +17,8 @@ const feedItemSchema = new mongoose.Schema({
         description: String,
         xpReward: Number,
         friend: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-        tip: { type: mongoose.Schema.Types.ObjectId, ref: 'Tip' }
+        tip: { type: mongoose.Schema.Types.ObjectId, ref: 'Tip' },
+        isFollowingBack: Boolean
     },
     timestamp: {
         type: Date,

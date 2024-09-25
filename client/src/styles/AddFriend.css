@@ -26,6 +26,12 @@
     gap: var(--sm);
 }
 
+.searching,
+.no-results {
+    color: var(--color-text-300);
+    padding: var(--xs);
+}   
+
 .user-card {
     display: flex;
     align-items: center;

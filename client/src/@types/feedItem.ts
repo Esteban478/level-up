@@ -3,7 +3,7 @@ import { Tip } from "./tip";
 
 export interface FeedItem {
   _id: string;
-  type: 'achievement' | 'friendAchievement' | 'tip';
+  type: 'achievement' | 'friendAchievement' | 'tip' | 'newFriend';
   content: {
     achievementId?: string;
     name?: string;
@@ -11,6 +11,7 @@ export interface FeedItem {
     xpReward?: number;
     friend: User;
     tip?: Tip;
+    isFollowingBack?: boolean;
   };
   timestamp: string;
   user: User;
