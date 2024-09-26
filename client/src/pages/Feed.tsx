@@ -1,6 +1,5 @@
 import { useFeed } from '../hooks/feed/useFeed';
 import FeedItem from '../components/FeedItem';
-import LoadingIndicator from '../components/shared/LoadingIndicator';
 import { useEffect } from 'react';
 import '../styles/Feed.css';
 
@@ -21,24 +20,22 @@ const Feed: React.FC = () => {
     refreshCongratulations();
   }, [refreshCongratulations]);
 
-  if (isLoading && feedItems.length === 0) {
-    return <LoadingIndicator />;
-  }
-
   if (error) {
     return <div>Error: {error}</div>;
   }
 
   return (
     <div className="feed">
+      {(isLoading && feedItems.length === 0) && <p>loading...</p>}
       {feedItems.map(item => (
+        
         <FeedItem 
           key={item._id || `${item.content.friend?._id}-${item.content.achievementId}`} 
           item={item} 
           onCongratulate={handleCongratulate} 
         />
       ))}
-      {hasMore && (
+      {hasMore && !isLoading && (
         <button onClick={loadMore} disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Load More'}
         </button>

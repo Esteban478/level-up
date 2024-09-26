@@ -82,12 +82,8 @@
     border-radius: var(--xs);
 }
 
-.tip-content {
-    border-radius: var(--xs);
-    padding: var(--xs);
-}
-
-.tip-content p {
+.tip-content p,
+.new-friend-content p {
     font-size: 0.9rem;
     margin-bottom: var(--xxs);
 }
@@ -106,18 +102,10 @@
 .feed-item-footer.end {
     justify-content: flex-end;
 }
-
 .congratulate-button {
-    background-color: var(--color-primary);
-    color: var(--color-text-100);
-    border: none;
-    border-radius: var(--xxs);
-    padding: var(--xs) var(--sm);
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: var(--xxs);
-    font: var(--h3)
 }
 
 .congratulate-button.congratulated {
